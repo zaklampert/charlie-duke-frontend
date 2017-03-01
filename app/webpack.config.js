@@ -3,7 +3,7 @@ var webpack = require('webpack');
 
 var javascriptEntryPath = path.resolve(__dirname, 'src', 'index.js');
 var htmlEntryPath = path.resolve(__dirname, 'src', 'index.html');
-var buildPath = path.resolve(__dirname, 'public', 'build');
+var buildPath = path.resolve(__dirname, 'static', 'build');
 module.exports = {
   entry: [
     'webpack-hot-middleware/client?reload=true',
