@@ -1,6 +1,8 @@
 import React from 'react';
+
 import { Hero, About, Capcom, GoingThere, BeingThere, ComingBack, Training } from './sections';
 import { Nav } from './components';
+
 
 export default class extends React.Component {
   constructor(props){

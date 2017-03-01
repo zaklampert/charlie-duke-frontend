@@ -25,7 +25,7 @@ if (isDeveloping) {
     }
   });
 
-  const bundlePath = path.join(__dirname, './public/build/index.html');
+  const bundlePath = path.join(__dirname, './dist/build/index.html');
 
   app.use(middleware);
   app.use(webpackHotMiddleware(compiler));
@@ -34,7 +34,7 @@ if (isDeveloping) {
     res.end();
   });
 } else {
-  const staticPath = path.join(__dirname, 'public/build')
+  const staticPath = path.join(__dirname, 'dist/build')
   app.use(express.static(staticPath));
 }
 
