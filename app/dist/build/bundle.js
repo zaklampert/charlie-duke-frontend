@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "50323b677aa0d67ce2cd"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "fbfda3b904ddf9d47307"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -4105,17 +4105,17 @@
 	});
 	exports.Nav = exports.SectionIntro = undefined;
 
-	var _SectionIntro = __webpack_require__(227);
+	var _sectionIntro = __webpack_require__(228);
 
-	var _SectionIntro2 = _interopRequireDefault(_SectionIntro);
+	var _sectionIntro2 = _interopRequireDefault(_sectionIntro);
 
-	var _nav = __webpack_require__(228);
+	var _nav = __webpack_require__(227);
 
 	var _nav2 = _interopRequireDefault(_nav);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.SectionIntro = _SectionIntro2.default;
+	exports.SectionIntro = _sectionIntro2.default;
 	exports.Nav = _nav2.default;
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(13); if (makeExportsHot(module, __webpack_require__(2))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "index.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
@@ -23590,6 +23590,146 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	var navItems = [{
+	  id: '00',
+	  name: 'About'
+	}, {
+	  id: '01',
+	  name: 'Capcom'
+	}, {
+	  id: '02',
+	  name: 'Training'
+	}, {
+	  id: '03',
+	  name: 'Getting There'
+	}, {
+	  id: '04',
+	  name: 'Being There'
+	}, {
+	  id: '05',
+	  name: 'Coming Home'
+	}];
+
+	exports.default = function (_ref) {
+	  var show = _ref.show,
+	      currentIndex = _ref.currentIndex;
+
+	  return _react2.default.createElement(
+	    'div',
+	    { id: 'nav', className: (0, _aphrodite.css)(show ? styles.nav : styles.hidden) },
+	    _react2.default.createElement(
+	      'div',
+	      { style: {
+	          position: "relative",
+	          height: "100vh"
+	        } },
+	      _react2.default.createElement(
+	        'div',
+	        { className: (0, _aphrodite.css)(styles.navItems) },
+	        _react2.default.createElement(
+	          'div',
+	          { 'data-menuanchor': 'top', className: 'active', style: { display: 'none' } },
+	          _react2.default.createElement(
+	            'a',
+	            { href: '#top' },
+	            'First section'
+	          )
+	        ),
+	        navItems.map(function (item, i) {
+	          return _react2.default.createElement(
+	            'div',
+	            { key: item.id, className: (0, _aphrodite.css)(styles.navItem), 'data-menuanchor': item.id },
+	            _react2.default.createElement(
+	              'a',
+	              { className: (0, _aphrodite.css)(styles.navLink), href: '#' + item.id, style: {
+	                  color: currentIndex === i ? 'white' : '#6b6b6b'
+	                } },
+	              _react2.default.createElement(
+	                'div',
+	                { style: { margin: '8px 0' } },
+	                item.id
+	              ),
+	              item.name
+	            ),
+	            _react2.default.createElement('span', { className: (0, _aphrodite.css)(styles.bullet), style: {
+	                background: currentIndex === i ? 'white' : '#6b6b6b'
+	              } })
+	          );
+	        })
+	      )
+	    )
+	  );
+	};
+
+	var styles = _aphrodite.StyleSheet.create({
+	  hidden: {
+	    display: 'none'
+	  },
+	  nav: {
+	    position: 'fixed',
+	    zIndex: '99',
+	    color: 'white',
+	    left: '80px'
+	  },
+	  navItems: {
+	    position: 'absolute',
+	    display: 'block',
+	    height: '80%',
+	    top: '50%',
+	    transform: 'translateY(-50%)',
+	    borderRight: '1px solid #6b6b6b'
+	  },
+	  navItem: {
+	    display: 'block',
+	    height: '13vh',
+	    position: 'relative',
+	    width: '50px',
+	    marginRight: '25px'
+	  },
+	  bullet: {
+	    display: 'block',
+	    position: 'absolute',
+	    width: '8px',
+	    right: '-29px',
+	    top: '50%',
+	    borderRadius: '100%',
+	    height: '8px'
+	  },
+	  navLink: {
+	    position: 'absolute',
+	    top: '50%',
+	    width: '100%',
+	    display: 'block',
+	    transform: 'translateY(-50%)',
+	    textAlign: 'right',
+	    textDecoration: 'none'
+
+	  }
+	});
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(13); if (makeExportsHot(module, __webpack_require__(2))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "nav.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)(module)))
+
+/***/ },
+/* 228 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(11), RootInstanceProvider = __webpack_require__(12), ReactMount = __webpack_require__(9), React = __webpack_require__(2); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _aphrodite = __webpack_require__(34);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	exports.default = function (_ref) {
 	  var order = _ref.order,
 	      title = _ref.title,
@@ -23601,22 +23741,23 @@
 	    { className: (0, _aphrodite.css)(styles.sectionIntro) },
 	    _react2.default.createElement(
 	      'div',
-	      { className: (0, _aphrodite.css)(styles.order) },
-	      order
+	      { className: 'sectionIntro_' + order + ' ' + (0, _aphrodite.css)(styles.order) },
+	      '0',
+	      order - 1
 	    ),
 	    _react2.default.createElement(
 	      'div',
-	      { className: (0, _aphrodite.css)(styles.title) },
+	      { className: 'sectionIntro_' + order + ' ' + (0, _aphrodite.css)(styles.title) },
 	      title
 	    ),
 	    _react2.default.createElement(
 	      'div',
-	      { className: (0, _aphrodite.css)(styles.copy) },
+	      { className: 'sectionIntro_' + order + ' ' + (0, _aphrodite.css)(styles.copy) },
 	      copy
 	    ),
 	    _react2.default.createElement(
 	      'div',
-	      { className: (0, _aphrodite.css)(styles.button), onClick: buttonAction },
+	      { className: 'sectionIntroButton_' + order + ' ' + (0, _aphrodite.css)(styles.button), onClick: buttonAction },
 	      buttonText
 	    )
 	  );
@@ -23658,143 +23799,7 @@
 	  }
 	});
 
-	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(13); if (makeExportsHot(module, __webpack_require__(2))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "SectionIntro.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)(module)))
-
-/***/ },
-/* 228 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(11), RootInstanceProvider = __webpack_require__(12), ReactMount = __webpack_require__(9), React = __webpack_require__(2); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _aphrodite = __webpack_require__(34);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var navItems = [{
-	  id: '00',
-	  name: 'About'
-	}, {
-	  id: '01',
-	  name: 'Capcom'
-	}, {
-	  id: '02',
-	  name: 'Training'
-	}, {
-	  id: '03',
-	  name: 'Getting There'
-	}, {
-	  id: '04',
-	  name: 'Being There'
-	}, {
-	  id: '05',
-	  name: 'Coming Home'
-	}];
-
-	exports.default = function (_ref) {
-	  var show = _ref.show;
-	  return _react2.default.createElement(
-	    'div',
-	    { id: 'nav', className: (0, _aphrodite.css)(show ? styles.nav : styles.hidden) },
-	    _react2.default.createElement(
-	      'div',
-	      { style: {
-	          position: "relative",
-	          height: "100vh"
-	        } },
-	      _react2.default.createElement(
-	        'div',
-	        { className: (0, _aphrodite.css)(styles.navItems) },
-	        _react2.default.createElement(
-	          'div',
-	          { 'data-menuanchor': 'top', className: 'active', style: { display: 'none' } },
-	          _react2.default.createElement(
-	            'a',
-	            { href: '#top' },
-	            'First section'
-	          )
-	        ),
-	        navItems.map(function (item) {
-	          return _react2.default.createElement(
-	            'div',
-	            { key: item.id, className: (0, _aphrodite.css)(styles.navItem), 'data-menuanchor': item.id },
-	            _react2.default.createElement(
-	              'a',
-	              { className: (0, _aphrodite.css)(styles.navLink), href: '#' + item.id },
-	              _react2.default.createElement(
-	                'div',
-	                { style: { margin: '8px 0' } },
-	                item.id
-	              ),
-	              item.name
-	            ),
-	            _react2.default.createElement('span', { className: (0, _aphrodite.css)(styles.bullet) })
-	          );
-	        })
-	      )
-	    )
-	  );
-	};
-
-	var styles = _aphrodite.StyleSheet.create({
-	  hidden: {
-	    display: 'none'
-	  },
-	  nav: {
-	    position: 'fixed',
-	    zIndex: '99',
-	    color: 'white',
-	    left: '80px'
-	  },
-	  navItems: {
-	    position: 'absolute',
-	    display: 'block',
-	    height: '80%',
-	    top: '50%',
-	    transform: 'translateY(-50%)',
-	    borderRight: '1px solid #ccc'
-	  },
-	  navItem: {
-	    display: 'block',
-	    height: '13vh',
-	    position: 'relative',
-	    width: '50px',
-	    marginRight: '25px'
-	  },
-	  bullet: {
-	    display: 'block',
-	    position: 'absolute',
-	    width: '8px',
-	    right: '-29px',
-	    top: '50%',
-	    borderRadius: '100%',
-	    height: '8px',
-	    background: 'white'
-	  },
-	  navLink: {
-	    position: 'absolute',
-	    top: '50%',
-	    width: '100%',
-	    display: 'block',
-	    transform: 'translateY(-50%)',
-	    color: 'white',
-	    textAlign: 'right',
-	    textDecoration: 'none'
-
-	  }
-	});
-
-	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(13); if (makeExportsHot(module, __webpack_require__(2))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "nav.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(13); if (makeExportsHot(module, __webpack_require__(2))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "sectionIntro.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)(module)))
 
 /***/ },
@@ -23863,12 +23868,21 @@
 	    var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, props));
 
 	    _this.state = {
-	      showNav: false
+	      showNav: false,
+	      currentIndex: null
 	    };
+	    _this._animateIntros = _this._animateIntros.bind(_this);
 	    return _this;
 	  }
 
 	  _createClass(_class, [{
+	    key: '_animateIntros',
+	    value: function _animateIntros(index, nextIndex) {
+	      TweenMax.fromTo('.sectionIntroButton_' + (nextIndex - 1), 1.45, { autoAlpha: 0 }, { autoAlpha: 1, delay: 1.86 });
+
+	      TweenMax.staggerFromTo('.sectionIntro_' + (nextIndex - 1), 1.25, { opacity: 0, y: -70 }, { opacity: 1, y: 0 }, .3);
+	    }
+	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      var self = this;
@@ -23877,7 +23891,13 @@
 	        scrollOverflow: true,
 	        menu: '#nav',
 	        anchors: ['top', '00', '01', '02', '03', '04', '05'],
+	        easingcss3: 'ease-out',
+	        scrollingSpeed: 1000,
 	        onLeave: function onLeave(index, nextIndex) {
+	          self._animateIntros(index, nextIndex);
+	          self.setState({
+	            currentIndex: nextIndex - 2
+	          });
 	          if (nextIndex !== 1) {
 	            self.setState({
 	              showNav: true
@@ -23893,6 +23913,10 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _state = this.state,
+	          showNav = _state.showNav,
+	          currentIndex = _state.currentIndex;
+
 	      return _react2.default.createElement(
 	        'div',
 	        { id: 'root', style: {
@@ -23900,7 +23924,10 @@
 	            color: 'white',
 	            background: '#171717'
 	          } },
-	        _react2.default.createElement(_components.Nav, { show: this.state.showNav }),
+	        _react2.default.createElement(_components.Nav, {
+	          show: showNav,
+	          currentIndex: currentIndex
+	        }),
 	        _react2.default.createElement(
 	          'div',
 	          { id: 'fullpage' },
@@ -24007,7 +24034,7 @@
 	        backgroundSize: 'cover'
 	      } },
 	    _react2.default.createElement(_components.SectionIntro, {
-	      order: '04',
+	      order: '5',
 	      title: 'Being There',
 	      copy: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt convallis velit, eu d ictum justo euismod id. Pellentesque habitant morbi tristique senectus et netus et malesuada fames.',
 	      buttonText: 'Explore',
@@ -24057,7 +24084,7 @@
 	        backgroundSize: 'cover'
 	      } },
 	    _react2.default.createElement(_components.SectionIntro, {
-	      order: '02',
+	      order: '2',
 	      title: 'Capcom',
 	      copy: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt convallis velit, eu d ictum justo euismod id. Pellentesque habitant morbi tristique senectus et netus et malesuada fames.',
 	      buttonText: 'Explore',
@@ -24107,7 +24134,7 @@
 	        backgroundSize: 'cover'
 	      } },
 	    _react2.default.createElement(_components.SectionIntro, {
-	      order: '05',
+	      order: '6',
 	      title: 'Coming Home',
 	      copy: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt convallis velit, eu d ictum justo euismod id. Pellentesque habitant morbi tristique senectus et netus et malesuada fames.',
 	      buttonText: 'Explore',
@@ -24157,7 +24184,7 @@
 	        backgroundSize: 'cover'
 	      } },
 	    _react2.default.createElement(_components.SectionIntro, {
-	      order: '03',
+	      order: '4',
 	      title: 'Getting There',
 	      copy: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt convallis velit, eu d ictum justo euismod id. Pellentesque habitant morbi tristique senectus et netus et malesuada fames.',
 	      buttonText: 'Explore',
@@ -24204,7 +24231,8 @@
 	    'div',
 	    { className: 'section', style: {
 	        backgroundImage: 'url(' + _hero2.default + ')',
-	        backgroundSize: 'cover'
+	        backgroundSize: 'cover',
+	        backgroundPosition: 'right center'
 	      } },
 	    _react2.default.createElement(
 	      'div',
@@ -24317,7 +24345,7 @@
 	        backgroundSize: 'cover'
 	      } },
 	    _react2.default.createElement(_components.SectionIntro, {
-	      order: '02',
+	      order: '3',
 	      title: 'Training',
 	      copy: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt convallis velit, eu d ictum justo euismod id. Pellentesque habitant morbi tristique senectus et netus et malesuada fames.',
 	      buttonText: 'Explore',
