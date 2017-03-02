@@ -6,6 +6,7 @@ export default ({}) => (
   <div className="section" style={{
     backgroundImage: `url(${background})`,
     backgroundSize: 'cover',
+    backgroundPosition: 'right center',
   }}>
     <div className={css(styles.title)}>
       Charlie Duke

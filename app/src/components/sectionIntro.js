@@ -3,10 +3,10 @@ import { StyleSheet, css } from 'aphrodite';
 
 export default ({order, title, copy, buttonText, buttonAction}) => (
   <div className={css(styles.sectionIntro)}>
-    <div className={css(styles.order)}>{order}</div>
-    <div className={css(styles.title)}>{title}</div>
-    <div className={css(styles.copy)}>{copy}</div>
-    <div className={css(styles.button)} onClick={buttonAction}>
+    <div className={`sectionIntro_${order} ` + css(styles.order)}>0{order - 1}</div>
+    <div className={`sectionIntro_${order} ` + css(styles.title)}>{title}</div>
+    <div className={`sectionIntro_${order} ` + css(styles.copy)}>{copy}</div>
+    <div className={`sectionIntroButton_${order} ` + css(styles.button)} onClick={buttonAction}>
       {buttonText}
     </div>
   </div>

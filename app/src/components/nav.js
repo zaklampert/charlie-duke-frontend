@@ -28,7 +28,8 @@ const navItems = [
   },
 ]
 
-export default ({show}) => (
+export default ({show, currentIndex}) => {
+  return (
     <div id="nav" className={css(
       show ? styles.nav : styles.hidden
     )}>
@@ -38,19 +39,24 @@ export default ({show}) => (
       }}>
       <div className={css(styles.navItems)}>
         <div data-menuanchor="top" className="active" style={{display: 'none'}}><a href="#top">First section</a></div>
-        {navItems.map(item => (
+        {navItems.map((item, i) => (
           <div key={item.id} className={css(styles.navItem)} data-menuanchor={item.id}>
-            <a className={css(styles.navLink)} href={`#${item.id}`}>
+            <a className={css(styles.navLink)} href={`#${item.id}`} style={{
+              color: (currentIndex === i) ? 'white' : '#6b6b6b'
+            }}>
               <div style={{margin: '8px 0'}}>{item.id}</div>
               {item.name}
             </a>
-            <span className={css(styles.bullet)}></span>
+            <span className={css(styles.bullet)} style={{
+              background: (currentIndex === i) ? 'white' : '#6b6b6b'
+            }}></span>
           </div>
         ))}
       </div>
       </div>
     </div>
 );
+}
 
 
 const styles = StyleSheet.create({
@@ -69,7 +75,7 @@ const styles = StyleSheet.create({
     height: '80%',
     top: '50%',
     transform: 'translateY(-50%)',
-    borderRight: '1px solid #ccc',
+    borderRight: '1px solid #6b6b6b',
   },
   navItem: {
     display: 'block',
@@ -86,7 +92,6 @@ const styles = StyleSheet.create({
     top: '50%',
     borderRadius: '100%',
     height: '8px',
-    background: 'white',
   },
   navLink: {
     position: 'absolute',
@@ -94,7 +99,6 @@ const styles = StyleSheet.create({
     width: '100%',
     display: 'block',
     transform: 'translateY(-50%)',
-    color: 'white',
     textAlign: 'right',
     textDecoration: 'none',
 

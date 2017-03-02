@@ -8,7 +8,7 @@ export default ({}) => (
     backgroundSize: 'cover',
   }}>
     <SectionIntro
-      order="02"
+      order="2"
       title="Capcom"
       copy="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt convallis velit, eu d ictum justo euismod id. Pellentesque habitant morbi tristique senectus et netus et malesuada fames."
       buttonText="Explore"

@@ -1,6 +1,5 @@
-import SectionIntro from './SectionIntro';
+import SectionIntro from './sectionIntro'
 import Nav from './nav';
-
 export {
     SectionIntro,
     Nav
