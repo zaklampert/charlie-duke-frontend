@@ -1,12 +1,12 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
-export default ({order, title, copy, buttonText, buttonAction}) => (
+export default ({order, title, copy, buttonText}) => (
   <div className={css(styles.sectionIntro)}>
-    <div className={`sectionIntro_${order} ` + css(styles.order)}>0{order - 1}</div>
+    <div className={`sectionIntro_${order} ` + css(styles.order)}>{order}</div>
     <div className={`sectionIntro_${order} ` + css(styles.title)}>{title}</div>
     <div className={`sectionIntro_${order} ` + css(styles.copy)}>{copy}</div>
-    <div className={`sectionIntroButton_${order} ` + css(styles.button)} onClick={buttonAction}>
+    <div className={`sectionIntroButton_${order} ` + css(styles.button)} onClick={()=>{$.fn.fullpage.moveSlideRight();}}>
       {buttonText}
     </div>
   </div>

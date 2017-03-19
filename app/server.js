@@ -1,7 +1,7 @@
 import path from 'path';
 import express from 'express';
 const isDeveloping = process.env.NODE_ENV !== 'production';
-const port = isDeveloping ? 3000 : process.env.PORT;
+const port = isDeveloping ? 5050 : process.env.PORT;
 const app = express();
 
 if (isDeveloping) {
