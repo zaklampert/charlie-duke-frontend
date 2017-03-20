@@ -1,33 +1,25 @@
 import React from 'react';
-import { sections } from './data';
-import { Hero, About, Capcom, GoingThere, BeingThere, ComingBack, Training } from './sections';
+import Helmet from 'react-helmet';
+import { pages } from './data';
 import { Nav } from './components';
-import { FullPageSection, FullPageSlide, SectionIntro, ImageWithText, SideBySide} from './layouts';
+import { About, Hero, Story } from './templates';
 
-const Layouts = {
-  ImageWithText,
-  SideBySide
+const Templates = {
+  About,
+  Hero,
+  Story,
 }
-
-const sectionSlugs = sections.map(section=>{
-  return section.slug;
+const anchors = pages.map(page=>{
+  return page.slug;
 })
-
-
-const anchors = [
-  'hero',
-  'about',
-  ...sectionSlugs,
-]
-
-
 
 export default class extends React.Component {
   constructor(props){
     super(props);
     this.state = {
       showNav: false,
-      currentIndex: null
+      currentIndex: null,
+      title: "Charlie Duke",
     }
     this._animateIntros = this._animateIntros.bind(this);
   }
@@ -50,53 +42,33 @@ export default class extends React.Component {
         self._animateIntros(index, nextIndex);
         self.setState({
           currentIndex: nextIndex - 2,
-        })
-        self.setState({
           showNav: (nextIndex !== 1) ? true : false,
+          title: `Charlie Duke // ${pages[nextIndex - 1].title}`,
         })
+
       }
     });
   }
   render(){
-    const { showNav, currentIndex } = this.state;
+    const { showNav, currentIndex, title } = this.state;
     return (
       <div id="root" style={{
         fontFamily: `"futura-pt", sans-serif`,
         color: 'white',
         background: '#171717'
       }}>
+      <Helmet
+        title={title}
+      />
         <Nav
           show={showNav}
           anchors={anchors}
           currentIndex={currentIndex}
         />
         <div id="fullpage">
-          <Hero />
-          <About />
-          {sections.map(section=>(
-            <FullPageSection
-              key={section.slug}>
-              <FullPageSlide
-                background={section.background}
-                theme="dark"
-              >
-                <SectionIntro
-                  order={section.order}
-                  title={section.title}
-                  copy={section.copy}
-                  buttonText="Explore"
-                />
-              </FullPageSlide>
-              {section.children && section.children.map(child => (
-                <FullPageSlide
-                  key={child.slug}
-                  theme="light">
-                  {React.createElement(Layouts[child.template], child)}
-                </FullPageSlide>
-              ))}
-            </FullPageSection>
+          {pages.map(page => (
+            React.createElement(Templates[page.template], {key: page.slug, page})
           ))}
-
         </div>
       </div>
     )
