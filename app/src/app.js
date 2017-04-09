@@ -1,19 +1,20 @@
 import React from 'react';
 import Helmet from 'react-helmet';
+import { connect } from 'react-redux'
 import { pages } from './data';
 import { Nav } from './components';
 import { About, Hero, Story } from './templates';
+import { getWPData } from './actions';
+import { mapDataToPage } from './data';
 
 const Templates = {
   About,
   Hero,
   Story,
 }
-const anchors = pages.map(page=>{
-  return page.slug;
-})
 
-export default class extends React.Component {
+
+class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
@@ -27,8 +28,13 @@ export default class extends React.Component {
     TweenMax.fromTo(`.sectionIntroButton_0${nextIndex - 2}`,1.45, {autoAlpha: 0}, {autoAlpha: 1, delay: 1.86});
     TweenMax.staggerFromTo(`.sectionIntro_0${nextIndex - 2}`, 1.25, {opacity:0, y: -70}, {opacity:1, y:0}, .3);
   }
-  componentDidMount() {
+  componentDidUpdate(prevProps) {
+    const { pages } = this.props;
     const self = this;
+    if ( !prevProps.pages.ready && pages.ready ){
+    const anchors = pages.data && pages.data.map(page=>{
+      return page.slug;
+    });
     $('#fullpage').fullpage({
       controlArrows: false,
       scrollOverflow: true,
@@ -43,15 +49,31 @@ export default class extends React.Component {
         self.setState({
           currentIndex: nextIndex - 2,
           showNav: (nextIndex !== 1) ? true : false,
-          title: `Charlie Duke // ${pages[nextIndex - 1].title}`,
+          title: `Charlie Duke // ${pages.data[nextIndex - 1].title}`,
         })
-
       }
     });
+    }
+  }
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(getWPData());
   }
   render(){
     const { showNav, currentIndex, title } = this.state;
-    return (
+    const { pages } = this.props;
+
+    if(!pages.ready){
+      return (
+        <div>loading...</div>
+      )
+    }
+    const anchors = pages.data && pages.data.map(page=>{
+      return page.slug;
+    });
+    const storyPages = pages.data && pages.data.filter((page)=> {return page.template === "Story" || page.template === "About"});
+
+     return (
       <div id="root" style={{
         fontFamily: `"futura-pt", sans-serif`,
         color: 'white',
@@ -64,9 +86,10 @@ export default class extends React.Component {
           show={showNav}
           anchors={anchors}
           currentIndex={currentIndex}
+          storyPages={storyPages}
         />
         <div id="fullpage">
-          {pages.map(page => (
+          {pages && pages.data && pages.data.map(page=>(
             React.createElement(Templates[page.template], {key: page.slug, page})
           ))}
         </div>
@@ -74,3 +97,14 @@ export default class extends React.Component {
     )
   }
 }
+
+
+const mapStateToProps = state => {
+  const { pages } = state
+
+  return {
+    pages
+  }
+}
+
+export default connect(mapStateToProps)(App)

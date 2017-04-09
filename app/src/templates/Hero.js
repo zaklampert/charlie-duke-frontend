@@ -9,7 +9,7 @@ export default ({page}) => (
       background={page.background}
     >
       <div className={css(styles.title)}>
-        {page.text}
+        {page.title}
       </div>
     </FullPageSlide>
   </FullPageSection>

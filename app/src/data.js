@@ -9,6 +9,36 @@ import beingRover from './images/being/rover.jpg';
 import heroBackground from './images/backgrounds/hero.jpg';
 
 
+const lookupTemplate = (page) => {
+  switch(page.order) {
+    case 1:
+      return "Hero";
+    case 2:
+      return "About";
+    default:
+      return "Story"
+  }
+}
+export const mapDataToPage = (dataFromWordpress) => {
+  return dataFromWordpress && dataFromWordpress.map(page=>{
+    console.log(page);
+    return {
+      template: lookupTemplate(page),
+      title: page.title,
+      background: page &&
+                  page.page_data &&
+                  page.page_data._embedded &&
+                  page.page_data._embedded["wp:featuredmedia"] &&
+                  page.page_data._embedded["wp:featuredmedia"][0] &&
+                  page.page_data._embedded["wp:featuredmedia"][0].source_url,
+      slug: page &&
+            page.page_data &&
+            page.page_data.slug,
+
+    }
+  })
+}
+
 export const pages = [
   {
     template: "Hero",

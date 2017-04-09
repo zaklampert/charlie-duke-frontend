@@ -1,9 +1,8 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
-import { pages } from '../data';
+// import { pages } from '../data';
 // XXX: this needs to be dynamic
-const storyPages = pages.filter((page)=> {return page.template === "Story" || page.template === "About"});
-export default ({show, currentIndex, anchors}) => {
+export default ({show, currentIndex, anchors, storyPages}) => {
   return (
     <div id="nav" className={css(
       show ? styles.nav : styles.hidden
