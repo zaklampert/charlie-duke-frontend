@@ -25,8 +25,8 @@ class App extends React.Component {
     this._animateIntros = this._animateIntros.bind(this);
   }
   _animateIntros(index, nextIndex) {
-    TweenMax.fromTo(`.sectionIntroButton_0${nextIndex - 2}`,1.45, {autoAlpha: 0}, {autoAlpha: 1, delay: 1.86});
-    TweenMax.staggerFromTo(`.sectionIntro_0${nextIndex - 2}`, 1.25, {opacity:0, y: -70}, {opacity:1, y:0}, .3);
+    TweenMax.fromTo(`.sectionIntroButton_${nextIndex - 1}`,1.45, {autoAlpha: 0}, {autoAlpha: 1, delay: 1.86});
+    TweenMax.staggerFromTo(`.sectionIntro_${nextIndex - 1}`, 1.25, {opacity:0, y: -70}, {opacity:1, y:0}, .3);
   }
   componentDidUpdate(prevProps) {
     const { pages } = this.props;

@@ -5,12 +5,12 @@ export default ({leftPhoto, leftCaption, rightPhoto, rightCaption}) => (
   <div className={css(styles.sideBySide)}>
     <div className={css(styles.half)}>
       <img className={css(styles.image)} src={leftPhoto} />
-      <div className={css(styles.caption)}>{leftCaption}</div>
+      <div className={css(styles.caption)}  dangerouslySetInnerHTML={{__html: leftCaption}}/>
 
     </div>
     <div className={css(styles.half)}>
       <img className={css(styles.image)} src={rightPhoto} />
-      <div className={css(styles.caption)}>{rightCaption}</div>
+      <div className={css(styles.caption)} dangerouslySetInnerHTML={{__html: rightCaption}}/>
     </div>
   </div>
 )

@@ -5,6 +5,7 @@ import FullPageSection from './FullPageSection'
 import FullPageSlide from './FullPageSlide'
 import SectionIntro from './SectionIntro'
 import Quote from './Quote';
+import Default from './Default';
 
 export {
     ImageWithText,
@@ -13,4 +14,5 @@ export {
     SectionIntro,
     Quote,
     SideBySide,
+    Default,
 }

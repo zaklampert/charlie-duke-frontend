@@ -8,7 +8,7 @@ export default ({page}) => (
     <FullPageSlide
       theme="dark">
         <div className={css(styles.quote)}>
-        "{page.quote}"
+        <span dangerouslySetInnerHTML={{__html: page.content}}/>
         </div>
       </FullPageSlide>
   </FullPageSection>

@@ -19,12 +19,24 @@ const lookupTemplate = (page) => {
       return "Story"
   }
 }
+
+const lookupChildTemplate = (child) => {
+  switch(child.page_data.meta_box.page_format) {
+    case "img_caption":
+      return "ImageWithText";
+    case "two_col":
+      return "SideBySide";
+    default:
+      return "Default";
+  }
+}
 export const mapDataToPage = (dataFromWordpress) => {
-  return dataFromWordpress && dataFromWordpress.map(page=>{
+  return dataFromWordpress && dataFromWordpress.map((page, i)=>{
     console.log(page);
     return {
       template: lookupTemplate(page),
       title: page.title,
+      order: i,
       background: page &&
                   page.page_data &&
                   page.page_data._embedded &&
@@ -34,7 +46,25 @@ export const mapDataToPage = (dataFromWordpress) => {
       slug: page &&
             page.page_data &&
             page.page_data.slug,
-
+      content: page && page.page_data &&  page.page_data.content && page.page_data.content.rendered,
+      children: page && page.children && page.children.map(child => {
+        return {
+          title: child && child.title,
+          slug: child && child.page_data && child.page_data.slug,
+          template: child && child.page_data && child.page_data.meta_box && child.page_data.meta_box.page_format && lookupChildTemplate(child),
+          leftPhoto: child && child.page_data && child.page_data.meta_box && child.page_data.meta_box.left_col_img && child.page_data.meta_box.left_col_img[0] && child.page_data.meta_box.left_col_img[0].url,
+          rightPhoto: child && child.page_data && child.page_data.meta_box && child.page_data.meta_box.right_col_img && child.page_data.meta_box.right_col_img[0] && child.page_data.meta_box.right_col_img[0].url,
+          leftCaption:  child && child.page_data && child.page_data.meta_box && child.page_data.meta_box.left_col_text,
+          rightCaption:  child && child.page_data && child.page_data.meta_box && child.page_data.meta_box.right_col_text,
+          image: child &&
+                  child.page_data &&
+                  child.page_data._embedded &&
+                  child.page_data._embedded["wp:featuredmedia"] &&
+                  child.page_data._embedded["wp:featuredmedia"][0] &&
+                  child.page_data._embedded["wp:featuredmedia"][0].source_url,
+          content: child && child.page_data &&  child.page_data.content && child.page_data.content.rendered
+        }
+      })
     }
   })
 }

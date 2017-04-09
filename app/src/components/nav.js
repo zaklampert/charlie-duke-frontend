@@ -1,7 +1,10 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
-// import { pages } from '../data';
-// XXX: this needs to be dynamic
+
+export const formatOrderForMenu = (order) => {
+  return "0" + (order-1);
+}
+
 export default ({show, currentIndex, anchors, storyPages}) => {
   return (
     <div id="nav" className={css(
@@ -18,7 +21,9 @@ export default ({show, currentIndex, anchors, storyPages}) => {
             <a className={css(styles.navLink)} href={`#${page.slug}`} style={{
               color: (currentIndex === i) ? 'white' : '#6b6b6b'
             }}>
-              <div style={{margin: '8px 0'}}>{page.order}</div>
+              <div style={{margin: '8px 0'}}>
+                {formatOrderForMenu(page.order)}
+              </div>
               {page.title}
             </a>
             <span className={css(styles.bullet)} style={{

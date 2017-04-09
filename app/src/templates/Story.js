@@ -1,9 +1,10 @@
 import React from 'react';
-import { FullPageSlide, FullPageSection, SectionIntro, ImageWithText, SideBySide } from '../layouts';
+import { FullPageSlide, FullPageSection, SectionIntro, ImageWithText, SideBySide, Default } from '../layouts';
 
 const Layouts = {
   ImageWithText,
-  SideBySide
+  SideBySide,
+  Default
 };
 
 export default ({page}) => (
@@ -16,11 +17,11 @@ export default ({page}) => (
       <SectionIntro
         order={page.order}
         title={page.title}
-        copy={page.copy}
+        copy={page.content}
         buttonText="Explore"
       />
     </FullPageSlide>
-    {page.children && page.children.map(child => (
+    {page.children && page.children.length > 0 && page.children.map(child => (
       <FullPageSlide
         key={child.slug}
         theme="light">
