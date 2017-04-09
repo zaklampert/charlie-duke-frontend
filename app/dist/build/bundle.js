@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "090df2f9969f16bff9e8"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "21fe178db58d6701a948"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -26862,7 +26862,7 @@
 	var POPULATE_MENU = exports.POPULATE_MENU = 'POPULATE_MENU';
 	var POPULATE_PAGES = exports.POPULATE_PAGES = 'POPULATE_PAGES';
 
-	var API_URL = 'http://charlieduke.staging.wpengine.com';
+	var API_URL = 'https://charlieduke.staging.wpengine.com';
 
 	var receivePages = function receivePages(json) {
 	  return {
