@@ -3,7 +3,7 @@ import {mapDataToPage} from '../data';
 export const POPULATE_MENU = 'POPULATE_MENU';
 export const POPULATE_PAGES = 'POPULATE_PAGES';
 
-const API_URL = 'http://charlieduke.staging.wpengine.com';
+const API_URL = 'https://charlieduke.staging.wpengine.com';
 
 const receivePages = (json) => ({
   type: POPULATE_PAGES,
