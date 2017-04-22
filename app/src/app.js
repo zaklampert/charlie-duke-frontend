@@ -6,6 +6,7 @@ import { Nav } from './components';
 import { About, Hero, Story } from './templates';
 import { getWPData } from './actions';
 import { mapDataToPage } from './data';
+import { Loading } from './components';
 
 const Templates = {
   About,
@@ -63,11 +64,6 @@ class App extends React.Component {
     const { showNav, currentIndex, title } = this.state;
     const { pages } = this.props;
 
-    if(!pages.ready){
-      return (
-        <div>loading...</div>
-      )
-    }
     const anchors = pages.data && pages.data.map(page=>{
       return page.slug;
     });
@@ -81,18 +77,26 @@ class App extends React.Component {
       }}>
       <Helmet
         title={title}
-      />
-        <Nav
-          show={showNav}
-          anchors={anchors}
-          currentIndex={currentIndex}
-          storyPages={storyPages}
-        />
-        <div id="fullpage">
-          {pages && pages.data && pages.data.map(page=>(
-            React.createElement(Templates[page.template], {key: page.slug, page})
-          ))}
-        </div>
+      >
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Helmet>
+      {(!pages.ready) ?
+        <Loading /> :
+        <span>
+
+          <Nav
+            show={showNav}
+            anchors={anchors}
+            currentIndex={currentIndex}
+            storyPages={storyPages}
+          />
+          <div id="fullpage">
+            {pages && pages.data && pages.data.map(page=>(
+              React.createElement(Templates[page.template], {key: page.slug, page})
+            ))}
+          </div>
+        </span>
+        }
       </div>
     )
   }

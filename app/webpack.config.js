@@ -15,17 +15,25 @@ module.exports = {
     filename: 'bundle.js',
   },
   module: {
-    loaders: [{
-      test: /\.js$/,
-      exclude: /(node_modules|bower_components)/,
-      loaders: ['react-hot', 'babel?presets[]=react,presets[]=es2015'],
-    }, {
-      test: /\.html$/,
-      loader: 'file?name=[name].[ext]',
-    },{
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
+        loaders: ['react-hot', 'babel?presets[]=react,presets[]=es2015'],
+      },
+      {
+        test: /\.html$/,
+        loader: 'file?name=[name].[ext]',
+      },
+      {
         test: /\.(png|svg|jpg)$/,
         loader: 'file-loader'
-      }],
+      },
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader',
+      },
+    ],
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),

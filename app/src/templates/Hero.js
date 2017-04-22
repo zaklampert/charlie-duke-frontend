@@ -7,6 +7,7 @@ export default ({page}) => (
     <FullPageSlide
       theme="dark"
       background={page.background}
+      backgroundPosition="76% center"
     >
       <div className={css(styles.title)}>
         {page.title}
