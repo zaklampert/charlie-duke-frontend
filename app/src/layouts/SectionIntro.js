@@ -27,6 +27,9 @@ const styles = StyleSheet.create({
     fontSize: '66px',
     fontFamily: '"futura-pt-bold"',
     fontWeight: '700',
+    '@media (max-width: 670px)': {
+      fontSize: '44px',
+    }
   },
   copy: {
     fontSize: '22px',
@@ -45,6 +48,13 @@ const styles = StyleSheet.create({
     ':hover':{
       backgroundColor: 'white',
       color: 'black',
+    },
+    '@media (max-width: 670px)':{
+      fontSize: '18px',
+      border: '2px solid white',
+      margin: '10px auto',
+      padding: '15px 30px',
+      maxWidth: '60%'
     }
   }
 })

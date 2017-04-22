@@ -41,8 +41,10 @@ class App extends React.Component {
       scrollOverflow: true,
       menu: '#nav',
       anchors,
+      resetSliders: true,
       easingcss3: 'ease-out',
-      scrollingSpeed: 1000,
+      scrollingSpeed: 700,
+      scrollHorizontally: true,
       slidesNavigation: true,
       slidesNavPosition: 'bottom',
       onLeave: function(index, nextIndex){

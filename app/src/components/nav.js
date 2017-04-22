@@ -15,9 +15,12 @@ export default ({show, currentIndex, anchors, storyPages}) => {
         height: "100vh",
       }}>
       <div className={css(styles.navItems)}>
-        <div data-menuanchor="top" className="active" style={{display: 'none'}}><a href="#top">First section</a></div>
+        <div data-menuanchor="top"
+             className="active" style={{display: 'none'}}>
+             <a href="#top">First section</a>
+        </div>
         {storyPages && storyPages.map((page, i) => (
-          <div key={page.slug} className={css(styles.navItem)} data-menuanchor={page.slug}>
+          <div key={page.slug} style={{height: 80 / storyPages.length + 'vh' }} className={css(styles.navItem)} data-menuanchor={page.slug}>
             <a className={css(styles.navLink)} href={`#${page.slug}`} style={{
               color: (currentIndex === i) ? 'white' : '#6b6b6b'
             }}>
@@ -58,7 +61,7 @@ const styles = StyleSheet.create({
   },
   navItem: {
     display: 'block',
-    height: '13vh',
+    // height: ,
     position: 'relative',
     width: '50px',
     marginRight: '25px',

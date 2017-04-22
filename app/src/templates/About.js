@@ -19,6 +19,9 @@ const styles = StyleSheet.create({
   quote: {
     maxWidth: '500px',
     margin: '0 auto',
-    fontSize: '53px'
+    fontSize: '53px',
+    '@media (max-width: 670px)': {
+      fontSize: '20px'
+    }
   }
 })

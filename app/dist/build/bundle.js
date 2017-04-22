@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "928bd584da191e4a499d"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "571c8981589d1c2d45f3"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -6267,7 +6267,7 @@
 
 
 	// module
-	exports.push([module.id, "\n/* Progress Bar */\n.progress {\n  position: fixed;\n  top: 0;\n  z-index: 5;\n  height: 6px;\n  display: block;\n  width: 100%;\n  background-color: #f5f5f5;\n  border-radius: 0px;\n  background-clip: padding-box;\n  margin: 0 0 0 0;\n  overflow: hidden; }\n  .progress .determinate {\n    position: absolute;\n    background-color: inherit;\n    top: 0;\n    bottom: 0;\n    background-color: #26a69a;\n    transition: width .3s linear; }\n  .progress .indeterminate {\n    background-color: #ddd; }\n    .progress .indeterminate:before {\n      content: '';\n      position: absolute;\n      background-color: inherit;\n      top: 0;\n      left: 0;\n      bottom: 0;\n      will-change: left, right;\n      -webkit-animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;\n              animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite; }\n    .progress .indeterminate:after {\n      content: '';\n      position: absolute;\n      background-color: inherit;\n      top: 0;\n      left: 0;\n      bottom: 0;\n      will-change: left, right;\n      -webkit-animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;\n              animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;\n      -webkit-animation-delay: 1.15s;\n              animation-delay: 1.15s; }\n\n@-webkit-keyframes indeterminate {\n  0% {\n    left: -35%;\n    right: 100%; }\n  60% {\n    left: 100%;\n    right: -90%; }\n  100% {\n    left: 100%;\n    right: -90%; } }\n@keyframes indeterminate {\n  0% {\n    left: -35%;\n    right: 100%; }\n  60% {\n    left: 100%;\n    right: -90%; }\n  100% {\n    left: 100%;\n    right: -90%; } }\n@-webkit-keyframes indeterminate-short {\n  0% {\n    left: -200%;\n    right: 100%; }\n  60% {\n    left: 107%;\n    right: -8%; }\n  100% {\n    left: 107%;\n    right: -8%; } }\n@keyframes indeterminate-short {\n  0% {\n    left: -200%;\n    right: 100%; }\n  60% {\n    left: 107%;\n    right: -8%; }\n  100% {\n    left: 107%;\n    right: -8%; } }\n", ""]);
+	exports.push([module.id, "\n/* Progress Bar */\n.progress {\n  position: fixed;\n  top: 0;\n  z-index: 5;\n  height: 4px;\n  display: block;\n  width: 100%;\n  background-color: #f5f5f5;\n  border-radius: 0px;\n  background-clip: padding-box;\n  margin: 0 0 0 0;\n  overflow: hidden; }\n  .progress .determinate {\n    position: absolute;\n    background-color: inherit;\n    top: 0;\n    bottom: 0;\n    background-color: #26a69a;\n    transition: width .3s linear; }\n  .progress .indeterminate {\n    background-color: #ddd; }\n    .progress .indeterminate:before {\n      content: '';\n      position: absolute;\n      background-color: inherit;\n      top: 0;\n      left: 0;\n      bottom: 0;\n      will-change: left, right;\n      -webkit-animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;\n              animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite; }\n    .progress .indeterminate:after {\n      content: '';\n      position: absolute;\n      background-color: inherit;\n      top: 0;\n      left: 0;\n      bottom: 0;\n      will-change: left, right;\n      -webkit-animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;\n              animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;\n      -webkit-animation-delay: 1.15s;\n              animation-delay: 1.15s; }\n\n@-webkit-keyframes indeterminate {\n  0% {\n    left: -35%;\n    right: 100%; }\n  60% {\n    left: 100%;\n    right: -90%; }\n  100% {\n    left: 100%;\n    right: -90%; } }\n@keyframes indeterminate {\n  0% {\n    left: -35%;\n    right: 100%; }\n  60% {\n    left: 100%;\n    right: -90%; }\n  100% {\n    left: 100%;\n    right: -90%; } }\n@-webkit-keyframes indeterminate-short {\n  0% {\n    left: -200%;\n    right: 100%; }\n  60% {\n    left: 107%;\n    right: -8%; }\n  100% {\n    left: 107%;\n    right: -8%; } }\n@keyframes indeterminate-short {\n  0% {\n    left: -200%;\n    right: 100%; }\n  60% {\n    left: 107%;\n    right: -8%; }\n  100% {\n    left: 107%;\n    right: -8%; } }\n", ""]);
 
 	// exports
 
@@ -11426,7 +11426,8 @@
 	        { className: (0, _aphrodite.css)(styles.navItems) },
 	        _react2.default.createElement(
 	          'div',
-	          { 'data-menuanchor': 'top', className: 'active', style: { display: 'none' } },
+	          { 'data-menuanchor': 'top',
+	            className: 'active', style: { display: 'none' } },
 	          _react2.default.createElement(
 	            'a',
 	            { href: '#top' },
@@ -11436,7 +11437,7 @@
 	        storyPages && storyPages.map(function (page, i) {
 	          return _react2.default.createElement(
 	            'div',
-	            { key: page.slug, className: (0, _aphrodite.css)(styles.navItem), 'data-menuanchor': page.slug },
+	            { key: page.slug, style: { height: 80 / storyPages.length + 'vh' }, className: (0, _aphrodite.css)(styles.navItem), 'data-menuanchor': page.slug },
 	            _react2.default.createElement(
 	              'a',
 	              { className: (0, _aphrodite.css)(styles.navLink), href: '#' + page.slug, style: {
@@ -11479,7 +11480,7 @@
 	  },
 	  navItem: {
 	    display: 'block',
-	    height: '13vh',
+	    // height: ,
 	    position: 'relative',
 	    width: '50px',
 	    marginRight: '25px'
@@ -30472,8 +30473,10 @@
 	          scrollOverflow: true,
 	          menu: '#nav',
 	          anchors: anchors,
+	          resetSliders: true,
 	          easingcss3: 'ease-out',
-	          scrollingSpeed: 1000,
+	          scrollingSpeed: 700,
+	          scrollHorizontally: true,
 	          slidesNavigation: true,
 	          slidesNavPosition: 'bottom',
 	          onLeave: function onLeave(index, nextIndex) {
@@ -30888,7 +30891,11 @@
 	            backgroundSize: 'cover',
 	            color: theme === "light" ? 'black' : 'white'
 	          } },
-	        children
+	        _react2.default.createElement(
+	          'div',
+	          { style: { padding: '20px' } },
+	          children
+	        )
 	      );
 	    }
 	  }]);
@@ -31052,7 +31059,10 @@
 	  title: {
 	    fontSize: '66px',
 	    fontFamily: '"futura-pt-bold"',
-	    fontWeight: '700'
+	    fontWeight: '700',
+	    '@media (max-width: 670px)': {
+	      fontSize: '44px'
+	    }
 	  },
 	  copy: {
 	    fontSize: '22px',
@@ -31071,6 +31081,13 @@
 	    ':hover': {
 	      backgroundColor: 'white',
 	      color: 'black'
+	    },
+	    '@media (max-width: 670px)': {
+	      fontSize: '18px',
+	      border: '2px solid white',
+	      margin: '10px auto',
+	      padding: '15px 30px',
+	      maxWidth: '60%'
 	    }
 	  }
 	});
@@ -31252,7 +31269,10 @@
 	  quote: {
 	    maxWidth: '500px',
 	    margin: '0 auto',
-	    fontSize: '53px'
+	    fontSize: '53px',
+	    '@media (max-width: 670px)': {
+	      fontSize: '20px'
+	    }
 	  }
 	});
 
