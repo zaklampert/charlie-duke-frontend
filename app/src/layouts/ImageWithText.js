@@ -14,7 +14,7 @@ export default ({image, content, caption, imageLink}) => (
 
 const styles = StyleSheet.create({
   imageWithText: {
-    maxWidth: '900px',
+    maxWidth: '1440px',
     margin: '0 auto',
   }
 })

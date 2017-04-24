@@ -22,7 +22,7 @@ export default ({leftPhoto, leftCaption, rightPhoto, rightCaption}) => (
 
 const styles = StyleSheet.create({
   sideBySide: {
-    maxWidth: '900px',
+    maxWidth: '1440px',
     margin: '0 auto',
     // fontSize: '12px',
     clear: 'both',

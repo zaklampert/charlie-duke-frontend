@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "ca3142dec812fc64bd56"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "5cfad40bb4980885697b"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -30867,7 +30867,7 @@
 
 	var styles = _aphrodite.StyleSheet.create({
 	  defaultLayout: {
-	    maxWidth: '900px',
+	    maxWidth: '1440px',
 	    margin: '0 auto',
 	    clear: 'both'
 	  },
@@ -31090,7 +31090,7 @@
 
 	var styles = _aphrodite.StyleSheet.create({
 	  imageWithText: {
-	    maxWidth: '900px',
+	    maxWidth: '1440px',
 	    margin: '0 auto'
 	  }
 	});
@@ -31289,7 +31289,7 @@
 
 	var styles = _aphrodite.StyleSheet.create({
 	  sideBySide: {
-	    maxWidth: '900px',
+	    maxWidth: '1440px',
 	    margin: '0 auto',
 	    // fontSize: '12px',
 	    clear: 'both'

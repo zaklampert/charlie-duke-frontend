@@ -10,7 +10,7 @@ export default ({content}) => (
 
 const styles = StyleSheet.create({
   defaultLayout: {
-    maxWidth: '900px',
+    maxWidth: '1440px',
     margin: '0 auto',
     clear: 'both',
   },
