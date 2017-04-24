@@ -2,17 +2,16 @@ import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
 export default ({content}) => (
-  <div className={css(styles.sideBySide)}>
+  <div className={css(styles.defaultLayout)}>
     <span dangerouslySetInnerHTML={{__html: content}} />
   </div>
 )
 
 
 const styles = StyleSheet.create({
-  sideBySide: {
+  defaultLayout: {
     maxWidth: '900px',
     margin: '0 auto',
-    fontSize: '12px',
     clear: 'both',
   },
   half: {

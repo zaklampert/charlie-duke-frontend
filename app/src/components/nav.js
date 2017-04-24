@@ -49,7 +49,10 @@ const styles = StyleSheet.create({
     position: 'fixed',
     zIndex: '99',
     color: 'white',
-    left: '80px'
+    left: '80px',
+    '@media (max-width: 765px)':{
+      display: 'none'
+    }
   },
   navItems: {
     position: 'absolute',

@@ -2,7 +2,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux'
 import { pages } from './data';
-import { Nav } from './components';
+import { Nav, InteriorNav } from './components';
 import { About, Hero, Story } from './templates';
 import { getWPData } from './actions';
 import { mapDataToPage } from './data';
@@ -26,8 +26,8 @@ class App extends React.Component {
     this._animateIntros = this._animateIntros.bind(this);
   }
   _animateIntros(index, nextIndex) {
-    TweenMax.fromTo(`.sectionIntroButton_${nextIndex - 1}`,1.45, {autoAlpha: 0}, {autoAlpha: 1, delay: 1.86});
-    TweenMax.staggerFromTo(`.sectionIntro_${nextIndex - 1}`, 1.25, {opacity:0, y: -70}, {opacity:1, y:0}, .3);
+    TweenMax.fromTo(`.sectionIntroButton_${nextIndex - 1}`,1.25, {autoAlpha: 0}, {autoAlpha: 1, delay: .6});
+    TweenMax.staggerFromTo(`.sectionIntro_${nextIndex - 1}`, 1, {opacity:0, y: -70}, {opacity:1, y:0}, .3);
   }
   componentDidUpdate(prevProps) {
     const { pages } = this.props;
@@ -48,13 +48,29 @@ class App extends React.Component {
       slidesNavigation: true,
       slidesNavPosition: 'bottom',
       onLeave: function(index, nextIndex){
+        // $.fn.fullpage.silentMoveTo(anchors[nextIndex - 1], 0);
         self._animateIntros(index, nextIndex);
         self.setState({
           currentIndex: nextIndex - 2,
           showNav: (nextIndex !== 1) ? true : false,
           title: `Charlie Duke // ${pages.data[nextIndex - 1].title}`,
+          currentSectionTitle: pages.data[nextIndex - 1].title,
+          showInteriorNav: false,
+          currentAnchor: pages.data[nextIndex - 1].slug
         })
-      }
+      },
+      onSlideLeave: function(anchorLink, index, slideIndex, direction, nextSlideIndex){
+        self.setState({
+          showNav: (nextSlideIndex === 0 ) ? true : false,
+        })
+
+      },
+      afterSlideLoad: function( anchorLink, index, slideAnchor, slideIndex){
+        self.setState({
+          showNav: (slideIndex === 0 ) ? true : false,
+          showInteriorNav: (slideIndex === 0 ) ? false : true,
+        })
+      },
     });
     }
   }
@@ -63,7 +79,7 @@ class App extends React.Component {
     dispatch(getWPData());
   }
   render(){
-    const { showNav, currentIndex, title } = this.state;
+    const { showNav, currentIndex, title, showInteriorNav, currentSectionTitle, currentAnchor } = this.state;
     const { pages } = this.props;
 
     const anchors = pages.data && pages.data.map(page=>{
@@ -75,6 +91,7 @@ class App extends React.Component {
       <div id="root" style={{
         fontFamily: `"futura-pt", sans-serif`,
         color: 'white',
+        fontSize: '18px',
         background: '#171717'
       }}>
       <Helmet
@@ -92,6 +109,13 @@ class App extends React.Component {
             currentIndex={currentIndex}
             storyPages={storyPages}
           />
+          {(showInteriorNav) ?
+            <InteriorNav
+              currentSectionTitle={currentSectionTitle}
+              currentAnchor={currentAnchor}
+              currentIndex={currentIndex}
+            /> : null}
+
           <div id="fullpage">
             {pages && pages.data && pages.data.map(page=>(
               React.createElement(Templates[page.template], {key: page.slug, page})

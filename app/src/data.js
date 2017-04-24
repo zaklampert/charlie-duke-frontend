@@ -26,6 +26,8 @@ const lookupChildTemplate = (child) => {
       return "ImageWithText";
     case "two_col":
       return "SideBySide";
+    case "full_image":
+      return "FullImage";
     default:
       return "Default";
   }
@@ -56,6 +58,7 @@ export const mapDataToPage = (dataFromWordpress) => {
           rightPhoto: child && child.page_data && child.page_data.meta_box && child.page_data.meta_box.right_col_img && child.page_data.meta_box.right_col_img[0] && child.page_data.meta_box.right_col_img[0].url,
           leftCaption:  child && child.page_data && child.page_data.meta_box && child.page_data.meta_box.left_col_text,
           rightCaption:  child && child.page_data && child.page_data.meta_box && child.page_data.meta_box.right_col_text,
+          imageLink:child && child.page_data && child.page_data.meta_box && child.page_data.meta_box.img_link,
           image: child &&
                   child.page_data &&
                   child.page_data._embedded &&
