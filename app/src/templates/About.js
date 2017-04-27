@@ -12,6 +12,11 @@ const Layouts = {
 
 export default ({page}) => (
   <FullPageSection>
+    <FullPageSlide>
+      <Quote
+        content={page.content}
+      />
+    </FullPageSlide>
     <FullPageSlide
       theme="dark">
         {page.children && page.children.length > 0 && page.children.map(child => (

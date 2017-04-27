@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "507ce808387bb20dfb0f"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "2325d616f259aaa6f4c7"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -31121,11 +31121,11 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = function (_ref) {
-	  var quote = _ref.quote;
+	  var content = _ref.content;
 	  return _react2.default.createElement(
 	    'div',
 	    { className: (0, _aphrodite.css)(styles.quote) },
-	    quote
+	    _react2.default.createElement('span', { dangerouslySetInnerHTML: { __html: content } })
 	  );
 	};
 
@@ -31413,6 +31413,13 @@
 	  return _react2.default.createElement(
 	    _layouts.FullPageSection,
 	    null,
+	    _react2.default.createElement(
+	      _layouts.FullPageSlide,
+	      null,
+	      _react2.default.createElement(_layouts.Quote, {
+	        content: page.content
+	      })
+	    ),
 	    _react2.default.createElement(
 	      _layouts.FullPageSlide,
 	      {

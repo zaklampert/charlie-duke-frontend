@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
-export default ({quote}) => (
+export default ({content}) => (
   <div className={css(styles.quote)}>
-    {quote}
+    <span dangerouslySetInnerHTML={{__html: content}} />
   </div>
 );
 
