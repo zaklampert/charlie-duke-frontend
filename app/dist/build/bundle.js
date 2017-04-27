@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "2325d616f259aaa6f4c7"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "d0c43a7be44e038c1af9"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -30908,11 +30908,7 @@
 
 	exports.default = function (_ref) {
 	  var image = _ref.image;
-	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    _react2.default.createElement('img', { 'data-src': image, style: { maxWidth: '100%' } })
-	  );
+	  return _react2.default.createElement('div', { className: (0, _aphrodite.css)(styles.fullImage), style: { backgroundImage: 'url(' + image + ')' } });
 	};
 
 	var styles = _aphrodite.StyleSheet.create({
@@ -31038,7 +31034,7 @@
 	          } },
 	        _react2.default.createElement(
 	          'div',
-	          { style: { padding: '20px' } },
+	          null,
 	          children
 	        )
 	      );
@@ -31086,7 +31082,7 @@
 	    _react2.default.createElement('img', { 'data-src': image, style: { maxWidth: '100%', maxHeight: '80vh', display: 'block', margin: '0 auto' } }),
 	    imageLink ? _react2.default.createElement(_components.AudioClip, { source: imageLink }) : null,
 	    caption,
-	    _react2.default.createElement('span', { dangerouslySetInnerHTML: { __html: content } })
+	    _react2.default.createElement('span', { style: { textAlign: 'center' }, dangerouslySetInnerHTML: { __html: content } })
 	  );
 	};
 

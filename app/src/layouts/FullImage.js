@@ -2,9 +2,7 @@ import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
 export default ({image}) => (
-  <div>
-    <img data-src={image} style={{maxWidth: '100%'}}/>
-  </div>
+  <div className={css(styles.fullImage)} style={{backgroundImage: `url(${image})`}}></div>
 )
 
 const styles = StyleSheet.create({

@@ -8,7 +8,7 @@ export default ({image, content, caption, imageLink}) => (
     {(imageLink) ? <AudioClip source={imageLink} /> : null }
 
     {caption}
-    <span dangerouslySetInnerHTML={{__html: content}}/>
+    <span style={{textAlign: 'center'}} dangerouslySetInnerHTML={{__html: content}}/>
   </div>
 )
 

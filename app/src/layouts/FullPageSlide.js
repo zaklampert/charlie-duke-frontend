@@ -12,7 +12,7 @@ export default class FullPageSlide extends React.Component{
         backgroundSize: 'cover',
         color: (theme === "light") ? 'black' : 'white',
       }}>
-      <div style={{padding: '20px'}}>
+      <div>
         {children}
       </div>
       </div>
