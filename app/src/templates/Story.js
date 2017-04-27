@@ -1,11 +1,12 @@
 import React from 'react';
-import { FullPageSlide, FullPageSection, SectionIntro, ImageWithText, SideBySide, Default, FullImage } from '../layouts';
+import { FullPageSlide, FullPageSection, SectionIntro, ImageWithText, SideBySide, Default, FullImage, Quote } from '../layouts';
 
 const Layouts = {
   ImageWithText,
   SideBySide,
   Default,
   FullImage,
+  Quote,
 };
 
 export default ({page}) => (

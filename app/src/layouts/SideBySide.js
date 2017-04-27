@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
     width: '48%',
     margin: '0 1%',
     display: 'inline-block',
+    verticalAlign: 'top',
   },
   image: {
     maxWidth: '100%',

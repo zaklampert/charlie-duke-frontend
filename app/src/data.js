@@ -28,6 +28,8 @@ const lookupChildTemplate = (child) => {
       return "SideBySide";
     case "full_image":
       return "FullImage";
+    case "quote":
+      return "Quote";
     default:
       return "Default";
   }

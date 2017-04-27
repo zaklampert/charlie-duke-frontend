@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "5cfad40bb4980885697b"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "507ce808387bb20dfb0f"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -11592,6 +11592,8 @@
 	      return "SideBySide";
 	    case "full_image":
 	      return "FullImage";
+	    case "quote":
+	      return "Quote";
 	    default:
 	      return "Default";
 	  }
@@ -31131,7 +31133,10 @@
 	  quote: {
 	    maxWidth: '500px',
 	    margin: '0 auto',
-	    fontSize: '53px'
+	    fontSize: '53px',
+	    '@media (max-width: 670px)': {
+	      fontSize: '20px'
+	    }
 	  }
 	});
 
@@ -31297,7 +31302,8 @@
 	  half: {
 	    width: '48%',
 	    margin: '0 1%',
-	    display: 'inline-block'
+	    display: 'inline-block',
+	    verticalAlign: 'top'
 	  },
 	  image: {
 	    maxWidth: '100%'
@@ -31394,6 +31400,14 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	var Layouts = {
+	  ImageWithText: _layouts.ImageWithText,
+	  SideBySide: _layouts.SideBySide,
+	  Default: _layouts.Default,
+	  FullImage: _layouts.FullImage,
+	  Quote: _layouts.Quote
+	};
+
 	exports.default = function (_ref) {
 	  var page = _ref.page;
 	  return _react2.default.createElement(
@@ -31403,11 +31417,15 @@
 	      _layouts.FullPageSlide,
 	      {
 	        theme: 'dark' },
-	      _react2.default.createElement(
-	        'div',
-	        { className: (0, _aphrodite.css)(styles.quote) },
-	        _react2.default.createElement('span', { dangerouslySetInnerHTML: { __html: page.content } })
-	      )
+	      page.children && page.children.length > 0 && page.children.map(function (child) {
+	        return _react2.default.createElement(
+	          _layouts.FullPageSlide,
+	          {
+	            key: child.slug,
+	            theme: 'light' },
+	          _react2.default.createElement(Layouts[child.template], child)
+	        );
+	      })
 	    )
 	  );
 	};
@@ -31538,7 +31556,8 @@
 	  ImageWithText: _layouts.ImageWithText,
 	  SideBySide: _layouts.SideBySide,
 	  Default: _layouts.Default,
-	  FullImage: _layouts.FullImage
+	  FullImage: _layouts.FullImage,
+	  Quote: _layouts.Quote
 	};
 
 	exports.default = function (_ref) {

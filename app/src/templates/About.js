@@ -1,15 +1,26 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
-import { FullPageSlide, FullPageSection } from '../layouts';
+import { FullPageSlide, FullPageSection, SectionIntro, ImageWithText, SideBySide, Default, FullImage, Quote } from '../layouts';
 
+const Layouts = {
+  ImageWithText,
+  SideBySide,
+  Default,
+  FullImage,
+  Quote,
+};
 
 export default ({page}) => (
   <FullPageSection>
     <FullPageSlide
       theme="dark">
-        <div className={css(styles.quote)}>
-        <span dangerouslySetInnerHTML={{__html: page.content}}/>
-        </div>
+        {page.children && page.children.length > 0 && page.children.map(child => (
+          <FullPageSlide
+            key={child.slug}
+            theme="light">
+            {React.createElement(Layouts[child.template], child)}
+          </FullPageSlide>
+        ))}
       </FullPageSlide>
   </FullPageSection>
 );
