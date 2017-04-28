@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   },
   nav: {
     position: 'fixed',
-    zIndex: '99',
+    zIndex: '89',
     color: 'white',
     left: '80px',
     '@media (max-width: 765px)':{

@@ -2,6 +2,8 @@ import {mapDataToPage} from '../data';
 
 export const POPULATE_MENU = 'POPULATE_MENU';
 export const POPULATE_PAGES = 'POPULATE_PAGES';
+export const SHOW_MODAL = 'SHOW_MODAL';
+export const HIDE_MODAL = 'HIDE_MODAL';
 
 const API_URL = 'https://charlieduke.staging.wpengine.com';
 
@@ -9,6 +11,18 @@ const receivePages = (json) => ({
   type: POPULATE_PAGES,
   json
 })
+
+export const showModal = ({content}) => dispatch => {
+  // $.fn.fullpage.setAllowScrolling(false);
+  //
+  // const viewer = ImageViewer(); //options is optional parameter
+  // viewer.show(content); //second paramter is optional
+
+  // return dispatch({
+  //   type: SHOW_MODAL,
+  //   content
+  // })
+}
 
 const mapWPData = (pages, menu) => dispatch => {
   const mappedMenuData = menu && menu.map(item=>{

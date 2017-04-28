@@ -2,18 +2,19 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux'
 import { pages } from './data';
-import { Nav, InteriorNav } from './components';
+import { Nav, InteriorNav, Modal } from './components';
 import { About, Hero, Story } from './templates';
-import { getWPData } from './actions';
+import * as actions from './actions';
 import { mapDataToPage } from './data';
 import { Loading } from './components';
+import Intense from './lib/intense.min.js';
+
 
 const Templates = {
   About,
   Hero,
   Story,
 }
-
 
 class App extends React.Component {
   constructor(props){
@@ -66,21 +67,28 @@ class App extends React.Component {
 
       },
       afterSlideLoad: function( anchorLink, index, slideAnchor, slideIndex){
+
         self.setState({
           showNav: (slideIndex === 0 ) ? true : false,
           showInteriorNav: (slideIndex === 0 ) ? false : true,
         })
       },
+      afterRender: function(){
+        const element = document.querySelectorAll( 'img' );
+        console.log(element)
+        Intense( element );
+      }
     });
+
     }
   }
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(getWPData());
+    dispatch(actions.getWPData());
   }
   render(){
     const { showNav, currentIndex, title, showInteriorNav, currentSectionTitle, currentAnchor } = this.state;
-    const { pages } = this.props;
+    const { pages, modal } = this.props;
 
     const anchors = pages.data && pages.data.map(page=>{
       return page.slug;
@@ -94,6 +102,7 @@ class App extends React.Component {
         fontSize: '18px',
         background: '#171717'
       }}>
+      {(modal.show) ? <Modal content={modal.content}/> : null}
       <Helmet
         title={title}
       >
@@ -130,10 +139,11 @@ class App extends React.Component {
 
 
 const mapStateToProps = state => {
-  const { pages } = state
+  const { pages, modal } = state
 
   return {
-    pages
+    pages,
+    modal,
   }
 }
 

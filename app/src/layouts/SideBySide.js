@@ -5,7 +5,7 @@ import { AudioClip } from '../components';
 export default ({leftPhoto, leftCaption, rightPhoto, rightCaption}) => (
   <div className={css(styles.sideBySide)}>
     <div className={css(styles.half)}>
-      <img className={css(styles.image)} data-src={leftPhoto} />
+      <img className={css(styles.image)} src={leftPhoto} />
       {/* <AudioClip
         file="https://s3.amazonaws.com/storage.brmbl.in/outofhand.wav"
       /> */}
@@ -13,7 +13,7 @@ export default ({leftPhoto, leftCaption, rightPhoto, rightCaption}) => (
 
     </div>
     <div className={css(styles.half)}>
-      <img className={css(styles.image)} data-src={rightPhoto} />
+      <img className={css(styles.image)} src={rightPhoto} />
       <span className={css(styles.caption)} dangerouslySetInnerHTML={{__html: rightCaption}}/>
     </div>
   </div>

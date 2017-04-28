@@ -9,7 +9,7 @@ const Layouts = {
   Quote,
 };
 
-export default ({page}) => (
+export default ({page, handlers}) => (
   <FullPageSection
     key={page.slug}>
     <FullPageSlide
