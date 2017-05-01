@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "b83de992974444fcd327"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "0b628d524b679e83b74a"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -30854,8 +30854,8 @@
 	          scrollOverflow: true,
 	          menu: '#nav',
 	          anchors: anchors,
-	          resetSliders: true,
-	          resetSlidersKey: '575A8F6E-343B4941-889B3733-CAB30D72',
+	          // resetSliders: true,
+	          // resetSlidersKey: '575A8F6E-343B4941-889B3733-CAB30D72',
 	          easingcss3: 'ease-out',
 	          scrollingSpeed: 700,
 	          scrollHorizontally: true,
