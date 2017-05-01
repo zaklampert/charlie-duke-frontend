@@ -10,7 +10,7 @@ const ImageWithText = ({image, content, caption, imageLink, openModal, dispatch}
     {(imageLink) ? <AudioClip source={imageLink} /> : null }
 
     {caption}
-    <span style={{textAlign: 'center'}} dangerouslySetInnerHTML={{__html: content}}/>
+    <div style={{textAlign: 'center', padding: '5px 20px'}} dangerouslySetInnerHTML={{__html: content}}/>
   </div>
 }
 

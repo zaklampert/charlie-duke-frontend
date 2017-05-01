@@ -4,13 +4,26 @@ export const POPULATE_MENU = 'POPULATE_MENU';
 export const POPULATE_PAGES = 'POPULATE_PAGES';
 export const SHOW_MODAL = 'SHOW_MODAL';
 export const HIDE_MODAL = 'HIDE_MODAL';
+export const UPDATE_LOCATION = 'UPDATE_LOCATION';
 
 const API_URL = 'https://charlieduke.staging.wpengine.com';
 
 const receivePages = (json) => ({
   type: POPULATE_PAGES,
   json
+});
+
+const receiveLocation = ({section, slide})=>({
+  type: UPDATE_LOCATION,
+  section,
+  slide,
 })
+
+export const updateLocation = ({hash}) => dispatch => {
+  const section = (hash.lastIndexOf("/") > -1) ? hash.substring(hash.lastIndexOf("#")+1,hash.lastIndexOf("/")) : hash.split('#')[1];
+  const slide = hash.split('/')[1] || null;
+  return dispatch(receiveLocation({section, slide}))
+}
 
 export const showModal = ({content}) => dispatch => {
   // $.fn.fullpage.setAllowScrolling(false);
@@ -43,7 +56,6 @@ const mapWPData = (pages, menu) => dispatch => {
     });
     return item
   })
-  console.log(mappedMenuData);
   return dispatch(receivePages(mapDataToPage(mappedMenuData)));
 }
 const getPages = (menu) => dispatch => {

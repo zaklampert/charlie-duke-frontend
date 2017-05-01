@@ -8,7 +8,7 @@ import * as actions from './actions';
 import { mapDataToPage } from './data';
 import { Loading } from './components';
 import Intense from './lib/intense.min.js';
-
+import './lib/fullpage.resetSliders.min.js';
 
 const Templates = {
   About,
@@ -31,7 +31,7 @@ class App extends React.Component {
     TweenMax.staggerFromTo(`.sectionIntro_${nextIndex - 1}`, 1, {opacity:0, y: -70}, {opacity:1, y:0}, .3);
   }
   componentDidUpdate(prevProps) {
-    const { pages } = this.props;
+    const { pages, dispatch } = this.props;
     const self = this;
     if ( !prevProps.pages.ready && pages.ready ){
     const anchors = pages.data && pages.data.map(page=>{
@@ -46,38 +46,40 @@ class App extends React.Component {
       easingcss3: 'ease-out',
       scrollingSpeed: 700,
       scrollHorizontally: true,
-      slidesNavigation: true,
-      slidesNavPosition: 'bottom',
+      slidesNavigation: false,
       onLeave: function(index, nextIndex){
-        // $.fn.fullpage.silentMoveTo(anchors[nextIndex - 1], 0);
+        setTimeout(()=>{
+            dispatch(actions.updateLocation({hash: window.location.hash}));
+
+        }, 50);
+
         self._animateIntros(index, nextIndex);
         self.setState({
           currentIndex: nextIndex - 2,
-          showNav: (nextIndex !== 1) ? true : false,
           title: `Charlie Duke // ${pages.data[nextIndex - 1].title}`,
           currentSectionTitle: pages.data[nextIndex - 1].title,
-          showInteriorNav: false,
           currentAnchor: pages.data[nextIndex - 1].slug
-        })
+        });
       },
       onSlideLeave: function(anchorLink, index, slideIndex, direction, nextSlideIndex){
+        setTimeout(()=>{
+            dispatch(actions.updateLocation({hash: window.location.hash}));
+        }, 50)
         self.setState({
           showNav: (nextSlideIndex === 0 ) ? true : false,
         })
-
       },
       afterSlideLoad: function( anchorLink, index, slideAnchor, slideIndex){
-
         self.setState({
           showNav: (slideIndex === 0 ) ? true : false,
           showInteriorNav: (slideIndex === 0 ) ? false : true,
         })
       },
       afterRender: function(){
+        // Load additional dom-required libraries.
         const element = document.querySelectorAll( 'img' );
-        console.log(element)
         Intense( element );
-      }
+      },
     });
 
     }
@@ -87,14 +89,14 @@ class App extends React.Component {
     dispatch(actions.getWPData());
   }
   render(){
-    const { showNav, currentIndex, title, showInteriorNav, currentSectionTitle, currentAnchor } = this.state;
-    const { pages, modal } = this.props;
-
+    const { currentIndex, title, currentSectionTitle } = this.state;
+    const { pages, modal, location } = this.props;
     const anchors = pages.data && pages.data.map(page=>{
       return page.slug;
     });
     const storyPages = pages.data && pages.data.filter((page)=> {return page.template === "Story" || page.template === "About"});
-
+    const showNav = (!location.slide);
+    const showInteriorNav = (location.slide);
      return (
       <div id="root" style={{
         fontFamily: `"futura-pt", sans-serif`,
@@ -121,8 +123,10 @@ class App extends React.Component {
           {(showInteriorNav) ?
             <InteriorNav
               currentSectionTitle={currentSectionTitle}
-              currentAnchor={currentAnchor}
+              currentAnchor={location.section}
               currentIndex={currentIndex}
+              currentSlide={location.slide}
+              totalSlides={pages && pages.data && pages.data[currentIndex] && pages.data[currentIndex + 1].children.length}
             /> : null}
 
           <div id="fullpage">
@@ -139,11 +143,12 @@ class App extends React.Component {
 
 
 const mapStateToProps = state => {
-  const { pages, modal } = state
+  const { pages, modal, location } = state
 
   return {
     pages,
     modal,
+    location
   }
 }
 

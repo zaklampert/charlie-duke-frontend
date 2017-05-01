@@ -17,16 +17,13 @@ export default ({page}) => (
         content={page.content}
       />
     </FullPageSlide>
-    <FullPageSlide
-      theme="dark">
-        {page.children && page.children.length > 0 && page.children.map(child => (
-          <FullPageSlide
+        {page.children && page.children.length > 0 && page.children.map(child => {
+          return <FullPageSlide
             key={child.slug}
             theme="light">
             {React.createElement(Layouts[child.template], child)}
           </FullPageSlide>
-        ))}
-      </FullPageSlide>
+        })}
   </FullPageSection>
 );
 

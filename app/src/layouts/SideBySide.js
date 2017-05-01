@@ -9,12 +9,12 @@ export default ({leftPhoto, leftCaption, rightPhoto, rightCaption}) => (
       {/* <AudioClip
         file="https://s3.amazonaws.com/storage.brmbl.in/outofhand.wav"
       /> */}
-      <span className={css(styles.caption)}  dangerouslySetInnerHTML={{__html: leftCaption}}/>
+      <div className={css(styles.caption)}  dangerouslySetInnerHTML={{__html: leftCaption}}/>
 
     </div>
     <div className={css(styles.half)}>
       <img className={css(styles.image)} src={rightPhoto} />
-      <span className={css(styles.caption)} dangerouslySetInnerHTML={{__html: rightCaption}}/>
+      <div className={css(styles.caption)} dangerouslySetInnerHTML={{__html: rightCaption}}/>
     </div>
   </div>
 )
@@ -26,6 +26,9 @@ const styles = StyleSheet.create({
     margin: '0 auto',
     // fontSize: '12px',
     clear: 'both',
+  },
+  caption: {
+    padding: '5px 20px',
   },
   half: {
     width: '48%',
