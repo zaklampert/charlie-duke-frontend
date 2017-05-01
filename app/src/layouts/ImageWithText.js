@@ -9,13 +9,13 @@ const ImageWithText = ({image, content, caption, imageLink, openModal, dispatch,
 
   return <div className={css(styles.imageWithText)}>
     <div style={{
-      maxWidth: `${imageWidth}px`,
+      maxWidth: (isPortrait) ? '800px' : `${imageWidth}px`,
       margin: '0 auto',
       display: 'block',
       position: 'relative',
     }}>
 
-      <img src={image} style={{width: '100%', maxHeight: '70vh'}} onClick={()=>dispatch(showModal({content: image}))}/>
+      <img src={image} style={{maxWidth: '100%', maxHeight: '70vh', margin: '0 auto', display: 'block'}} onClick={()=>dispatch(showModal({content: image}))}/>
       {(imageLink) ? <AudioClip source={imageLink} /> : null }
 
       {caption}

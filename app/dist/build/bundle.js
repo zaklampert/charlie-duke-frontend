@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "062bfe5499eae35cb67e"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "228d0048feb5d19c4580"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -30893,8 +30893,6 @@
 	            // Load additional dom-required libraries.
 	            var element = document.querySelectorAll('img');
 	            var intenseDivs = document.querySelectorAll('*[data-intense="true"]');
-	            console.log(intenseDivs);
-	            // console.log(intenseClassDivs);
 	            (0, _intenseMin2.default)(element);
 	            (0, _intenseMin2.default)(intenseDivs);
 	          }
@@ -31138,7 +31136,9 @@
 	    fontWeight: 'bold',
 	    color: 'black',
 	    cursor: 'pointer',
-	    fontSize: '13px'
+	    fontSize: '13px',
+	    background: 'rgba(255,255,255,.9)',
+	    padding: '6px'
 	  },
 	  interiorNavRight: {
 	    position: 'absolute',
@@ -31151,6 +31151,8 @@
 	    cursor: 'pointer'
 	  },
 	  interiorNavLeft: {
+	    background: 'rgba(255,255,255,.9)',
+	    padding: '6px',
 	    position: 'absolute',
 	    top: '50%',
 	    transform: 'translateY(-50%)',
@@ -31582,12 +31584,12 @@
 	    _react2.default.createElement(
 	      'div',
 	      { style: {
-	          maxWidth: imageWidth + 'px',
+	          maxWidth: isPortrait ? '800px' : imageWidth + 'px',
 	          margin: '0 auto',
 	          display: 'block',
 	          position: 'relative'
 	        } },
-	      _react2.default.createElement('img', { src: image, style: { width: '100%', maxHeight: '70vh' }, onClick: function onClick() {
+	      _react2.default.createElement('img', { src: image, style: { maxWidth: '100%', maxHeight: '70vh', margin: '0 auto', display: 'block' }, onClick: function onClick() {
 	          return dispatch((0, _actions.showModal)({ content: image }));
 	        } }),
 	      imageLink ? _react2.default.createElement(_components.AudioClip, { source: imageLink }) : null,

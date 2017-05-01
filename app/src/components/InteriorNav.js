@@ -33,6 +33,8 @@ const styles = StyleSheet.create({
     color: 'black',
     cursor: 'pointer',
     fontSize: '13px',
+    background: 'rgba(255,255,255,.9)',
+    padding: '6px',
   },
   interiorNavRight: {
     position: 'absolute',
@@ -45,6 +47,8 @@ const styles = StyleSheet.create({
     cursor: 'pointer',
   },
   interiorNavLeft: {
+    background: 'rgba(255,255,255,.9)',
+    padding: '6px',
     position: 'absolute',
     top: '50%',
     transform: 'translateY(-50%)',
