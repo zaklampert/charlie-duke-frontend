@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "7ab1e91b42b7ab3f1ea2"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "062bfe5499eae35cb67e"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -11858,6 +11858,7 @@
 	          imageLink: child && child.page_data && child.page_data.meta_box && child.page_data.meta_box.img_link,
 	          image: child && child.page_data && child.page_data._embedded && child.page_data._embedded["wp:featuredmedia"] && child.page_data._embedded["wp:featuredmedia"][0] && child.page_data._embedded["wp:featuredmedia"][0].source_url,
 	          imageWidth: child && child.page_data && child.page_data._embedded && child.page_data._embedded["wp:featuredmedia"] && child.page_data._embedded["wp:featuredmedia"][0] && child.page_data._embedded["wp:featuredmedia"][0].media_details && child.page_data._embedded["wp:featuredmedia"][0].media_details.width,
+	          imageHeight: child && child.page_data && child.page_data._embedded && child.page_data._embedded["wp:featuredmedia"] && child.page_data._embedded["wp:featuredmedia"][0] && child.page_data._embedded["wp:featuredmedia"][0].media_details && child.page_data._embedded["wp:featuredmedia"][0].media_details.height,
 	          content: child && child.page_data && child.page_data.content && child.page_data.content.rendered
 	        };
 	      })
@@ -30891,7 +30892,11 @@
 	          afterRender: function afterRender() {
 	            // Load additional dom-required libraries.
 	            var element = document.querySelectorAll('img');
+	            var intenseDivs = document.querySelectorAll('*[data-intense="true"]');
+	            console.log(intenseDivs);
+	            // console.log(intenseClassDivs);
 	            (0, _intenseMin2.default)(element);
+	            (0, _intenseMin2.default)(intenseDivs);
 	          }
 	        });
 	      }
@@ -31391,17 +31396,15 @@
 
 	exports.default = function (_ref) {
 	  var image = _ref.image;
-	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    _react2.default.createElement('img', { className: (0, _aphrodite.css)(styles.fullImage), src: image })
-	  );
+	  return _react2.default.createElement('div', { className: (0, _aphrodite.css)(styles.fullImage), 'data-intense': 'true', style: { backgroundImage: 'url(' + image + ')' }, 'data-image': image });
 	};
 
 	var styles = _aphrodite.StyleSheet.create({
 	  fullImage: {
-	    minWidth: '100vw',
-	    minHeight: '100vh'
+	    backgroundSize: 'cover',
+	    backgroundPosition: 'center, center',
+	    width: '100vw',
+	    height: '100vh'
 	  }
 	});
 
@@ -31568,7 +31571,10 @@
 	      imageLink = _ref.imageLink,
 	      openModal = _ref.openModal,
 	      dispatch = _ref.dispatch,
-	      imageWidth = _ref.imageWidth;
+	      imageWidth = _ref.imageWidth,
+	      imageHeight = _ref.imageHeight;
+
+	  var isPortrait = imageWidth / imageHeight < 1;
 
 	  return _react2.default.createElement(
 	    'div',
@@ -31578,9 +31584,10 @@
 	      { style: {
 	          maxWidth: imageWidth + 'px',
 	          margin: '0 auto',
-	          display: 'block'
+	          display: 'block',
+	          position: 'relative'
 	        } },
-	      _react2.default.createElement('img', { src: image, style: { maxWidth: '100%', maxHeight: '80vh', display: 'block', margin: '0 auto' }, onClick: function onClick() {
+	      _react2.default.createElement('img', { src: image, style: { width: '100%', maxHeight: '70vh' }, onClick: function onClick() {
 	          return dispatch((0, _actions.showModal)({ content: image }));
 	        } }),
 	      imageLink ? _react2.default.createElement(_components.AudioClip, { source: imageLink }) : null,

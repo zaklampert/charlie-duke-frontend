@@ -79,7 +79,9 @@ class App extends React.Component {
       afterRender: function(){
         // Load additional dom-required libraries.
         const element = document.querySelectorAll( 'img' );
+        const intenseDivs = document.querySelectorAll('*[data-intense="true"]');
         Intense( element );
+        Intense(intenseDivs);
       },
     });
 

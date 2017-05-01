@@ -74,6 +74,13 @@ export const mapDataToPage = (dataFromWordpress) => {
                   child.page_data._embedded["wp:featuredmedia"][0] &&
                   child.page_data._embedded["wp:featuredmedia"][0].media_details &&
                   child.page_data._embedded["wp:featuredmedia"][0].media_details.width,
+          imageHeight: child &&
+                  child.page_data &&
+                  child.page_data._embedded &&
+                  child.page_data._embedded["wp:featuredmedia"] &&
+                  child.page_data._embedded["wp:featuredmedia"][0] &&
+                  child.page_data._embedded["wp:featuredmedia"][0].media_details &&
+                  child.page_data._embedded["wp:featuredmedia"][0].media_details.height,
           content: child && child.page_data &&  child.page_data.content && child.page_data.content.rendered
         }
       })
