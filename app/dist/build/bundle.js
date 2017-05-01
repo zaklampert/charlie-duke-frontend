@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "344141979bb113ef8961"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "7ab1e91b42b7ab3f1ea2"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -31346,7 +31346,7 @@
 	  return _react2.default.createElement(
 	    'div',
 	    { className: (0, _aphrodite.css)(styles.defaultLayout) },
-	    _react2.default.createElement('span', { dangerouslySetInnerHTML: { __html: content } })
+	    _react2.default.createElement('span', { style: { padding: '5px 15px' }, dangerouslySetInnerHTML: { __html: content } })
 	  );
 	};
 
@@ -31585,7 +31585,7 @@
 	        } }),
 	      imageLink ? _react2.default.createElement(_components.AudioClip, { source: imageLink }) : null,
 	      caption,
-	      _react2.default.createElement('div', { style: { padding: '5px 8px' }, dangerouslySetInnerHTML: { __html: content } })
+	      _react2.default.createElement('div', { style: { padding: '5px 15px' }, dangerouslySetInnerHTML: { __html: content } })
 	    )
 	  );
 	};

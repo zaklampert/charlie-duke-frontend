@@ -3,7 +3,7 @@ import { StyleSheet, css } from 'aphrodite';
 
 export default ({content}) => (
   <div className={css(styles.defaultLayout)}>
-    <span dangerouslySetInnerHTML={{__html: content}} />
+    <span style={{padding: '5px 15px'}} dangerouslySetInnerHTML={{__html: content}} />
   </div>
 )
 
