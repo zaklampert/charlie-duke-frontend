@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "0b628d524b679e83b74a"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "344141979bb113ef8961"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -11857,6 +11857,7 @@
 	          rightCaption: child && child.page_data && child.page_data.meta_box && child.page_data.meta_box.right_col_text,
 	          imageLink: child && child.page_data && child.page_data.meta_box && child.page_data.meta_box.img_link,
 	          image: child && child.page_data && child.page_data._embedded && child.page_data._embedded["wp:featuredmedia"] && child.page_data._embedded["wp:featuredmedia"][0] && child.page_data._embedded["wp:featuredmedia"][0].source_url,
+	          imageWidth: child && child.page_data && child.page_data._embedded && child.page_data._embedded["wp:featuredmedia"] && child.page_data._embedded["wp:featuredmedia"][0] && child.page_data._embedded["wp:featuredmedia"][0].media_details && child.page_data._embedded["wp:featuredmedia"][0].media_details.width,
 	          content: child && child.page_data && child.page_data.content && child.page_data.content.rendered
 	        };
 	      })
@@ -31390,14 +31391,17 @@
 
 	exports.default = function (_ref) {
 	  var image = _ref.image;
-	  return _react2.default.createElement('div', { className: (0, _aphrodite.css)(styles.fullImage), style: { backgroundImage: 'url(' + image + ')' } });
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement('img', { className: (0, _aphrodite.css)(styles.fullImage), src: image })
+	  );
 	};
 
 	var styles = _aphrodite.StyleSheet.create({
 	  fullImage: {
-	    backgroundSize: 'cover',
-	    width: '100vw',
-	    height: '100vh'
+	    minWidth: '100vw',
+	    minHeight: '100vh'
 	  }
 	});
 
@@ -31563,17 +31567,26 @@
 	      caption = _ref.caption,
 	      imageLink = _ref.imageLink,
 	      openModal = _ref.openModal,
-	      dispatch = _ref.dispatch;
+	      dispatch = _ref.dispatch,
+	      imageWidth = _ref.imageWidth;
 
 	  return _react2.default.createElement(
 	    'div',
 	    { className: (0, _aphrodite.css)(styles.imageWithText) },
-	    _react2.default.createElement('img', { src: image, style: { maxWidth: '100%', maxHeight: '80vh', display: 'block', margin: '0 auto' }, onClick: function onClick() {
-	        return dispatch((0, _actions.showModal)({ content: image }));
-	      } }),
-	    imageLink ? _react2.default.createElement(_components.AudioClip, { source: imageLink }) : null,
-	    caption,
-	    _react2.default.createElement('div', { style: { textAlign: 'center', padding: '5px 20px' }, dangerouslySetInnerHTML: { __html: content } })
+	    _react2.default.createElement(
+	      'div',
+	      { style: {
+	          maxWidth: imageWidth + 'px',
+	          margin: '0 auto',
+	          display: 'block'
+	        } },
+	      _react2.default.createElement('img', { src: image, style: { maxWidth: '100%', maxHeight: '80vh', display: 'block', margin: '0 auto' }, onClick: function onClick() {
+	          return dispatch((0, _actions.showModal)({ content: image }));
+	        } }),
+	      imageLink ? _react2.default.createElement(_components.AudioClip, { source: imageLink }) : null,
+	      caption,
+	      _react2.default.createElement('div', { style: { padding: '5px 8px' }, dangerouslySetInnerHTML: { __html: content } })
+	    )
 	  );
 	};
 

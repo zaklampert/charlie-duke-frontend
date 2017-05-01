@@ -4,13 +4,19 @@ import { StyleSheet, css } from 'aphrodite';
 import {showModal} from '../actions';
 import {connect} from 'react-redux';
 
-const ImageWithText = ({image, content, caption, imageLink, openModal, dispatch}) => {
+const ImageWithText = ({image, content, caption, imageLink, openModal, dispatch, imageWidth}) => {
   return <div className={css(styles.imageWithText)}>
+    <div style={{
+      maxWidth: `${imageWidth}px`,
+      margin: '0 auto',
+      display: 'block',
+    }}>
     <img src={image} style={{maxWidth: '100%', maxHeight: '80vh',display:'block',margin: '0 auto'}} onClick={()=>dispatch(showModal({content: image}))}/>
     {(imageLink) ? <AudioClip source={imageLink} /> : null }
 
     {caption}
-    <div style={{textAlign: 'center', padding: '5px 20px'}} dangerouslySetInnerHTML={{__html: content}}/>
+    <div style={{ padding: '5px 8px'}} dangerouslySetInnerHTML={{__html: content}}/>
+    </div>
   </div>
 }
 
