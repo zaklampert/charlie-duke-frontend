@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "2262f9e562e34894437e"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "a92465b6e1432e780b36"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -6267,7 +6267,7 @@
 
 
 	// module
-	exports.push([module.id, ".chevron::before {\n\tborder-style: solid;\n\tborder-width: 0.01em 0.01em 0 0;\n\tcontent: '';\n\tdisplay: inline-block;\n\theight: 0.45em;\n\tleft: 0.15em;\n\tposition: relative;\n\ttop: 0.15em;\n\ttransform: rotate(-45deg);\n\tvertical-align: top;\n\twidth: 0.45em;\n}\n\n.chevron.right:before {\n\tleft: 0;\n\ttransform: rotate(45deg);\n}\n\n.chevron.bottom:before {\n\ttop: 0;\n\ttransform: rotate(135deg);\n}\n\n.chevron.left:before {\n\tleft: 0.25em;\n\ttransform: rotate(-135deg);\n}\n", ""]);
+	exports.push([module.id, ".chevron::before {\n  border-style: solid;\n  border-width: 0.01em 0.01em 0 0;\n  content: '';\n  display: inline-block;\n  height: 0.45em;\n  left: 0.15em;\n  position: relative;\n  top: 0.15em;\n  transform: rotate(-45deg);\n  vertical-align: top;\n  width: 0.45em;\n}\n.chevron.right:before {\n  left: 0;\n  transform: rotate(45deg);\n}\n.chevron.bottom:before {\n  top: 0;\n  transform: rotate(135deg);\n}\n.chevron.left:before {\n  left: 0.25em;\n  transform: rotate(-135deg);\n}\n.close {\n  position: relative;\n  display: inline-block;\n  width: 50px;\n  height: 50px;\n  overflow: hidden;\n}\n.close:hover::before,\n.close:hover::after {\n  background: $blue;\n}\n.close::before,\n.close::after {\n  content: '';\n  position: absolute;\n  height: 1px;\n  width: 100%;\n  top: 50%;\n  left: 0;\n  margin-top: -1px;\n  background: #000;\n}\n.close::before {\n  transform: rotate(45deg);\n}\n.close::after {\n  transform: rotate(-45deg);\n}\n", ""]);
 
 	// exports
 
@@ -11541,6 +11541,14 @@
 	var UPDATE_LOCATION = exports.UPDATE_LOCATION = 'UPDATE_LOCATION';
 
 	var API_URL = 'https://charlieduke.com';
+	var apiOptions = {
+	  headers: {
+	    'Access-Control-Allow-Origin': '*',
+	    'Access-Control-Allow-Headers': "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+	  },
+	  credentials: 'include',
+	  mode: 'cors'
+	};
 
 	var receivePages = function receivePages(json) {
 	  return {
@@ -34015,16 +34023,7 @@
 	      { className: (0, _aphrodite.css)(styles.interiorNavTop), onClick: function onClick() {
 	          $.fn.fullpage.moveTo(currentAnchor, 0);
 	        } },
-	      _react2.default.createElement('i', { className: 'fa fa-caret-left', 'aria-hidden': 'true' }),
-	      ' ',
-	      _react2.default.createElement(
-	        'span',
-	        { style: { fontWeight: 'lighter' } },
-	        '0',
-	        currentIndex
-	      ),
-	      ' ',
-	      currentSectionTitle
+	      _react2.default.createElement('div', { className: 'close' })
 	    ),
 	    _react2.default.createElement(
 	      'span',

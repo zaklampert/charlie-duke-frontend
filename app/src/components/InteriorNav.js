@@ -1,11 +1,12 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
-import '../css/chevrons.css';
+import '../css/chevrons.less';
 
 export default ({show, currentSectionTitle, currentAnchor, currentIndex, currentSlide, totalSlides}) => (
   <div>
     <span className={css(styles.interiorNavTop)} onClick={()=>{$.fn.fullpage.moveTo(currentAnchor, 0);}}>
-      <i className="fa fa-caret-left" aria-hidden="true"></i> <span style={{fontWeight:'lighter'}}>0{currentIndex}</span> {currentSectionTitle}
+      <div className="close"></div>
+      {/* <i className="fa fa-caret-left" aria-hidden="true"></i> <span style={{fontWeight:'lighter'}}>0{currentIndex}</span> {currentSectionTitle} */}
     </span>
     <span className={css(styles.interiorNavLeft)} onClick={()=>{$.fn.fullpage.moveSlideLeft()}}>
       <div className={css(styles.leftNumber)}>

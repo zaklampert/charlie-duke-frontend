@@ -7,7 +7,14 @@ export const HIDE_MODAL = 'HIDE_MODAL';
 export const UPDATE_LOCATION = 'UPDATE_LOCATION';
 
 const API_URL = 'https://charlieduke.com';
-
+const apiOptions = {
+  headers:{
+  'Access-Control-Allow-Origin':'*',
+  'Access-Control-Allow-Headers': "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+  },
+  credentials: 'include',
+  mode: 'cors',
+}
 
 const receivePages = (json) => ({
   type: POPULATE_PAGES,
