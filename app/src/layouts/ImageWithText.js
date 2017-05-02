@@ -16,10 +16,16 @@ const ImageWithText = ({image, content, caption, imageLink, openModal, dispatch,
     }}>
 
       <img src={image} style={{maxWidth: '100%', maxHeight: '70vh', margin: '0 auto', display: 'block'}} onClick={()=>dispatch(showModal({content: image}))}/>
+      <div style={{
+        maxWidth: '800px',
+        margin: '0 auto',
+        padding: '5px 15px'
+      }}>
       {(imageLink) ? <AudioClip source={imageLink} /> : null }
 
       {caption}
-      <div style={{ padding: '5px 15px'}} dangerouslySetInnerHTML={{__html: content}}></div>
+      <div dangerouslySetInnerHTML={{__html: content}}></div>
+      </div>
     </div>
   </div>
 }
