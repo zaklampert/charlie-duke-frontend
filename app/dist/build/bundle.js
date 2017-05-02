@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "4bbae3b57f0a4798039b"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "2262f9e562e34894437e"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -33609,7 +33609,8 @@
 	    _this.state = {
 	      showNav: false,
 	      currentIndex: null,
-	      title: "Charlie Duke"
+	      title: "Charlie Duke",
+	      fullpageReady: false
 	    };
 	    _this._animateIntros = _this._animateIntros.bind(_this);
 	    return _this;
@@ -33635,6 +33636,7 @@
 	        var anchors = pages.data && pages.data.map(function (page) {
 	          return page.slug;
 	        });
+
 	        $('#fullpage').fullpage({
 	          controlArrows: false,
 	          scrollOverflow: true,
@@ -33670,6 +33672,13 @@
 	            self.setState({
 	              showNav: nextSlideIndex === 0 ? true : false
 	            });
+
+	            if (nextSlideIndex > 0) {
+
+	              $.fn.fullpage.setAllowScrolling(false, 'down, up');
+	            } else {
+	              $.fn.fullpage.setAllowScrolling(true, 'down, up');
+	            }
 	          },
 	          afterSlideLoad: function afterSlideLoad(anchorLink, index, slideAnchor, slideIndex) {
 	            self.setState({
@@ -33854,7 +33863,7 @@
 	      var source = this.props.source;
 
 	      var self = this;
-	      var audio = new Howl({
+	      this.audio = new Howl({
 	        src: [source],
 	        onplay: function onplay() {
 	          self.setState({
@@ -33886,9 +33895,6 @@
 	          });
 	        }
 	      });
-	      self.setState({
-	        audio: audio
-	      });
 	    }
 	  }, {
 	    key: 'componentWillUnmount',
@@ -33899,22 +33905,22 @@
 	    key: '_getPosition',
 	    value: function _getPosition() {
 	      var _state = this.state,
-	          audio = _state.audio,
 	          playing = _state.playing,
 	          ended = _state.ended,
 	          paused = _state.paused;
 
 
-	      audio && playing && !paused && this.setState({
-	        currentPosition: audio.seek()
+	      this.audio && playing && !paused && this.setState({
+	        currentPosition: this.audio.seek()
 	      });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+
 	      var _state2 = this.state,
 	          loaded = _state2.loaded,
-	          audio = _state2.audio,
 	          playing = _state2.playing,
 	          currentPosition = _state2.currentPosition,
 	          ended = _state2.ended,
@@ -33934,21 +33940,21 @@
 	          'span',
 	          null,
 	          ended && !playing ? _react2.default.createElement('i', { onClick: function onClick() {
-	              return audio.play();
+	              return _this2.audio.play();
 	            }, className: 'fa fa-repeat', 'aria-hidden': 'true' }) : null,
 	          paused ? _react2.default.createElement('i', { onClick: function onClick() {
-	              return audio.play();
+	              return _this2.audio.play();
 	            }, className: 'fa fa-play-circle', 'aria-hidden': 'true' }) : _react2.default.createElement('i', { onClick: function onClick() {
-	              return audio.pause();
+	              return _this2.audio.pause();
 	            }, className: 'fa fa-pause-circle', 'aria-hidden': 'true' }),
 	          _react2.default.createElement('i', { onClick: function onClick() {
-	              audio.stop();
+	              _this2.audio.stop();
 	            }, className: 'fa fa-stop-circle', 'aria-hidden': 'true' }),
 	          _react2.default.createElement(
 	            'span',
 	            null,
 	            ' ',
-	            formatTime(currentPosition) + ' / ' + formatTime(audio.duration())
+	            formatTime(currentPosition) + ' / ' + formatTime(this.audio.duration())
 	          )
 	        );
 	      }
@@ -33956,10 +33962,10 @@
 	      return _react2.default.createElement(
 	        'span',
 	        { onClick: function onClick() {
-	            audio.play();
+	            _this2.audio.play();
 	          } },
 	        _react2.default.createElement('i', { className: 'fa fa-headphones', 'aria-hidden': 'true' }),
-	        formatTime(audio.duration())
+	        formatTime(this.audio.duration())
 	      );
 	    }
 	  }]);

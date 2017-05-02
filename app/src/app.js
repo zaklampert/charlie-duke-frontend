@@ -23,6 +23,7 @@ class App extends React.Component {
       showNav: false,
       currentIndex: null,
       title: "Charlie Duke",
+      fullpageReady: false,
     }
     this._animateIntros = this._animateIntros.bind(this);
   }
@@ -38,6 +39,7 @@ class App extends React.Component {
     const anchors = pages.data && pages.data.map(page=>{
       return page.slug;
     });
+
     $('#fullpage').fullpage({
       controlArrows: false,
       scrollOverflow: true,
@@ -52,7 +54,6 @@ class App extends React.Component {
       onLeave: function(index, nextIndex){
         setTimeout(()=>{
             dispatch(actions.updateLocation({hash: window.location.hash}));
-
         }, 50);
 
         self._animateIntros(index, nextIndex);
@@ -74,6 +75,14 @@ class App extends React.Component {
         self.setState({
           showNav: (nextSlideIndex === 0 ) ? true : false,
         });
+
+        if(nextSlideIndex > 0){
+
+          $.fn.fullpage.setAllowScrolling(false, 'down, up');
+        } else {
+          $.fn.fullpage.setAllowScrolling(true, 'down, up');
+        }
+
       },
       afterSlideLoad: function( anchorLink, index, slideAnchor, slideIndex){
         self.setState({
@@ -86,7 +95,7 @@ class App extends React.Component {
         const element = document.querySelectorAll( 'img' );
         const intenseDivs = document.querySelectorAll('*[data-intense="true"]');
         Intense( element );
-        Intense(intenseDivs);
+        Intense( intenseDivs );
       },
     });
 
@@ -106,7 +115,7 @@ class App extends React.Component {
 
     const showNav = (location.section === "charlie-duke") ? false : (currentIndex > -1 && !location.slide);
     const showInteriorNav = (location.slide);
-     return (
+  return (
       <div id="root" style={{
         fontFamily: `"futura-pt", sans-serif`,
         color: 'white',

@@ -8,6 +8,7 @@ export const UPDATE_LOCATION = 'UPDATE_LOCATION';
 
 const API_URL = 'https://charlieduke.com';
 
+
 const receivePages = (json) => ({
   type: POPULATE_PAGES,
   json

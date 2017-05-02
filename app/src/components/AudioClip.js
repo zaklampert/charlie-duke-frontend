@@ -35,7 +35,7 @@ export default class AudioClip extends React.Component{
   componentDidMount(){
     const {source} = this.props;
     const self = this;
-    const audio = new Howl({
+    this.audio = new Howl({
       src: [source],
       onplay: ()=>{
         self.setState({
@@ -67,23 +67,21 @@ export default class AudioClip extends React.Component{
         })
       }
     });
-    self.setState({
-      audio
-    });
+
 
   }
   componentWillUnmount(){
     clearInterval(this.interval);
   }
   _getPosition(){
-    const {audio, playing, ended, paused} = this.state;
+    const {playing, ended, paused} = this.state;
 
-    audio &&  playing && !paused && this.setState({
-      currentPosition: audio.seek()
+    this.audio &&  playing && !paused && this.setState({
+      currentPosition: this.audio.seek()
     })
   }
   render(){
-    const { loaded, audio, playing, currentPosition, ended, paused } = this.state;
+    const { loaded, playing, currentPosition, ended, paused } = this.state;
     if (!loaded) {
       return (
         <span>
@@ -96,21 +94,21 @@ export default class AudioClip extends React.Component{
 
       return (
         <span >
-          {(ended && !playing) ? <i onClick={()=>audio.play()} className="fa fa-repeat" aria-hidden="true"></i> : null }
+          {(ended && !playing) ? <i onClick={()=>this.audio.play()} className="fa fa-repeat" aria-hidden="true"></i> : null }
           {(paused) ?
-            <i onClick={()=>audio.play()} className="fa fa-play-circle" aria-hidden="true"></i> :
-            <i onClick={()=>audio.pause()} className="fa fa-pause-circle" aria-hidden="true"></i>
+            <i onClick={()=>this.audio.play()} className="fa fa-play-circle" aria-hidden="true"></i> :
+            <i onClick={()=>this.audio.pause()} className="fa fa-pause-circle" aria-hidden="true"></i>
           }
-          <i onClick={()=>{audio.stop()}} className="fa fa-stop-circle" aria-hidden="true"></i>
-          <span > {`${formatTime(currentPosition)} / ${formatTime(audio.duration())}`}</span>
+          <i onClick={()=>{this.audio.stop()}} className="fa fa-stop-circle" aria-hidden="true"></i>
+          <span > {`${formatTime(currentPosition)} / ${formatTime(this.audio.duration())}`}</span>
         </span>
       )
     }
 
     return (
-      <span onClick={()=>{audio.play()}}>
+      <span onClick={()=>{this.audio.play()}}>
         <i className="fa fa-headphones" aria-hidden="true"></i>
-        {formatTime(audio.duration())}
+        {formatTime(this.audio.duration())}
       </span>
     )
 
