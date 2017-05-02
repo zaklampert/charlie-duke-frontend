@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "228d0048feb5d19c4580"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "d36e707857e0119c74e2"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -30844,9 +30844,11 @@
 	    value: function componentDidUpdate(prevProps) {
 	      var _props = this.props,
 	          pages = _props.pages,
-	          dispatch = _props.dispatch;
+	          dispatch = _props.dispatch,
+	          location = _props.location;
 
 	      var self = this;
+
 	      if (!prevProps.pages.ready && pages.ready) {
 	        var anchors = pages.data && pages.data.map(function (page) {
 	          return page.slug;
@@ -30876,6 +30878,10 @@
 	            });
 	          },
 	          onSlideLeave: function onSlideLeave(anchorLink, index, slideIndex, direction, nextSlideIndex) {
+	            var numberOfSlides = pages && pages.data && pages.data[index] && pages.data[index - 1].children.length;
+	            if (slideIndex === numberOfSlides) {
+	              $.fn.fullpage.moveSectionDown();
+	            }
 	            setTimeout(function () {
 	              dispatch(actions.updateLocation({ hash: window.location.hash }));
 	            }, 50);

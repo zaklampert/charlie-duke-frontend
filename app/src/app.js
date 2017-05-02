@@ -31,8 +31,9 @@ class App extends React.Component {
     TweenMax.staggerFromTo(`.sectionIntro_${nextIndex - 1}`, 1, {opacity:0, y: -70}, {opacity:1, y:0}, .3);
   }
   componentDidUpdate(prevProps) {
-    const { pages, dispatch } = this.props;
+    const { pages, dispatch, location } = this.props;
     const self = this;
+
     if ( !prevProps.pages.ready && pages.ready ){
     const anchors = pages.data && pages.data.map(page=>{
       return page.slug;
@@ -63,12 +64,16 @@ class App extends React.Component {
         });
       },
       onSlideLeave: function(anchorLink, index, slideIndex, direction, nextSlideIndex){
+        const numberOfSlides =  pages && pages.data && pages.data[index] && pages.data[index - 1].children.length;
+        if (slideIndex === numberOfSlides){
+          $.fn.fullpage.moveSectionDown();
+        }
         setTimeout(()=>{
             dispatch(actions.updateLocation({hash: window.location.hash}));
         }, 50)
         self.setState({
           showNav: (nextSlideIndex === 0 ) ? true : false,
-        })
+        });
       },
       afterSlideLoad: function( anchorLink, index, slideAnchor, slideIndex){
         self.setState({
