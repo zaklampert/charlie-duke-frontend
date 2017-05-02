@@ -1,4 +1,5 @@
 import {mapDataToPage} from '../data';
+import {pauseHowls} from '../helpers';
 
 export const POPULATE_MENU = 'POPULATE_MENU';
 export const POPULATE_PAGES = 'POPULATE_PAGES';
@@ -12,9 +13,13 @@ const apiOptions = {
   // 'Access-Control-Allow-Origin':'*',
   // 'Access-Control-Allow-Headers': "Origin, X-Requested-With, Content-Type, Accept, Authorization",
   // },
-  // credentials: 'include',
+  // method: 'GET',
+  // headers: {
+  //   Accept: 'application/json',
+  // },
   mode: 'cors',
 }
+
 
 const receivePages = (json) => ({
   type: POPULATE_PAGES,
@@ -28,6 +33,7 @@ const receiveLocation = ({section, slide})=>({
 })
 
 export const updateLocation = ({hash}) => dispatch => {
+  pauseHowls();
   const section = (hash.lastIndexOf("/") > -1) ? hash.substring(hash.lastIndexOf("#")+1,hash.lastIndexOf("/")) : hash.split('#')[1];
   const slide = hash.split('/')[1] || null;
   return dispatch(receiveLocation({section, slide}))
@@ -79,5 +85,7 @@ export const getWPData = () => dispatch => {
     .then(response => response.json())
     .then(json => {
       dispatch(getPages(json));
+    }).catch(err=>{
+      console.log(err);
     })
 }

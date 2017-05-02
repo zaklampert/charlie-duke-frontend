@@ -1,5 +1,6 @@
 import React from 'react';
 import Howler from 'howler';
+import {pauseHowls} from '../helpers';
 function formatTime(seconds)
 {
     // Hours, minutes and seconds
@@ -18,13 +19,6 @@ function formatTime(seconds)
     ret += "" + mins + ":" + (secs < 10 ? "0" : "");
     ret += "" + secs;
     return ret;
-}
-
-function pauseHowls(){
-  const howls = window.Howler._howls;
-    howls && howls.forEach(howl=>{
-      howl.pause();
-  });
 }
 
 export default class AudioClip extends React.Component{
