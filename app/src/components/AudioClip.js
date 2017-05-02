@@ -31,12 +31,24 @@ export default class AudioClip extends React.Component{
       paused: false,
     }
     this.interval = setInterval(this._getPosition.bind(this), 500);
+    this._loadAudio = this._loadAudio.bind(this);
   }
-  componentDidMount(){
+  componentWillUnmount(){
+    clearInterval(this.interval);
+  }
+  _getPosition(){
+    const {playing, ended, paused, audio} = this.state;
+
+    audio &&  playing && !paused && this.setState({
+      currentPosition: audio.seek()
+    })
+  }
+  _loadAudio(){
     const {source} = this.props;
     const self = this;
-    this.audio = new Howl({
+    const audio = new Howl({
       src: [source],
+      autoplay: true,
       onplay: ()=>{
         self.setState({
           playing: true,
@@ -67,21 +79,21 @@ export default class AudioClip extends React.Component{
         })
       }
     });
-
-
-  }
-  componentWillUnmount(){
-    clearInterval(this.interval);
-  }
-  _getPosition(){
-    const {playing, ended, paused} = this.state;
-
-    this.audio &&  playing && !paused && this.setState({
-      currentPosition: this.audio.seek()
+    this.setState({
+      audio,
+      ready: true,
     })
   }
   render(){
-    const { loaded, playing, currentPosition, ended, paused } = this.state;
+    const { loaded, playing, currentPosition, ended, paused, ready, audio } = this.state;
+
+    if(!ready){
+      return (
+        <span>
+          <i onClick={()=>this._loadAudio()} className="fa fa-headphones" aria-hidden="true"></i>
+        </span>
+      )
+    }
     if (!loaded) {
       return (
         <span>
@@ -90,27 +102,27 @@ export default class AudioClip extends React.Component{
       )
     }
 
-    if (playing) {
+    // if (playing) {
 
       return (
         <span >
-          {(ended && !playing) ? <i onClick={()=>this.audio.play()} className="fa fa-repeat" aria-hidden="true"></i> : null }
+          {(ended && !playing) ? <i onClick={()=>audio.play()} className="fa fa-repeat" aria-hidden="true"></i> : null }
           {(paused) ?
-            <i onClick={()=>this.audio.play()} className="fa fa-play-circle" aria-hidden="true"></i> :
-            <i onClick={()=>this.audio.pause()} className="fa fa-pause-circle" aria-hidden="true"></i>
+            <i onClick={()=>audio.play()} className="fa fa-play-circle" aria-hidden="true"></i> :
+            <i onClick={()=>audio.pause()} className="fa fa-pause-circle" aria-hidden="true"></i>
           }
-          <i onClick={()=>{this.audio.stop()}} className="fa fa-stop-circle" aria-hidden="true"></i>
-          <span > {`${formatTime(currentPosition)} / ${formatTime(this.audio.duration())}`}</span>
+          <i onClick={()=>{audio.stop()}} className="fa fa-stop-circle" aria-hidden="true"></i>
+          <span > {`${formatTime(currentPosition)} / ${formatTime(audio.duration())}`}</span>
         </span>
       )
-    }
+    // }
 
-    return (
-      <span onClick={()=>{this.audio.play()}}>
-        <i className="fa fa-headphones" aria-hidden="true"></i>
-        {formatTime(this.audio.duration())}
-      </span>
-    )
+    // return (
+    //   <span onClick={()=>{this.audio.play()}}>
+    //     <i className="fa fa-headphones" aria-hidden="true"></i>
+    //     {formatTime(this.audio.duration())}
+    //   </span>
+    // )
 
   }
 }

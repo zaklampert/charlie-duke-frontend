@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "a92465b6e1432e780b36"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "b7c31f09e64dd84f2f7a"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -33862,17 +33862,38 @@
 	      paused: false
 	    };
 	    _this.interval = setInterval(_this._getPosition.bind(_this), 500);
+	    _this._loadAudio = _this._loadAudio.bind(_this);
 	    return _this;
 	  }
 
 	  _createClass(AudioClip, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      clearInterval(this.interval);
+	    }
+	  }, {
+	    key: '_getPosition',
+	    value: function _getPosition() {
+	      var _state = this.state,
+	          playing = _state.playing,
+	          ended = _state.ended,
+	          paused = _state.paused,
+	          audio = _state.audio;
+
+
+	      audio && playing && !paused && this.setState({
+	        currentPosition: audio.seek()
+	      });
+	    }
+	  }, {
+	    key: '_loadAudio',
+	    value: function _loadAudio() {
 	      var source = this.props.source;
 
 	      var self = this;
-	      this.audio = new Howl({
+	      var audio = new Howl({
 	        src: [source],
+	        autoplay: true,
 	        onplay: function onplay() {
 	          self.setState({
 	            playing: true,
@@ -33903,23 +33924,9 @@
 	          });
 	        }
 	      });
-	    }
-	  }, {
-	    key: 'componentWillUnmount',
-	    value: function componentWillUnmount() {
-	      clearInterval(this.interval);
-	    }
-	  }, {
-	    key: '_getPosition',
-	    value: function _getPosition() {
-	      var _state = this.state,
-	          playing = _state.playing,
-	          ended = _state.ended,
-	          paused = _state.paused;
-
-
-	      this.audio && playing && !paused && this.setState({
-	        currentPosition: this.audio.seek()
+	      this.setState({
+	        audio: audio,
+	        ready: true
 	      });
 	    }
 	  }, {
@@ -33932,8 +33939,20 @@
 	          playing = _state2.playing,
 	          currentPosition = _state2.currentPosition,
 	          ended = _state2.ended,
-	          paused = _state2.paused;
+	          paused = _state2.paused,
+	          ready = _state2.ready,
+	          audio = _state2.audio;
 
+
+	      if (!ready) {
+	        return _react2.default.createElement(
+	          'span',
+	          null,
+	          _react2.default.createElement('i', { onClick: function onClick() {
+	              return _this2._loadAudio();
+	            }, className: 'fa fa-headphones', 'aria-hidden': 'true' })
+	        );
+	      }
 	      if (!loaded) {
 	        return _react2.default.createElement(
 	          'span',
@@ -33942,39 +33961,37 @@
 	        );
 	      }
 
-	      if (playing) {
-
-	        return _react2.default.createElement(
-	          'span',
-	          null,
-	          ended && !playing ? _react2.default.createElement('i', { onClick: function onClick() {
-	              return _this2.audio.play();
-	            }, className: 'fa fa-repeat', 'aria-hidden': 'true' }) : null,
-	          paused ? _react2.default.createElement('i', { onClick: function onClick() {
-	              return _this2.audio.play();
-	            }, className: 'fa fa-play-circle', 'aria-hidden': 'true' }) : _react2.default.createElement('i', { onClick: function onClick() {
-	              return _this2.audio.pause();
-	            }, className: 'fa fa-pause-circle', 'aria-hidden': 'true' }),
-	          _react2.default.createElement('i', { onClick: function onClick() {
-	              _this2.audio.stop();
-	            }, className: 'fa fa-stop-circle', 'aria-hidden': 'true' }),
-	          _react2.default.createElement(
-	            'span',
-	            null,
-	            ' ',
-	            formatTime(currentPosition) + ' / ' + formatTime(this.audio.duration())
-	          )
-	        );
-	      }
+	      // if (playing) {
 
 	      return _react2.default.createElement(
 	        'span',
-	        { onClick: function onClick() {
-	            _this2.audio.play();
-	          } },
-	        _react2.default.createElement('i', { className: 'fa fa-headphones', 'aria-hidden': 'true' }),
-	        formatTime(this.audio.duration())
+	        null,
+	        ended && !playing ? _react2.default.createElement('i', { onClick: function onClick() {
+	            return audio.play();
+	          }, className: 'fa fa-repeat', 'aria-hidden': 'true' }) : null,
+	        paused ? _react2.default.createElement('i', { onClick: function onClick() {
+	            return audio.play();
+	          }, className: 'fa fa-play-circle', 'aria-hidden': 'true' }) : _react2.default.createElement('i', { onClick: function onClick() {
+	            return audio.pause();
+	          }, className: 'fa fa-pause-circle', 'aria-hidden': 'true' }),
+	        _react2.default.createElement('i', { onClick: function onClick() {
+	            audio.stop();
+	          }, className: 'fa fa-stop-circle', 'aria-hidden': 'true' }),
+	        _react2.default.createElement(
+	          'span',
+	          null,
+	          ' ',
+	          formatTime(currentPosition) + ' / ' + formatTime(audio.duration())
+	        )
 	      );
+	      // }
+
+	      // return (
+	      //   <span onClick={()=>{this.audio.play()}}>
+	      //     <i className="fa fa-headphones" aria-hidden="true"></i>
+	      //     {formatTime(this.audio.duration())}
+	      //   </span>
+	      // )
 	    }
 	  }]);
 
