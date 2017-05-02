@@ -103,7 +103,8 @@ class App extends React.Component {
       return page.slug;
     });
     const storyPages = pages.data && pages.data.filter((page)=> {return page.template === "Story" || page.template === "About"});
-    const showNav = (!location.slide);
+
+    const showNav = (location.section === "charlie-duke") ? false : (currentIndex > -1 && !location.slide);
     const showInteriorNav = (location.slide);
      return (
       <div id="root" style={{

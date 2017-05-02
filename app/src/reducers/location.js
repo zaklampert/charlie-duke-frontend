@@ -1,6 +1,6 @@
 const UPDATE_LOCATION = 'UPDATE_LOCATION';
 
-const location = (state = {section: null, slide: null}, action) => {
+const location = (state = {section: 'charlie-duke', slide: null}, action) => {
   switch(action.type){
     case UPDATE_LOCATION:
       return {

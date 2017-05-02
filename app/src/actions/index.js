@@ -6,7 +6,7 @@ export const SHOW_MODAL = 'SHOW_MODAL';
 export const HIDE_MODAL = 'HIDE_MODAL';
 export const UPDATE_LOCATION = 'UPDATE_LOCATION';
 
-const API_URL = 'https://charlieduke.staging.wpengine.com';
+const API_URL = 'https://charlieduke.com';
 
 const receivePages = (json) => ({
   type: POPULATE_PAGES,

@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "d36e707857e0119c74e2"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "3d40b6d796d58844e912"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -11540,7 +11540,7 @@
 	var HIDE_MODAL = exports.HIDE_MODAL = 'HIDE_MODAL';
 	var UPDATE_LOCATION = exports.UPDATE_LOCATION = 'UPDATE_LOCATION';
 
-	var API_URL = 'https://charlieduke.staging.wpengine.com';
+	var API_URL = 'https://charlieduke.com';
 
 	var receivePages = function receivePages(json) {
 	  return {
@@ -30930,7 +30930,8 @@
 	      var storyPages = pages.data && pages.data.filter(function (page) {
 	        return page.template === "Story" || page.template === "About";
 	      });
-	      var showNav = !location.slide;
+
+	      var showNav = location.section === "charlie-duke" ? false : currentIndex > -1 && !location.slide;
 	      var showInteriorNav = location.slide;
 	      return _react2.default.createElement(
 	        'div',
@@ -32039,7 +32040,7 @@
 	var UPDATE_LOCATION = 'UPDATE_LOCATION';
 
 	var location = function location() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { section: null, slide: null };
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { section: 'charlie-duke', slide: null };
 	  var action = arguments[1];
 
 	  switch (action.type) {
