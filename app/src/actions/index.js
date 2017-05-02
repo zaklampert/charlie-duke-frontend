@@ -8,11 +8,11 @@ export const UPDATE_LOCATION = 'UPDATE_LOCATION';
 
 const API_URL = 'https://charlieduke.com';
 const apiOptions = {
-  headers:{
-  'Access-Control-Allow-Origin':'*',
-  'Access-Control-Allow-Headers': "Origin, X-Requested-With, Content-Type, Accept, Authorization",
-  },
-  credentials: 'include',
+  // headers:{
+  // 'Access-Control-Allow-Origin':'*',
+  // 'Access-Control-Allow-Headers': "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+  // },
+  // credentials: 'include',
   mode: 'cors',
 }
 
@@ -67,7 +67,7 @@ const mapWPData = (pages, menu) => dispatch => {
   return dispatch(receivePages(mapDataToPage(mappedMenuData)));
 }
 const getPages = (menu) => dispatch => {
-  return fetch(`${API_URL}/wp-json/wp/v2/pages?per_page=100&_embed`)
+  return fetch(`${API_URL}/wp-json/wp/v2/pages?per_page=100&_embed`, apiOptions)
     .then(response => response.json())
     .then(pages=>{
       dispatch(mapWPData(pages, menu))
@@ -75,7 +75,7 @@ const getPages = (menu) => dispatch => {
 }
 
 export const getWPData = () => dispatch => {
-  return fetch(`${API_URL}/wp-json/wp-api-menus/v2/menu-locations/site-menu`)
+  return fetch(`${API_URL}/wp-json/wp-api-menus/v2/menu-locations/site-menu`, apiOptions)
     .then(response => response.json())
     .then(json => {
       dispatch(getPages(json));

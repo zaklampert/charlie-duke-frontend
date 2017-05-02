@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "b7c31f09e64dd84f2f7a"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "370daef5309be25d154d"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -11542,11 +11542,11 @@
 
 	var API_URL = 'https://charlieduke.com';
 	var apiOptions = {
-	  headers: {
-	    'Access-Control-Allow-Origin': '*',
-	    'Access-Control-Allow-Headers': "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-	  },
-	  credentials: 'include',
+	  // headers:{
+	  // 'Access-Control-Allow-Origin':'*',
+	  // 'Access-Control-Allow-Headers': "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+	  // },
+	  // credentials: 'include',
 	  mode: 'cors'
 	};
 
@@ -11616,7 +11616,7 @@
 	};
 	var getPages = function getPages(menu) {
 	  return function (dispatch) {
-	    return fetch(API_URL + '/wp-json/wp/v2/pages?per_page=100&_embed').then(function (response) {
+	    return fetch(API_URL + '/wp-json/wp/v2/pages?per_page=100&_embed', apiOptions).then(function (response) {
 	      return response.json();
 	    }).then(function (pages) {
 	      dispatch(mapWPData(pages, menu));
@@ -11626,7 +11626,7 @@
 
 	var getWPData = exports.getWPData = function getWPData() {
 	  return function (dispatch) {
-	    return fetch(API_URL + '/wp-json/wp-api-menus/v2/menu-locations/site-menu').then(function (response) {
+	    return fetch(API_URL + '/wp-json/wp-api-menus/v2/menu-locations/site-menu', apiOptions).then(function (response) {
 	      return response.json();
 	    }).then(function (json) {
 	      dispatch(getPages(json));
@@ -33846,6 +33846,13 @@
 	  return ret;
 	}
 
+	function pauseHowls() {
+	  var howls = window.Howler._howls;
+	  howls && howls.forEach(function (howl) {
+	    howl.pause();
+	  });
+	}
+
 	var AudioClip = function (_React$Component) {
 	  _inherits(AudioClip, _React$Component);
 
@@ -33863,6 +33870,7 @@
 	    };
 	    _this.interval = setInterval(_this._getPosition.bind(_this), 500);
 	    _this._loadAudio = _this._loadAudio.bind(_this);
+	    _this._playAudio = _this._playAudio.bind(_this);
 	    return _this;
 	  }
 
@@ -33891,6 +33899,7 @@
 	      var source = this.props.source;
 
 	      var self = this;
+	      pauseHowls();
 	      var audio = new Howl({
 	        src: [source],
 	        autoplay: true,
@@ -33930,6 +33939,16 @@
 	      });
 	    }
 	  }, {
+	    key: '_playAudio',
+	    value: function _playAudio() {
+	      var audio = this.state.audio;
+
+	      var howls = window.Howler._howls;
+
+	      pauseHowls();
+	      audio.play();
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _this2 = this;
@@ -33967,10 +33986,10 @@
 	        'span',
 	        null,
 	        ended && !playing ? _react2.default.createElement('i', { onClick: function onClick() {
-	            return audio.play();
+	            return _this2._playAudio();
 	          }, className: 'fa fa-repeat', 'aria-hidden': 'true' }) : null,
 	        paused ? _react2.default.createElement('i', { onClick: function onClick() {
-	            return audio.play();
+	            return _this2._playAudio();
 	          }, className: 'fa fa-play-circle', 'aria-hidden': 'true' }) : _react2.default.createElement('i', { onClick: function onClick() {
 	            return audio.pause();
 	          }, className: 'fa fa-pause-circle', 'aria-hidden': 'true' }),
@@ -33987,7 +34006,7 @@
 	      // }
 
 	      // return (
-	      //   <span onClick={()=>{this.audio.play()}}>
+	      //   <span onClick={()=>{this.this._playAudio()}}>
 	      //     <i className="fa fa-headphones" aria-hidden="true"></i>
 	      //     {formatTime(this.audio.duration())}
 	      //   </span>

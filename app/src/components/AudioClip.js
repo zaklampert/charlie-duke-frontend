@@ -20,6 +20,13 @@ function formatTime(seconds)
     return ret;
 }
 
+function pauseHowls(){
+  const howls = window.Howler._howls;
+    howls && howls.forEach(howl=>{
+      howl.pause();
+  });
+}
+
 export default class AudioClip extends React.Component{
   constructor(props){
     super(props);
@@ -32,6 +39,7 @@ export default class AudioClip extends React.Component{
     }
     this.interval = setInterval(this._getPosition.bind(this), 500);
     this._loadAudio = this._loadAudio.bind(this);
+    this._playAudio = this._playAudio.bind(this);
   }
   componentWillUnmount(){
     clearInterval(this.interval);
@@ -46,6 +54,7 @@ export default class AudioClip extends React.Component{
   _loadAudio(){
     const {source} = this.props;
     const self = this;
+    pauseHowls();
     const audio = new Howl({
       src: [source],
       autoplay: true,
@@ -84,6 +93,13 @@ export default class AudioClip extends React.Component{
       ready: true,
     })
   }
+  _playAudio(){
+    const {audio} = this.state;
+    const howls = window.Howler._howls;
+
+    pauseHowls();
+    audio.play();
+  }
   render(){
     const { loaded, playing, currentPosition, ended, paused, ready, audio } = this.state;
 
@@ -106,9 +122,9 @@ export default class AudioClip extends React.Component{
 
       return (
         <span >
-          {(ended && !playing) ? <i onClick={()=>audio.play()} className="fa fa-repeat" aria-hidden="true"></i> : null }
+          {(ended && !playing) ? <i onClick={()=>this._playAudio()} className="fa fa-repeat" aria-hidden="true"></i> : null }
           {(paused) ?
-            <i onClick={()=>audio.play()} className="fa fa-play-circle" aria-hidden="true"></i> :
+            <i onClick={()=>this._playAudio()} className="fa fa-play-circle" aria-hidden="true"></i> :
             <i onClick={()=>audio.pause()} className="fa fa-pause-circle" aria-hidden="true"></i>
           }
           <i onClick={()=>{audio.stop()}} className="fa fa-stop-circle" aria-hidden="true"></i>
@@ -118,7 +134,7 @@ export default class AudioClip extends React.Component{
     // }
 
     // return (
-    //   <span onClick={()=>{this.audio.play()}}>
+    //   <span onClick={()=>{this.this._playAudio()}}>
     //     <i className="fa fa-headphones" aria-hidden="true"></i>
     //     {formatTime(this.audio.duration())}
     //   </span>
