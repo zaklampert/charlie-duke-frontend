@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "21da68280e561e4edd92"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "735df5b558c112caca68"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -11831,6 +11831,7 @@
 	      children: page && page.children && page.children.map(function (child) {
 	        return {
 	          title: child && child.title,
+	          subtitle: child && child.page_data && child.page_data.meta_box && child.page_data.meta_box.subtitle,
 	          slug: child && child.page_data && child.page_data.slug,
 	          template: child && child.page_data && child.page_data.meta_box && child.page_data.meta_box.page_format && lookupChildTemplate(child),
 	          leftPhoto: child && child.page_data && child.page_data.meta_box && child.page_data.meta_box.left_col_img && child.page_data.meta_box.left_col_img[0] && child.page_data.meta_box.left_col_img[0].url,
@@ -11843,6 +11844,7 @@
 	          video: child && child.page_data && child.page_data.meta_box && child.page_data.meta_box.video_url,
 	          leftVideo: child && child.page_data && child.page_data.meta_box && child.page_data.meta_box.left_video,
 	          rightVideo: child && child.page_data && child.page_data.meta_box && child.page_data.meta_box.right_video,
+	          showTitle: child && child.page_data && child.page_data.meta_box && child.page_data.meta_box.title_display && child.page_data.meta_box.title_display === "1",
 	          image: child && child.page_data && child.page_data._embedded && child.page_data._embedded["wp:featuredmedia"] && child.page_data._embedded["wp:featuredmedia"][0] && child.page_data._embedded["wp:featuredmedia"][0].source_url,
 	          imageWidth: child && child.page_data && child.page_data._embedded && child.page_data._embedded["wp:featuredmedia"] && child.page_data._embedded["wp:featuredmedia"][0] && child.page_data._embedded["wp:featuredmedia"][0].media_details && child.page_data._embedded["wp:featuredmedia"][0].media_details.width,
 	          imageHeight: child && child.page_data && child.page_data._embedded && child.page_data._embedded["wp:featuredmedia"] && child.page_data._embedded["wp:featuredmedia"][0] && child.page_data._embedded["wp:featuredmedia"][0].media_details && child.page_data._embedded["wp:featuredmedia"][0].media_details.height,
@@ -35265,10 +35267,37 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = function (_ref) {
-	  var content = _ref.content;
+	  var content = _ref.content,
+	      title = _ref.title,
+	      subtitle = _ref.subtitle,
+	      showTitle = _ref.showTitle;
 	  return _react2.default.createElement(
 	    'div',
 	    { className: (0, _aphrodite.css)(styles.defaultLayout) },
+	    showTitle ? _react2.default.createElement(
+	      'span',
+	      null,
+	      _react2.default.createElement(
+	        'h1',
+	        { style: {
+	            textTransform: 'uppercase',
+	            marginBottom: '0px',
+	            paddingBottom: '0px'
+	          } },
+	        title
+	      ),
+	      _react2.default.createElement(
+	        'h2',
+	        { style: {
+	            fontWeight: 'lighter',
+	            textTransform: 'uppercase',
+	            marginTop: '0px',
+	            paddingTop: '0px'
+	          } },
+	        '\u2014 ',
+	        subtitle
+	      )
+	    ) : null,
 	    _react2.default.createElement('span', { style: { padding: '5px 15px' }, dangerouslySetInnerHTML: { __html: content } })
 	  );
 	};
@@ -35277,7 +35306,8 @@
 	  defaultLayout: {
 	    maxWidth: '1440px',
 	    margin: '0 auto',
-	    clear: 'both'
+	    clear: 'both',
+	    padding: '15px;'
 	  },
 	  half: {
 	    width: '48%',

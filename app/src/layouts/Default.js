@@ -1,8 +1,23 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
-export default ({content}) => (
+export default ({content, title, subtitle, showTitle}) => (
   <div className={css(styles.defaultLayout)}>
+    { (showTitle) ?
+      <span>
+        <h1 style={{
+          textTransform: 'uppercase',
+          marginBottom: '0px',
+          paddingBottom: '0px',
+        }}>{title}</h1>
+        <h2 style={{
+          fontWeight: 'lighter',
+          textTransform: 'uppercase',
+          marginTop: '0px',
+          paddingTop: '0px',
+        }}>&mdash; {subtitle}</h2>
+      </span> :
+    null }
     <span style={{padding: '5px 15px'}} dangerouslySetInnerHTML={{__html: content}} />
   </div>
 )
@@ -13,6 +28,7 @@ const styles = StyleSheet.create({
     maxWidth: '1440px',
     margin: '0 auto',
     clear: 'both',
+    padding: '15px;'
   },
   half: {
     width: '48%',

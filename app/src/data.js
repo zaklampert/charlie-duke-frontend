@@ -44,6 +44,7 @@ export const mapDataToPage = (dataFromWordpress) => {
       children: page && page.children && page.children.map(child => {
         return {
           title: child && child.title,
+          subtitle: child && child.page_data && child.page_data.meta_box && child.page_data.meta_box.subtitle,
           slug: child && child.page_data && child.page_data.slug,
           template: child && child.page_data && child.page_data.meta_box && child.page_data.meta_box.page_format && lookupChildTemplate(child),
           leftPhoto: child && child.page_data && child.page_data.meta_box && child.page_data.meta_box.left_col_img && child.page_data.meta_box.left_col_img[0] && child.page_data.meta_box.left_col_img[0].url,
@@ -56,6 +57,7 @@ export const mapDataToPage = (dataFromWordpress) => {
           video: child && child.page_data && child.page_data.meta_box && child.page_data.meta_box.video_url,
           leftVideo: child && child.page_data && child.page_data.meta_box && child.page_data.meta_box.left_video,
           rightVideo: child && child.page_data && child.page_data.meta_box && child.page_data.meta_box.right_video,
+          showTitle: child && child.page_data && child.page_data.meta_box && child.page_data.meta_box.title_display && (child.page_data.meta_box.title_display === "1"),
           image: child &&
                   child.page_data &&
                   child.page_data._embedded &&
