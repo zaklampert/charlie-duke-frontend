@@ -17,7 +17,7 @@ class VideoPlayer extends React.Component{
       iframeSrc = `https://player.vimeo.com/video/${videoId}?badge=0"`;
       case 'youtube.com':
       videoId = URI(video).query(true).v
-      iframeSrc = `https://www.youtube.com/embed/${videoId}?ecver=1`;
+      iframeSrc = `https://www.youtube.com/embed/${videoId}?ecver=1&iv_load_policy=3&modestbranding=1&showinfo=0&rel=0`;
       break;
     }
 

@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "735df5b558c112caca68"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "5290c6ce09eac35197ab"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -35148,7 +35148,7 @@
 	        iframeSrc = 'https://player.vimeo.com/video/' + videoId + '?badge=0"';
 	      case 'youtube.com':
 	        videoId = (0, _urijs2.default)(video).query(true).v;
-	        iframeSrc = 'https://www.youtube.com/embed/' + videoId + '?ecver=1';
+	        iframeSrc = 'https://www.youtube.com/embed/' + videoId + '?ecver=1&iv_load_policy=3&modestbranding=1&showinfo=0&rel=0';
 	        break;
 	    }
 
