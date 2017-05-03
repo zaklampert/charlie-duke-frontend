@@ -1,10 +1,10 @@
 import React from 'react';
-import { AudioClip } from '../components';
+import { AudioClip, VideoPlayer } from '../components';
 import { StyleSheet, css } from 'aphrodite';
 import {showModal} from '../actions';
 import {connect} from 'react-redux';
 
-const ImageWithText = ({image, content, caption, imageLink, openModal, dispatch, imageWidth, imageHeight}) => {
+const ImageWithText = ({image, content, caption, imageLink, openModal, dispatch, imageWidth, imageHeight, video}) => {
   const isPortrait = ((imageWidth / imageHeight) < 1);
 
   return <div className={css(styles.imageWithText)}>
@@ -14,8 +14,12 @@ const ImageWithText = ({image, content, caption, imageLink, openModal, dispatch,
       display: 'block',
       position: 'relative',
     }}>
-
-      <img src={image} style={{maxWidth: '100%', maxHeight: '70vh', margin: '0 auto', display: 'block'}} onClick={()=>dispatch(showModal({content: image}))}/>
+      {(video && video.length > 0) ?
+        <VideoPlayer video={video}/> :
+        <img src={image}
+             style={{maxWidth: '100%', maxHeight: '70vh', margin: '0 auto', display: 'block', cursor:'zoom-in'}}
+             onClick={()=>dispatch(showModal({content: image}))}/>
+      }
       <div style={{
         maxWidth: '800px',
         margin: '0 auto',

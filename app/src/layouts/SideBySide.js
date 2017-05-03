@@ -1,19 +1,20 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
-import { AudioClip } from '../components';
+import { AudioClip, VideoPlayer } from '../components';
 
-export default ({leftPhoto, leftCaption, rightPhoto, rightCaption}) => (
+export default ({leftPhoto, leftCaption, rightPhoto, rightCaption, leftVideo, rightVideo, leftImageLink, rightImageLink}) => (
   <div className={css(styles.sideBySide)}>
     <div className={css(styles.half)}>
-      <img className={css(styles.image)} src={leftPhoto} />
-      {/* <AudioClip
-        file="https://s3.amazonaws.com/storage.brmbl.in/outofhand.wav"
-      /> */}
+      {(leftVideo) ? <VideoPlayer video={leftVideo}/> : <img className={css(styles.image)} src={leftPhoto} /> }
+      {(leftImageLink) ? <AudioClip source={leftImageLink} /> : null }
+
+
       <div className={css(styles.caption)}  dangerouslySetInnerHTML={{__html: leftCaption}}/>
 
     </div>
     <div className={css(styles.half)}>
-      <img className={css(styles.image)} src={rightPhoto} />
+      {(rightVideo) ? <VideoPlayer video={rightVideo}/> : <img className={css(styles.image)} src={rightPhoto} /> }
+      {(rightImageLink) ? <AudioClip source={rightImageLink} /> : null }
       <div className={css(styles.caption)} dangerouslySetInnerHTML={{__html: rightCaption}}/>
     </div>
   </div>

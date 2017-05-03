@@ -121,7 +121,7 @@ export default class AudioClip extends React.Component{
             <i onClick={()=>this._playAudio()} className="fa fa-play-circle" aria-hidden="true"></i> :
             <i onClick={()=>audio.pause()} className="fa fa-pause-circle" aria-hidden="true"></i>
           }
-          <i onClick={()=>{audio.stop()}} className="fa fa-stop-circle" aria-hidden="true"></i>
+          {/* <i onClick={()=>{audio.stop()}} className="fa fa-stop-circle" aria-hidden="true"></i> */}
           <span > {`${formatTime(currentPosition)} / ${formatTime(audio.duration())}`}</span>
         </span>
       )
