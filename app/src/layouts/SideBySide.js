@@ -5,7 +5,7 @@ import { AudioClip, VideoPlayer } from '../components';
 export default ({leftPhoto, leftCaption, rightPhoto, rightCaption, leftVideo, rightVideo, leftImageLink, rightImageLink}) => (
   <div className={css(styles.sideBySide)}>
     <div className={css(styles.half)}>
-      {(leftVideo) ? <VideoPlayer video={leftVideo}/> : <img className={css(styles.image)} src={leftPhoto} /> }
+      {(leftVideo) ? <VideoPlayer video={leftVideo}/> : <img className={css(styles.image)} data-src={leftPhoto}  data-image={leftPhoto}/> }
       {(leftImageLink) ? <AudioClip source={leftImageLink} /> : null }
 
 
@@ -13,7 +13,7 @@ export default ({leftPhoto, leftCaption, rightPhoto, rightCaption, leftVideo, ri
 
     </div>
     <div className={css(styles.half)}>
-      {(rightVideo) ? <VideoPlayer video={rightVideo}/> : <img className={css(styles.image)} src={rightPhoto} /> }
+      {(rightVideo) ? <VideoPlayer video={rightVideo}/> : <img className={css(styles.image)} data-src={rightPhoto} data-image={rightPhoto} /> }
       {(rightImageLink) ? <AudioClip source={rightImageLink} /> : null }
       <div className={css(styles.caption)} dangerouslySetInnerHTML={{__html: rightCaption}}/>
     </div>

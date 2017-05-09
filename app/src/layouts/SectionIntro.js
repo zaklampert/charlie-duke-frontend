@@ -7,11 +7,37 @@ export default ({order, title, copy, buttonText}) => (
     <div className={`sectionIntro_${order} ` + css(styles.order)}>{formatOrderForMenu(order)}</div>
     <div className={`sectionIntro_${order} ` + css(styles.title)}>{title}</div>
     <div className={`sectionIntro_${order} ` + css(styles.copy)}><span dangerouslySetInnerHTML={{__html: copy}}/></div>
-    <div className={`sectionIntroButton_${order} ` + css(styles.button)} onClick={()=>{$.fn.fullpage.moveSlideRight();}}>
+    <div className={`sectionIntroButton_${order} ` + css(buttons.button)} onClick={()=>{$.fn.fullpage.moveSlideRight();}}>
       {buttonText}
     </div>
   </div>
 );
+
+export const buttons = StyleSheet.create({
+  button: {
+    border: '3px solid white',
+    padding: '22px 44px',
+    display: 'block',
+    maxWidth: '275px',
+    margin: '20px auto',
+    cursor: 'pointer',
+    fontWeight: '600',
+    textTransform: 'uppercase',
+    fontSize: '22px',
+    textAlign: 'center',
+    ':hover':{
+      backgroundColor: 'white',
+      color: 'black',
+    },
+    '@media (max-width: 670px)':{
+      fontSize: '18px',
+      border: '2px solid white',
+      margin: '10px auto',
+      padding: '15px 30px',
+      maxWidth: '60%'
+    }
+  }
+})
 
 const styles = StyleSheet.create({
   sectionIntro: {
@@ -35,26 +61,5 @@ const styles = StyleSheet.create({
     fontSize: '22px',
     margin: '60px 0px',
   },
-  button: {
-    border: '3px solid white',
-    padding: '22px 44px',
-    display: 'block',
-    maxWidth: '275px',
-    margin: '20px auto',
-    cursor: 'pointer',
-    fontWeight: '600',
-    textTransform: 'uppercase',
-    fontSize: '22px',
-    ':hover':{
-      backgroundColor: 'white',
-      color: 'black',
-    },
-    '@media (max-width: 670px)':{
-      fontSize: '18px',
-      border: '2px solid white',
-      margin: '10px auto',
-      padding: '15px 30px',
-      maxWidth: '60%'
-    }
-  }
+
 })

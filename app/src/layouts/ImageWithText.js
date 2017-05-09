@@ -16,7 +16,8 @@ const ImageWithText = ({image, content, caption, imageLink, openModal, dispatch,
     }}>
       {(video && video.length > 0) ?
         <VideoPlayer video={video}/> :
-        <img src={image}
+        <img data-src={image}
+             data-image={image}
              style={{maxWidth: '100%', maxHeight: '70vh', margin: '0 auto', display: 'block', cursor:'zoom-in'}}
              onClick={()=>dispatch(showModal({content: image}))}/>
       }
@@ -28,7 +29,7 @@ const ImageWithText = ({image, content, caption, imageLink, openModal, dispatch,
       {(imageLink) ? <AudioClip source={imageLink} /> : null }
 
       {caption}
-      <div dangerouslySetInnerHTML={{__html: content}}></div>
+      <div style={{overflowY:'scroll'}} dangerouslySetInnerHTML={{__html: content}}></div>
       </div>
     </div>
   </div>

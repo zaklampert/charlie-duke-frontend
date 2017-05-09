@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     maxWidth: '500px',
     margin: '0 auto',
     fontSize: '53px',
+    padding: '18px',
     '@media (max-width: 670px)': {
       fontSize: '20px'
     }

@@ -6,6 +6,7 @@ export default class FullPageSlide extends React.Component{
     return (
       <div className="slide" style={{
         backgroundImage: `url("${background}")`,
+        paddingBottom: '76px',
         backgroundPosition: backgroundPosition || 'center center',
         // XXX: Smarter theming
         backgroundColor: (theme === "light") ? 'white' : 'initial',

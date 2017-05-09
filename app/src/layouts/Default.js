@@ -18,7 +18,7 @@ export default ({content, title, subtitle, showTitle}) => (
         }}>&mdash; {subtitle}</h2>
       </span> :
     null }
-    <span style={{padding: '5px 15px'}} dangerouslySetInnerHTML={{__html: content}} />
+    <div style={{paddingBottom: '167px'}} dangerouslySetInnerHTML={{__html: content}} />
   </div>
 )
 
@@ -28,7 +28,10 @@ const styles = StyleSheet.create({
     maxWidth: '1440px',
     margin: '0 auto',
     clear: 'both',
-    padding: '15px;'
+    padding: '15px 100px',
+    '@media (max-width: 670px)':{
+      padding: '22px 22px 100px 22px',
+    }
   },
   half: {
     width: '48%',

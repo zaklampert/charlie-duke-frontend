@@ -1,8 +1,6 @@
 import React from 'react';
 import URI from 'urijs';
 
-
-
 class VideoPlayer extends React.Component{
   constructor(props){
     super(props);
@@ -11,7 +9,7 @@ class VideoPlayer extends React.Component{
     let videoId = '';
     let iframeSrc = '';
 
-    switch(domain){
+    switch(domain) {
       case 'vimeo.com':
       videoId = URI(video).segment()[0];
       iframeSrc = `https://player.vimeo.com/video/${videoId}?badge=0"`;

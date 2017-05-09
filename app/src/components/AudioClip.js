@@ -100,7 +100,7 @@ export default class AudioClip extends React.Component{
     if(!ready){
       return (
         <span>
-          <i onClick={()=>this._loadAudio()} className="fa fa-headphones" aria-hidden="true"></i>
+          <i onClick={()=>this._loadAudio()} className="fa fa-headphones" style={{cursor:'pointer', paddingRight:'5px'}} aria-hidden="true"></i>
         </span>
       )
     }
@@ -116,10 +116,10 @@ export default class AudioClip extends React.Component{
 
       return (
         <span >
-          {(ended && !playing) ? <i onClick={()=>this._playAudio()} className="fa fa-repeat" aria-hidden="true"></i> : null }
+          {(ended && !playing) ? <i onClick={()=>this._playAudio()} className="fa fa-repeat" style={{cursor:'pointer', paddingRight:'5px'}} aria-hidden="true"></i> : null }
           {(paused) ?
-            <i onClick={()=>this._playAudio()} className="fa fa-play-circle" aria-hidden="true"></i> :
-            <i onClick={()=>audio.pause()} className="fa fa-pause-circle" aria-hidden="true"></i>
+            <i onClick={()=>this._playAudio()} className="fa fa-play-circle" style={{cursor:'pointer', paddingRight:'5px'}} aria-hidden="true"></i> :
+            <i onClick={()=>audio.pause()} className="fa fa-pause-circle" style={{cursor:'pointer', paddingRight:'5px'}} aria-hidden="true"></i>
           }
           {/* <i onClick={()=>{audio.stop()}} className="fa fa-stop-circle" aria-hidden="true"></i> */}
           <span > {`${formatTime(currentPosition)} / ${formatTime(audio.duration())}`}</span>
