@@ -14,9 +14,9 @@ export default ({page}) => (
       <div className={css(styles.title)}>
         {page.title}
       </div>
-      <div className={css(buttons.button)} onClick={()=>{$.fn.fullpage.moveSectionDown()}}>
+      {/* <div className={css(buttons.button)} onClick={()=>{$.fn.fullpage.moveSectionDown()}}>
         The Story
-      </div>
+      </div> */}
     </FullPageSlide>
   </FullPageSection>
 )

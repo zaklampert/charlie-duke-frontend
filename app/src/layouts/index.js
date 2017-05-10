@@ -7,6 +7,7 @@ import SectionIntro from './SectionIntro'
 import Quote from './Quote';
 import Default from './Default';
 import FullImage from './FullImage';
+import Events from './Events';
 
 export {
     ImageWithText,
@@ -17,4 +18,5 @@ export {
     SideBySide,
     Default,
     FullImage,
+    Events,
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { FullPageSlide, FullPageSection, SectionIntro, ImageWithText, SideBySide, Default, FullImage, Quote } from '../layouts';
+import { FullPageSlide, FullPageSection, SectionIntro, ImageWithText, SideBySide, Default, FullImage, Quote, Events } from '../layouts';
 
 const Layouts = {
   ImageWithText,
@@ -7,11 +7,13 @@ const Layouts = {
   Default,
   FullImage,
   Quote,
+  Events,
 };
 
 export default ({page, handlers}) => (
   <FullPageSection
     key={page.slug}>
+
     <FullPageSlide
       background={page.background}
       theme="dark"

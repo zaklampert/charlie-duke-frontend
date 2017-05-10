@@ -1,8 +1,9 @@
-import {mapDataToPage} from '../data';
+import {mapDataToPage, mapEvents} from '../data';
 import {pauseHowls} from '../helpers';
 
 export const POPULATE_MENU = 'POPULATE_MENU';
 export const POPULATE_PAGES = 'POPULATE_PAGES';
+export const POPULATE_EVENTS = 'POPULATE_EVENTS';
 export const SHOW_MODAL = 'SHOW_MODAL';
 export const HIDE_MODAL = 'HIDE_MODAL';
 export const UPDATE_LOCATION = 'UPDATE_LOCATION';
@@ -23,8 +24,12 @@ const apiOptions = {
 
 const receivePages = (json) => ({
   type: POPULATE_PAGES,
-  json
+  json,
 });
+const receiveEvents = (events) => ({
+  type: POPULATE_EVENTS,
+  events,
+})
 
 const receiveLocation = ({section, slide})=>({
   type: UPDATE_LOCATION,
@@ -72,6 +77,17 @@ const mapWPData = (pages, menu) => dispatch => {
   })
   return dispatch(receivePages(mapDataToPage(mappedMenuData)));
 }
+const getEvents = () => dispatch => {
+    return fetch(`${API_URL}/wp-json/wp/v2/event?filter%5Borderby%5D=meta_value_num&meta_key=event_date&order=asc`, apiOptions)
+    .then(response => response.json())
+    .then(events=>{
+      dispatch(receiveEvents(mapEvents(events)));
+    })
+    .catch(e=>{
+      console.log(e);
+    })
+}
+
 const getPages = (menu) => dispatch => {
   return fetch(`${API_URL}/wp-json/wp/v2/pages?per_page=100&_embed`, apiOptions)
     .then(response => response.json())
@@ -85,7 +101,11 @@ export const getWPData = () => dispatch => {
     .then(response => response.json())
     .then(json => {
       dispatch(getPages(json));
-    }).catch(err=>{
+    })
+    .then(()=>{
+      dispatch(getEvents());
+    })
+    .catch(err=>{
       console.log(err);
     })
 }

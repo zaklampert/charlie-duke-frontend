@@ -1,3 +1,4 @@
+import moment from 'moment';
 
 const lookupTemplate = (page) => {
   switch(page.order) {
@@ -20,6 +21,8 @@ const lookupChildTemplate = (child) => {
       return "FullImage";
     case "quote":
       return "Quote";
+    case "events":
+      return "Events";
     default:
       return "Default";
   }
@@ -82,5 +85,25 @@ export const mapDataToPage = (dataFromWordpress) => {
         }
       })
     }
+  })
+}
+
+export const mapEvents = (dataFromWordpress) => {
+  return dataFromWordpress && dataFromWordpress.map(event => {
+    const yesterday = moment().subtract(1, 'days').format();
+
+    const eventDate = event && event.meta_box && event.meta_box.event_date && moment.utc(event.meta_box.event_date * 1000).format();
+    const mappedEvent  = {
+      id: event && event.id,
+      future: eventDate && (moment(eventDate).isAfter(yesterday, 'day')),
+      published: event && event.status && (event.status === "publish"),
+      eventDate,
+      eventTime: event && event.meta_box && event.meta_box.event_start_time,
+      title: event && event.title && event.title.rendered,
+      venue: event && event.meta_box && event.meta_box.address_venue,
+      address: event && event.meta_box && event.meta_box.address_formatted,
+      event_link: event && event.meta_box && event.meta_box.event_link,
+    }
+    return mappedEvent.future && mappedEvent;
   })
 }
