@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "c0351f2d2abb6922a274"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "0b63c13604e8455e1a69"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -27396,7 +27396,7 @@
 	            _react2.default.createElement(
 	              'a',
 	              { className: (0, _aphrodite.css)(styles.navLink), href: '#' + page.slug, style: {
-	                  color: currentIndex === i ? 'white' : '#6b6b6b'
+	                  color: currentIndex === i ? 'white' : '#848484'
 	                } },
 	              _react2.default.createElement(
 	                'div',
@@ -27423,8 +27423,8 @@
 	    position: 'fixed',
 	    zIndex: '89',
 	    color: 'white',
-	    left: '80px',
-	    '@media (max-width: 765px)': {
+	    left: '33px',
+	    '@media (max-width: 868px)': {
 	      display: 'none'
 	    }
 	  },
@@ -27440,7 +27440,7 @@
 	    display: 'block',
 	    // height: ,
 	    position: 'relative',
-	    width: '50px',
+	    width: '114px',
 	    marginRight: '25px'
 	  },
 	  bullet: {

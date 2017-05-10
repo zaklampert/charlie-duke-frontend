@@ -22,7 +22,7 @@ export default ({show, currentIndex, anchors, storyPages}) => {
         {storyPages && storyPages.map((page, i) => (
           <div key={page.slug} style={{height: 80 / storyPages.length + 'vh' }} className={css(styles.navItem)} data-menuanchor={page.slug}>
             <a className={css(styles.navLink)} href={`#${page.slug}`} style={{
-              color: (currentIndex === i) ? 'white' : '#6b6b6b'
+              color: (currentIndex === i) ? 'white' : '#848484'
             }}>
               <div style={{margin: '8px 0'}}>
                 {formatOrderForMenu(page.order)}
@@ -49,8 +49,8 @@ const styles = StyleSheet.create({
     position: 'fixed',
     zIndex: '89',
     color: 'white',
-    left: '80px',
-    '@media (max-width: 765px)':{
+    left: '33px',
+    '@media (max-width: 868px)':{
       display: 'none'
     }
   },
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     display: 'block',
     // height: ,
     position: 'relative',
-    width: '50px',
+    width: '114px',
     marginRight: '25px',
   },
   bullet: {
