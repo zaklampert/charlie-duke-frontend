@@ -66,7 +66,9 @@ class App extends React.Component {
       },
       onSlideLeave: function(anchorLink, index, slideIndex, direction, nextSlideIndex){
         const numberOfSlides =  pages && pages.data && pages.data[index] && pages.data[index - 1].children.length;
-        if (slideIndex === numberOfSlides){
+        if ( slideIndex === numberOfSlides &&
+            (nextSlideIndex !== numberOfSlides - 1) &&
+            nextSlideIndex !== numberOfSlides ) {
           $.fn.fullpage.moveSectionDown();
         }
         setTimeout(()=>{

@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "6879ef5ad51e9d2d3012"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "c0351f2d2abb6922a274"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -50504,7 +50504,7 @@
 	          },
 	          onSlideLeave: function onSlideLeave(anchorLink, index, slideIndex, direction, nextSlideIndex) {
 	            var numberOfSlides = pages && pages.data && pages.data[index] && pages.data[index - 1].children.length;
-	            if (slideIndex === numberOfSlides) {
+	            if (slideIndex === numberOfSlides && nextSlideIndex !== numberOfSlides - 1 && nextSlideIndex !== numberOfSlides) {
 	              $.fn.fullpage.moveSectionDown();
 	            }
 	            setTimeout(function () {
