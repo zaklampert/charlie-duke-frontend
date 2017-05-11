@@ -11,7 +11,7 @@ const Events = ({events, image}) => (
       const mapsSearchUrl = `https://www.google.com/maps/search/${event.address}`
       return (
         <div key={event.id} style={{
-          padding: '5px 0'
+          padding: '15px 0'
         }}>
           <span className={css(styles.eventTitle)}
                 dangerouslySetInnerHTML={{__html: event.title}}
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   events: {
     maxWidth: '1440px',
     minWidth: '70vw',
-    background: 'rgba(0,0,0,.5)',
+    background: 'rgba(0,0,0,.75)',
     margin: '0 auto',
     padding: '15px 100px 30px 100px',
     color: 'white',

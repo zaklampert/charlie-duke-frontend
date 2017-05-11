@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "0b63c13604e8455e1a69"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "0a0fe490a041d4bed10f"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -50783,7 +50783,6 @@
 
 	      var _state2 = this.state,
 	          loaded = _state2.loaded,
-	          playing = _state2.playing,
 	          currentPosition = _state2.currentPosition,
 	          ended = _state2.ended,
 	          paused = _state2.paused,
@@ -50808,8 +50807,6 @@
 	        );
 	      }
 
-	      // if (playing) {
-
 	      return _react2.default.createElement(
 	        'span',
 	        null,
@@ -50828,14 +50825,6 @@
 	          formatTime(currentPosition) + ' / ' + formatTime(audio.duration())
 	        )
 	      );
-	      // }
-
-	      // return (
-	      //   <span onClick={()=>{this.this._playAudio()}}>
-	      //     <i className="fa fa-headphones" aria-hidden="true"></i>
-	      //     {formatTime(this.audio.duration())}
-	      //   </span>
-	      // )
 	    }
 	  }]);
 
@@ -51390,7 +51379,7 @@
 	        return _react2.default.createElement(
 	          'div',
 	          { key: event.id, style: {
-	              padding: '5px 0'
+	              padding: '15px 0'
 	            } },
 	          _react2.default.createElement('span', { className: (0, _aphrodite.css)(styles.eventTitle),
 	            dangerouslySetInnerHTML: { __html: event.title }
@@ -51421,7 +51410,7 @@
 	  events: {
 	    maxWidth: '1440px',
 	    minWidth: '70vw',
-	    background: 'rgba(0,0,0,.5)',
+	    background: 'rgba(0,0,0,.75)',
 	    margin: '0 auto',
 	    padding: '15px 100px 30px 100px',
 	    color: 'white',
@@ -51667,28 +51656,52 @@
 	    _react2.default.createElement(
 	      'div',
 	      { style: {
-	          maxWidth: isPortrait ? '800px' : imageWidth + 'px',
 	          margin: '0 auto',
 	          display: 'block',
-	          position: 'relative'
+	          position: 'relative',
+	          padding: '67px 12px'
 	        } },
-	      video && video.length > 0 ? _react2.default.createElement(_components.VideoPlayer, { video: video }) : _react2.default.createElement('img', { 'data-src': image,
-	        'data-image': image,
-	        style: { maxWidth: '100%', maxHeight: '70vh', margin: '0 auto', display: 'block', cursor: 'zoom-in' },
-	        onClick: function onClick() {
-	          return dispatch((0, _actions.showModal)({ content: image }));
-	        } }),
-	      _react2.default.createElement(
+	      video && video.length > 0 ? _react2.default.createElement(_components.VideoPlayer, { video: video }) : _react2.default.createElement(
 	        'div',
 	        { style: {
-	            maxWidth: '800px',
-	            margin: '0 auto',
-	            padding: '5px 15px'
+	            display: 'table',
+	            maxWidth: '100%',
+	            maxHeight: '60vh',
+	            margin: '0 auto'
 	          } },
-	        imageLink ? _react2.default.createElement(_components.AudioClip, { source: imageLink }) : null,
-	        caption,
-	        _react2.default.createElement('div', { style: { overflowY: 'scroll' }, dangerouslySetInnerHTML: { __html: content } })
-	      )
+	        _react2.default.createElement('img', { 'data-src': image,
+	          'data-image': image,
+
+	          style: {
+	            maxWidth: '100%',
+	            maxHeight: '60vh',
+	            minHeight: '20vh',
+	            cursor: 'zoom-in'
+	          }
+	        }),
+	        _react2.default.createElement('div', { style: {
+	            display: 'table-caption',
+	            captionSide: 'bottom',
+	            width: '100%'
+
+	          }, dangerouslySetInnerHTML: { __html: content } }),
+	        imageLink ? _react2.default.createElement(
+	          'div',
+	          { style: {
+	              display: 'table-caption',
+	              captionSide: 'bottom',
+	              textAlign: 'center'
+
+	            } },
+	          _react2.default.createElement(_components.AudioClip, { source: imageLink }),
+	          ' '
+	        ) : null
+	      ),
+	      _react2.default.createElement('div', { style: {
+	          maxWidth: '800px',
+	          margin: '0 auto',
+	          padding: '5px 15px'
+	        } })
 	    )
 	  );
 	};

@@ -95,7 +95,7 @@ export default class AudioClip extends React.Component{
     audio.play();
   }
   render(){
-    const { loaded, playing, currentPosition, ended, paused, ready, audio } = this.state;
+    const { loaded, currentPosition, ended, paused, ready, audio } = this.state;
 
     if(!ready){
       return (
@@ -112,8 +112,6 @@ export default class AudioClip extends React.Component{
       )
     }
 
-    // if (playing) {
-
       return (
         <span >
           {(ended && !playing) ? <i onClick={()=>this._playAudio()} className="fa fa-repeat" style={{cursor:'pointer', paddingRight:'5px'}} aria-hidden="true"></i> : null }
@@ -125,14 +123,7 @@ export default class AudioClip extends React.Component{
           <span > {`${formatTime(currentPosition)} / ${formatTime(audio.duration())}`}</span>
         </span>
       )
-    // }
 
-    // return (
-    //   <span onClick={()=>{this.this._playAudio()}}>
-    //     <i className="fa fa-headphones" aria-hidden="true"></i>
-    //     {formatTime(this.audio.duration())}
-    //   </span>
-    // )
 
   }
 }
