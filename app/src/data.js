@@ -1,11 +1,16 @@
 import moment from 'moment';
 
 const lookupTemplate = (page) => {
-  switch(page.order) {
-    case 1:
-      return "Hero";
-    case 2:
+  if (page.title === "Charlie Duke") {
+    return "Hero";
+  }
+  switch(page.page_data.meta_box.page_format) {
+    case "home_panel":
+      return "Story";
+    case "quote":
       return "About";
+    case "shop":
+      return "Shop";
     default:
       return "Story"
   }
@@ -106,4 +111,20 @@ export const mapEvents = (dataFromWordpress) => {
     }
     return mappedEvent.future && mappedEvent;
   })
-}
+};
+
+export const mapProducts = (dataFromWordpress) => {
+  return dataFromWordpress && dataFromWordpress.map(product => {
+    const mappedProduct = {
+      id: product && product.id,
+      title: product && product.title && product.title.rendered,
+      description: product && product.content && product.content.rendered,
+      image: product && product._embedded && product._embedded["wp:featuredmedia"] &&
+      product._embedded["wp:featuredmedia"][0] && product._embedded["wp:featuredmedia"][0].source_url,
+      price: product && product.meta_box && product.meta_box.price,
+      domesticShipping: product && product.meta_box && product.meta_box.dom_shipping,
+      internationalShipping: product && product.meta_box && product.meta_box.intnl_shipping,
+    };
+    return mappedProduct;
+  })
+};

@@ -3,7 +3,7 @@ import Helmet from 'react-helmet';
 import { connect } from 'react-redux'
 import { pages } from './data';
 import { Nav, InteriorNav, Modal } from './components';
-import { About, Hero, Story } from './templates';
+import { About, Hero, Story, Shop } from './templates';
 import * as actions from './actions';
 import { mapDataToPage } from './data';
 import { Loading } from './components';
@@ -14,6 +14,7 @@ const Templates = {
   About,
   Hero,
   Story,
+  Shop,
 }
 
 class App extends React.Component {
@@ -153,6 +154,7 @@ class App extends React.Component {
             {pages && pages.data && pages.data.map(page=>(
               React.createElement(Templates[page.template], {key: page.slug, page})
             ))}
+
           </div>
         </span>
         }

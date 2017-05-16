@@ -1,9 +1,10 @@
-import {mapDataToPage, mapEvents} from '../data';
-import {pauseHowls} from '../helpers';
+import { mapDataToPage, mapEvents, mapProducts } from '../data';
+import { pauseHowls } from '../helpers';
 
 export const POPULATE_MENU = 'POPULATE_MENU';
 export const POPULATE_PAGES = 'POPULATE_PAGES';
 export const POPULATE_EVENTS = 'POPULATE_EVENTS';
+export const POPULATE_PRODUCTS = 'POPULATE_PRODUCTS';
 export const SHOW_MODAL = 'SHOW_MODAL';
 export const HIDE_MODAL = 'HIDE_MODAL';
 export const UPDATE_LOCATION = 'UPDATE_LOCATION';
@@ -26,16 +27,22 @@ const receivePages = (json) => ({
   type: POPULATE_PAGES,
   json,
 });
+
 const receiveEvents = (events) => ({
   type: POPULATE_EVENTS,
   events,
+});
+
+const receiveProducts = (products) => ({
+  type: POPULATE_PRODUCTS,
+  products,
 })
 
 const receiveLocation = ({section, slide})=>({
   type: UPDATE_LOCATION,
   section,
   slide,
-})
+});
 
 export const updateLocation = ({hash}) => dispatch => {
   pauseHowls();
@@ -80,18 +87,26 @@ const mapWPData = (pages, menu) => dispatch => {
 const getEvents = () => dispatch => {
     return fetch(`${API_URL}/wp-json/wp/v2/event?filter%5Borderby%5D=meta_value_num&meta_key=event_date&order=asc`, apiOptions)
     .then(response => response.json())
-    .then(events=>{
+    .then(events => {
       dispatch(receiveEvents(mapEvents(events)));
     })
-    .catch(e=>{
+    .catch(e => {
       console.log(e);
     })
 }
 
+const getProducts = () => dispatch => {
+  return fetch(`${API_URL}/wp-json/wp/v2/product?per_page=100&_embed`, apiOptions)
+    .then(response => response.json())
+    .then(products => {
+      dispatch(receiveProducts(mapProducts(products)));
+    });
+};
+
 const getPages = (menu) => dispatch => {
   return fetch(`${API_URL}/wp-json/wp/v2/pages?per_page=100&_embed`, apiOptions)
     .then(response => response.json())
-    .then(pages=>{
+    .then(pages => {
       dispatch(mapWPData(pages, menu))
     });
 }
@@ -104,6 +119,8 @@ export const getWPData = () => dispatch => {
     })
     .then(()=>{
       dispatch(getEvents());
+    }).then(()=>{
+      dispatch(getProducts());
     })
     .catch(err=>{
       console.log(err);
