@@ -21,7 +21,6 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      showNav: false,
       currentIndex: null,
       title: "Charlie Duke",
       fullpageReady: false,
@@ -75,9 +74,7 @@ class App extends React.Component {
         setTimeout(()=>{
             dispatch(actions.updateLocation({hash: window.location.hash}));
         }, 50)
-        self.setState({
-          showNav: (nextSlideIndex === 0 ) ? true : false,
-        });
+
 
         if(nextSlideIndex > 0){
 
@@ -89,7 +86,6 @@ class App extends React.Component {
       },
       afterSlideLoad: function( anchorLink, index, slideAnchor, slideIndex){
         self.setState({
-          showNav: (slideIndex === 0 ) ? true : false,
           showInteriorNav: (slideIndex === 0 ) ? false : true,
         })
       },
@@ -116,7 +112,7 @@ class App extends React.Component {
     });
     const storyPages = pages.data && pages.data.filter((page)=> {return page.template === "Story" || page.template === "About"});
 
-    const showNav = (location.section === "charlie-duke") ? false : (currentIndex > -1 && !location.slide);
+    const showNav = (location.section === "charlie-duke" || location.section === "shop") ? false : (currentIndex > -1 && !location.slide);
     const showInteriorNav = (location.slide);
   return (
       <div id="root" style={{
@@ -130,6 +126,7 @@ class App extends React.Component {
         title={title}
       >
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script src="https://js.stripe.com/v3/"></script>
       </Helmet>
       {(!pages.ready) ?
         <Loading /> :

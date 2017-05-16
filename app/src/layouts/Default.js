@@ -18,7 +18,7 @@ export default ({content, title, subtitle, showTitle}) => (
         }}>&mdash; {subtitle}</h2>
       </span> :
     null }
-    <div style={{paddingBottom: '167px'}} dangerouslySetInnerHTML={{__html: content}} />
+    <div dangerouslySetInnerHTML={{__html: content}} />
   </div>
 )
 
