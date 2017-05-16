@@ -16,7 +16,7 @@ const Shop = ({page, products}) => (
         {products.map(product => {
           return (
             <div key={product.id}>
-              <div dangerouslySetInnerHTML={{__html: product.title}}/>
+              <span dangerouslySetInnerHTML={{__html: product.title}}/> - {product.price}
               <div dangerouslySetInnerHTML={{__html: product.description}}/>
               <img src={product.image}/>
             </div>

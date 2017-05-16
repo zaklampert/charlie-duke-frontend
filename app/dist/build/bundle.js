@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "fa8fd1ed864c55415441"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "84bc1b8d7448b45e8808"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -52461,7 +52461,9 @@
 	          return _react2.default.createElement(
 	            'div',
 	            { key: product.id },
-	            _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: product.title } }),
+	            _react2.default.createElement('span', { dangerouslySetInnerHTML: { __html: product.title } }),
+	            ' - ',
+	            product.price,
 	            _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: product.description } }),
 	            _react2.default.createElement('img', { src: product.image })
 	          );
