@@ -10,9 +10,11 @@ const ImageWithText = ({image, content, caption, imageLink, openModal, dispatch,
   return <div className={css(styles.imageWithText)}>
     <div style={{
       margin: '0 auto',
-      display: 'block',
+      display: 'inline-block',
       position: 'relative',
       padding: '67px 12px',
+      left: '50%',
+      transform: "translateX(-50%)"
     }}>
       {(video && video.length > 0) ?
         <VideoPlayer video={video}/> :
@@ -38,27 +40,18 @@ const ImageWithText = ({image, content, caption, imageLink, openModal, dispatch,
                captionSide: 'bottom',
                width: '100%',
 
-             }} dangerouslySetInnerHTML={{__html: content}}></div>
+             }}> <div dangerouslySetInnerHTML={{__html: content}}></div>
              {(imageLink) ?
-               <div  style={{
-                 display: 'table-caption',
-                 captionSide: 'bottom',
+               <span  style={{
+                 display: 'block',
+                 margin: '0 auto',
                  textAlign: 'center',
 
                }}>
-                <AudioClip source={imageLink} /> </div>: null }
+                <AudioClip source={imageLink} /> </span>: null }
+            </div>
          </div>
       }
-      <div style={{
-        maxWidth: '800px',
-        margin: '0 auto',
-        padding: '5px 15px'
-      }}>
-
-
-
-
-      </div>
     </div>
   </div>
 }
