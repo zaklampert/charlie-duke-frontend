@@ -20,7 +20,8 @@ const onToken = (token) => {
      });
    });
 }
-const STRIPE_KEY = "pk_H4AX6EXvu8eDxQGFZXKHrT3JWGdNv";
+const STRIPE_KEY = "pk_Z4nRov9Ge6n90mXq9v0VQeFmgIbsr";
+
 const stripeProps = {
   stripeKey: STRIPE_KEY,
   token: onToken,

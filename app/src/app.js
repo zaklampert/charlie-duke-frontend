@@ -128,6 +128,7 @@ class App extends React.Component {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <script src="https://js.stripe.com/v3/"></script>
       </Helmet>
+
       {(!pages.ready) ?
         <Loading /> :
         <span>
