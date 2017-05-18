@@ -5,38 +5,19 @@ import { AudioClip, VideoPlayer } from '../components';
 export default ({leftPhoto, leftCaption, rightPhoto, rightCaption, leftVideo, rightVideo, leftImageLink, rightImageLink}) => (
   <div className={css(styles.sideBySide)}>
     <div className={css(styles.half)}>
-      <div style={{
-        display: 'table'
-      }}>
       {(leftVideo) ? <VideoPlayer video={leftVideo}/> : <img className={css(styles.image)} data-src={leftPhoto}  data-image={leftPhoto}/> }
 
-
-
-      <div style={{
-        display: 'table-caption',
-        captionSide: 'bottom',
-      }}>
       <div className={css(styles.caption)}  dangerouslySetInnerHTML={{__html: leftCaption}}/>
-      {(leftImageLink) ? <span style={{display: 'block', margin: '0 auto', textAlign:'center'}}><AudioClip source={leftImageLink} /></span> : null }
-      </div>
-      </div>
+        {(leftImageLink) ? <div className={css(styles.audio)}><AudioClip source={leftImageLink} /></div> : null }
+
     </div>
     <div className={css(styles.half)}>
-      <div style={{
-        display: 'table'
-      }}>
       {(rightVideo) ? <VideoPlayer video={rightVideo}/> : <img className={css(styles.image)} data-src={rightPhoto} data-image={rightPhoto} /> }
 
-
-            <div style={{
-              display: 'table-caption',
-              captionSide: 'bottom',
-            }}>  <div className={css(styles.caption)} dangerouslySetInnerHTML={{__html: rightCaption}}/>
-              {(rightImageLink) ?<span style={{display: 'block', margin: '0 auto', textAlign:'center'}}> <AudioClip source={rightImageLink} /></span> : null }
-          </div>
+      <div className={css(styles.caption)} dangerouslySetInnerHTML={{__html: rightCaption}}/>
+      {(rightImageLink) ? <div className={css(styles.audio)}><AudioClip source={rightImageLink} /> </div>: null }
     </div>
   </div>
-</div>
 )
 
 
@@ -48,7 +29,10 @@ const styles = StyleSheet.create({
     clear: 'both',
   },
   caption: {
-    // padding: '5px 20px',
+    padding: '5px 0px',
+  },
+  audio: {
+    textAlign: 'center',
   },
   half: {
     width: '48%',
@@ -58,5 +42,6 @@ const styles = StyleSheet.create({
   },
   image: {
     maxWidth: '100%',
+    maxHeight: '70vh'
   }
 })

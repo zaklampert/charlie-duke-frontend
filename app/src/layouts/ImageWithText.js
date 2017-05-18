@@ -12,7 +12,7 @@ const ImageWithText = ({image, content, caption, imageLink, openModal, dispatch,
       margin: '0 auto',
       display: 'inline-block',
       position: 'relative',
-      padding: '67px 12px',
+      // padding: '67px 12px',
       left: '50%',
       transform: "translateX(-50%)"
     }}>

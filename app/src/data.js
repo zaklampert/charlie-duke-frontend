@@ -35,16 +35,14 @@ const lookupChildTemplate = (child) => {
 export const mapDataToPage = (dataFromWordpress) => {
   return dataFromWordpress && dataFromWordpress.map((page, i)=>{
     // console.log(page);
+    console.log(page)
     return {
       template: lookupTemplate(page),
       title: page.title,
       order: i,
       background: page &&
-                  page.page_data &&
-                  page.page_data._embedded &&
-                  page.page_data._embedded["wp:featuredmedia"] &&
-                  page.page_data._embedded["wp:featuredmedia"][0] &&
-                  page.page_data._embedded["wp:featuredmedia"][0].source_url,
+                  page.page_data && page.page_data.featured_image &&
+                  page.page_data.featured_image.url,
       slug: page &&
             page.page_data &&
             page.page_data.slug,
@@ -66,26 +64,15 @@ export const mapDataToPage = (dataFromWordpress) => {
           leftVideo: child && child.page_data && child.page_data.meta_box && child.page_data.meta_box.left_video,
           rightVideo: child && child.page_data && child.page_data.meta_box && child.page_data.meta_box.right_video,
           showTitle: child && child.page_data && child.page_data.meta_box && child.page_data.meta_box.title_display && (child.page_data.meta_box.title_display === "1"),
-          image: child &&
-                  child.page_data &&
-                  child.page_data._embedded &&
-                  child.page_data._embedded["wp:featuredmedia"] &&
-                  child.page_data._embedded["wp:featuredmedia"][0] &&
-                  child.page_data._embedded["wp:featuredmedia"][0].source_url,
-          imageWidth: child &&
-                  child.page_data &&
-                  child.page_data._embedded &&
-                  child.page_data._embedded["wp:featuredmedia"] &&
-                  child.page_data._embedded["wp:featuredmedia"][0] &&
-                  child.page_data._embedded["wp:featuredmedia"][0].media_details &&
-                  child.page_data._embedded["wp:featuredmedia"][0].media_details.width,
+          image: child && child.page_data &&
+                 child.page_data.featured_image &&
+                 child.page_data.featured_image.url,
+          imageWidth: child && child.page_data &&
+                 child.page_data.featured_image &&
+                 child.page_data.featured_image.width,
           imageHeight: child &&
-                  child.page_data &&
-                  child.page_data._embedded &&
-                  child.page_data._embedded["wp:featuredmedia"] &&
-                  child.page_data._embedded["wp:featuredmedia"][0] &&
-                  child.page_data._embedded["wp:featuredmedia"][0].media_details &&
-                  child.page_data._embedded["wp:featuredmedia"][0].media_details.height,
+                 child.featured_image &&
+                 child.featured_image.height,
           content: child && child.page_data &&  child.page_data.content && child.page_data.content.rendered
         }
       })

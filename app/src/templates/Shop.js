@@ -25,7 +25,8 @@ const STRIPE_KEY = "pk_Z4nRov9Ge6n90mXq9v0VQeFmgIbsr";
 const stripeProps = {
   stripeKey: STRIPE_KEY,
   token: onToken,
-  name: "Charlie Duke"
+  name: "Charlie Duke",
+  shippingAddress: true,
 }
 
 const Shop = ({page, products}) => (
@@ -51,6 +52,7 @@ const Shop = ({page, products}) => (
                 currency="USD"
                 panelLabel={`${product.price} + ${product.domesticShipping} shipping`}
                 image={product.image}
+
                 >
               <div className={css(buttons.button)}>{product.price} + Shipping</div>
               </StripeCheckout>
