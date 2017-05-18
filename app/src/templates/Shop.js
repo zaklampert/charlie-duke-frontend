@@ -10,15 +10,12 @@ const currencyToNumber = (currency) => {
   return Number(currency.replace(/[^0-9\.]+/g,""));
 };
 
+const displayPrice = (currency) => {
+  return currency.split('.')[0];
+}
+
 const onToken = (token) => {
-  fetch('/save-stripe-token', {
-   method: 'POST',
-   body: JSON.stringify(token),
-   }).then(response => {
-     response.json().then(data => {
-       alert(`We are in business, ${data.email}`);
-     });
-   });
+  console.log(token);
 }
 const STRIPE_KEY = "pk_Z4nRov9Ge6n90mXq9v0VQeFmgIbsr";
 
@@ -42,29 +39,9 @@ const Shop = ({page, products}) => (
         {products.map(product => {
           return (
             <div key={product.id} className={css(styles.thirds)}>
-              <div className={css(styles.product)}>
-              <img src={product.image} style={{maxWidth: '100%'}}/>
-              <StripeCheckout
-                {...stripeProps}
-                description={product.title}
-                amount={(currencyToNumber(product.price) * 100) + (currencyToNumber(product.domesticShipping) * 100)}
-                currency="USD"
-                panelLabel={`${product.price} + ${product.domesticShipping} shipping`}
-                image={product.image}
-
-                >
-              <div>
-                <div style={{fontSize: '22px'}} dangerouslySetInnerHTML={{__html: product.title}}/>
-                <div dangerouslySetInnerHTML={{__html: product.description}}/>
-                <div style={{color: '#666'}}>
-                  {product.price}<br/>
-                  US Shipping - {product.domesticShipping}<br/>
-                  International Shipping - {product.internationalShipping}
-                </div>
-
-
-              </div>
-              </StripeCheckout>
+              <div className={css(styles.productInner)}>
+              <img src={product.image} style={{width: '90%', margin: '0 auto', display: 'block',}}/>
+              <Product product={product} />
               </div>
             </div>
           )
@@ -75,25 +52,126 @@ const Shop = ({page, products}) => (
     </FullPageSlide>
   </FullPageSection>
 )
+const initialProductState = {
+  showOptions: false,
+  readyToCheckout: false,
+  shippingRate: null,
+  inscription: null,
+  wantSigned: null,
+}
+class Product extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = initialProductState
+  }
+
+  render(){
+    const { product } = this.props;
+    const { showOptions, readyToCheckout, shippingRate, wantSigned, inscription } = this.state;
+    const offerBoth = product.variants && (product.variants.indexOf('signed') > -1) && (product.variants.indexOf('unsigned') > -1);
+    const offerOnlySigned = product.variants && (product.variants.indexOf('signed') > -1) && (product.variants.indexOf('unsigned') < 0);
+    if ( showOptions ) {
+      return (
+        <div className={css(styles.productOptions)}>
+          {(!shippingRate) ?
+            <div>
+              Choose Shipping: <br/>
+              <div className={css(styles.link)} onClick={()=>{this.setState({shippingRate:product.domesticShipping })}}>US ({product.domesticShipping})</div>
+              <div className={css(styles.link)} onClick={()=>{this.setState({shippingRate:product.internationalShipping })}}>International ({product.internationalShipping})</div>
+            </div>
+          : null }
+
+          {(shippingRate && offerBoth && !wantSigned) ?
+            <div>
+
+              Would you like this signed?
+              <div style={{padding: '5px'}}>
+                <span className={css(styles.link)} onClick={()=>{this.setState({wantSigned: 'yes'})}}>Yes</span> |
+                <span className={css(styles.link)} onClick={()=>{this.setState({wantSigned: 'no'})}}>No, thanks.</span>
+
+              </div>
+
+            </div> : null
+          }
+
+          {((shippingRate && offerOnlySigned) || (shippingRate && wantSigned === "yes")) ?
+            <div>
+              <label htmlFor="inscription">What would you like on the inscription? </label><br/>
+              <input name="inscription" style={{width: '90%', boxSizing: 'border-box', padding: '5px', margin: '14px 0' }} onChange={(e)=>{this.setState({inscription: e.target.value})}} />
+            </div> : null
+          }
+
+          { (shippingRate ) && ( offerOnlySigned || (offerBoth && wantSigned) || (!offerOnlySigned && !offerBoth)) ?
+            <StripeCheckout
+              {...stripeProps}
+              description={`${product.title} ${(wantSigned && inscription) ? "Inscribed: " + inscription : ""}`}
+              amount={(currencyToNumber(product.price) * 100) + (currencyToNumber(shippingRate) * 100)}
+              currency="USD"
+              panelLabel={`${product.price} + ${shippingRate} shipping`}
+              image={product.image}
+            /> : null
+          }
+          <div style={{fontSize: '12px', cursor: 'pointer', color: '#adadad', padding: '8px'}} onClick={()=>this.setState(initialProductState)}>Cancel</div>
+        </div>
+
+      )
+    }
+
+  return (
+    <div onClick={()=>this.setState({showOptions: true})} className={css(styles.productDetails)}>
+      <div style={{fontSize: '22px'}} dangerouslySetInnerHTML={{__html: product.title}}/>
+      <div dangerouslySetInnerHTML={{__html: product.description}}/>
+      <div style={{color: '#666'}}>
+        {displayPrice(product.price)}<br/>
+        US Shipping - {displayPrice(product.domesticShipping)}<br/>
+        International Shipping - {displayPrice(product.internationalShipping)}
+      </div>
+
+
+    </div>
+    )
+  }
+}
 
 const styles = StyleSheet.create({
   row: {
-    textAlign: 'center',
-    '::after':{
-      clear: 'both',
-      content: '',
-      display: 'table',
-    }
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexWrap: 'wrap',
+    flexDirection: 'row'
   },
   thirds: {
-    width: '33%',
-    float: 'left',
-    '@media(max-width: 760px)': {
-      width: '100%',
+    width: '32%',
+    '@media(max-width: 960px)':{
+      width: '50%',
+    },
+    '@media (max-width: 670px)':{
+      width: '100%'
     }
   },
-  product: {
+  productInner: {
     padding: '5px 12px',
+    textAlign: 'center',
+  },
+  productDetails: {
+    cursor: 'pointer',
+    padding: '22px 5px',
+    maxWidth: '90%',
+
+    margin: '0 auto',
+    ':hover':{
+      background: '#333'
+    }
+
+  },
+  link: {
+    cursor: 'pointer',
+    ':hover':{
+      textDecoration: 'underline',
+    }
+  },
+  productOptions: {
+    padding: '22px 5px',
   },
   products: {
     maxWidth: '1440px',

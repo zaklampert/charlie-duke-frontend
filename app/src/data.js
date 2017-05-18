@@ -108,6 +108,7 @@ export const mapProducts = (dataFromWordpress) => {
       description: product && product.content && product.content.rendered,
       image: product && product._embedded && product._embedded["wp:featuredmedia"] &&
       product._embedded["wp:featuredmedia"][0] && product._embedded["wp:featuredmedia"][0].source_url,
+      variants: product && product.meta_box && product.meta_box.variants,
       price: product && product.meta_box && product.meta_box.price,
       domesticShipping: product && product.meta_box && product.meta_box.dom_shipping,
       internationalShipping: product && product.meta_box && product.meta_box.intnl_shipping,
