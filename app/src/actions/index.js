@@ -1,5 +1,6 @@
 import { mapDataToPage, mapEvents, mapProducts } from '../data';
 import { pauseHowls } from '../helpers';
+import 'isomorphic-fetch';
 
 export const POPULATE_MENU = 'POPULATE_MENU';
 export const POPULATE_PAGES = 'POPULATE_PAGES';

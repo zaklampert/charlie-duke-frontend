@@ -43,8 +43,7 @@ const Shop = ({page, products}) => (
           return (
             <div key={product.id} className={css(styles.thirds)}>
               <div className={css(styles.product)}>
-              <img src={product.image} style={{maxWidth: '100%'}}/><br/>
-              <div style={{fontSize: '33px'}} dangerouslySetInnerHTML={{__html: product.title}}/>
+              <img src={product.image} style={{maxWidth: '100%'}}/>
               <StripeCheckout
                 {...stripeProps}
                 description={product.title}
@@ -54,9 +53,18 @@ const Shop = ({page, products}) => (
                 image={product.image}
 
                 >
-              <div className={css(buttons.button)}>{product.price} + Shipping</div>
+              <div>
+                <div style={{fontSize: '22px'}} dangerouslySetInnerHTML={{__html: product.title}}/>
+                <div dangerouslySetInnerHTML={{__html: product.description}}/>
+                <div style={{color: '#666'}}>
+                  {product.price}<br/>
+                  US Shipping - {product.domesticShipping}<br/>
+                  International Shipping - {product.internationalShipping}
+                </div>
+
+
+              </div>
               </StripeCheckout>
-              <div dangerouslySetInnerHTML={{__html: product.description}}/>
               </div>
             </div>
           )
