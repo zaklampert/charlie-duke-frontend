@@ -34,8 +34,6 @@ const lookupChildTemplate = (child) => {
 }
 export const mapDataToPage = (dataFromWordpress) => {
   return dataFromWordpress && dataFromWordpress.map((page, i)=>{
-    // console.log(page);
-    console.log(page)
     return {
       template: lookupTemplate(page),
       title: page.title,
