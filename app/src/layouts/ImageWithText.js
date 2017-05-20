@@ -10,7 +10,7 @@ const ImageWithText = ({image, content, caption, imageLink, openModal, dispatch,
   return <div className={css(styles.imageWithText)}>
     <div style={{
       margin: '0 auto',
-      display: 'inline-block',
+      display: (video && video.length > 0) ? 'block' : 'inline-block',
       position: 'relative',
       // padding: '67px 12px',
       left: '50%',
