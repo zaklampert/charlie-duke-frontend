@@ -3,8 +3,11 @@ import { FullPageSlide, FullPageSection } from '../layouts';
 import { StyleSheet, css } from 'aphrodite';
 import {connect} from 'react-redux';
 import StripeCheckout from 'react-stripe-checkout';
+import 'isomorphic-fetch';
 
 import {buttons} from '../layouts/SectionIntro';
+const STRIPE_KEY = "pk_Z4nRov9Ge6n90mXq9v0VQeFmgIbsr";
+const STRIPE_CHARGE_ENDPOINT = "https://charlieduke.com/wp-json/duke/v1/stripe/charge"
 
 const currencyToNumber = (currency) => {
   return Number(currency.replace(/[^0-9\.]+/g,""));
@@ -14,14 +17,32 @@ const displayPrice = (currency) => {
   return currency.split('.')[0];
 }
 
-const onToken = (token) => {
-  console.log(token);
+const onToken = (amount, success, error, token, args, ) => {
+  // TODO: Need to pass args (address, etc)
+  // console.log(token);
+  let myHeaders = new Headers();
+  myHeaders.append('Content-Type', 'application/json');
+  console.log(token, amount);
+  fetch(STRIPE_CHARGE_ENDPOINT, {
+     method: 'POST',
+     headers: myHeaders,
+     mode: 'cors',
+     cache: 'default',
+     body: JSON.stringify({
+       token: token.id,
+       amount,
+     }),
+   }).then(response => {
+     response.json().then(data => {
+       success(data);
+     });
+   }).catch(e=>{
+     error(e);
+   })
 }
-const STRIPE_KEY = "pk_Z4nRov9Ge6n90mXq9v0VQeFmgIbsr";
 
 const stripeProps = {
   stripeKey: STRIPE_KEY,
-  token: onToken,
   name: "Charlie Duke",
   shippingAddress: true,
 }
@@ -58,18 +79,70 @@ const initialProductState = {
   shippingRate: null,
   inscription: null,
   wantSigned: null,
+  purchased: false,
+  error: false,
+  ordering: false,
 }
 class Product extends React.Component{
   constructor(props){
     super(props);
     this.state = initialProductState
+    this._onSuccess = this._onSuccess.bind(this);
   }
+  _onSuccess() {
+    this.setState({
+      purchased: true,
+      ordering: false,
+    })
 
+  }
+  _onError() {
+    this.setState({
+      error: true,
+      ordering: false,
+    })
+
+  }
   render(){
     const { product } = this.props;
-    const { showOptions, readyToCheckout, shippingRate, wantSigned, inscription } = this.state;
+    const { showOptions,
+            readyToCheckout,
+            shippingRate,
+            wantSigned,
+            inscription,
+            ordering,
+            purchased,
+            error } = this.state;
     const offerBoth = product.variants && (product.variants.indexOf('signed') > -1) && (product.variants.indexOf('unsigned') > -1);
     const offerOnlySigned = product.variants && (product.variants.indexOf('signed') > -1) && (product.variants.indexOf('unsigned') < 0);
+
+    if (purchased) {
+      return (
+        <div className={css(styles.purchaseSuccess)}>
+          Purchased! <br/>
+          Check your email for confirmation.<br/>
+          <span onClick={()=>this.setState(initialProductState)} style={{cursor: 'pointer', textDecoration: 'underline'}}>Purchase another one.</span>
+        </div>
+      )
+    }
+
+    if (error) {
+      return (
+        <div className={css(styles.purchaseSuccess)}>
+          Sorry <br/>
+          There was a problem processing your order.<br/>
+          <span onClick={()=>this.setState(initialProductState)} style={{cursor: 'pointer', textDecoration: 'underline'}}>Try again.</span>
+        </div>
+      )
+    }
+
+    if (ordering) {
+      return (
+        <div className={css(styles.purchaseSuccess)}>
+          Finishing your order... <br/>
+        </div>
+      )
+    }
     if ( showOptions ) {
       return (
         <div className={css(styles.productOptions)}>
@@ -104,12 +177,17 @@ class Product extends React.Component{
           { (shippingRate ) && ( offerOnlySigned || (offerBoth && wantSigned) || (!offerOnlySigned && !offerBoth)) ?
             <StripeCheckout
               {...stripeProps}
+              token= {onToken.bind(this, (currencyToNumber(product.price) * 100) + (currencyToNumber(shippingRate) * 100), this._onSuccess, this._onError)}
               description={`${product.title} ${(wantSigned && inscription) ? "Inscribed: " + inscription : ""}`}
               amount={(currencyToNumber(product.price) * 100) + (currencyToNumber(shippingRate) * 100)}
               currency="USD"
               panelLabel={`${product.price} + ${shippingRate} shipping`}
               image={product.image}
-            /> : null
+            >
+            <div className={css(buttons.button)} onClick={()=>{this.setState({ordering: true})}}>
+              Pay with Credit Card
+            </div>
+          </StripeCheckout>: null
           }
           <div style={{fontSize: '12px', cursor: 'pointer', color: '#adadad', padding: '8px'}} onClick={()=>this.setState(initialProductState)}>Cancel</div>
         </div>
@@ -123,8 +201,8 @@ class Product extends React.Component{
       <div dangerouslySetInnerHTML={{__html: product.description}}/>
       <div style={{color: '#666'}}>
         {displayPrice(product.price)}<br/>
-        US Shipping - {displayPrice(product.domesticShipping)}<br/>
-        International Shipping - {displayPrice(product.internationalShipping)}
+        {/* US Shipping - {displayPrice(product.domesticShipping)}<br/>
+        International Shipping - {displayPrice(product.internationalShipping)} */}
       </div>
 
 
@@ -152,6 +230,13 @@ const styles = StyleSheet.create({
   productInner: {
     padding: '5px 12px',
     textAlign: 'center',
+  },
+  purchaseSuccess: {
+
+    padding: '22px 5px',
+    maxWidth: '90%',
+    margin: '0 auto',
+
   },
   productDetails: {
     cursor: 'pointer',
