@@ -5,19 +5,19 @@ import './Menu.css';
 const menuItems = [
   {
     label: 'About',
-    href: '/#about'
+    href: '#about'
   },
   {
     label: 'Apollo',
-    href: '/#capcom',
+    href: '#capcom',
   },
   {
     label: 'Public Speaking',
-    href: '/#live',
+    href: '#live',
   },
   {
     label: 'Shop',
-    href: '/#shop',
+    href: '#shop',
   },
   {
     label: 'Contact',
