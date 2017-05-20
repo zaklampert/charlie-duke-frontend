@@ -199,7 +199,7 @@ class Product extends React.Component{
               image={product.image}
             >
             <div className={css(buttons.button)} onClick={()=>{this.setState({ordering: true})}}>
-              Pay with Credit Card
+              Order
             </div>
           </StripeCheckout>: null
           }
