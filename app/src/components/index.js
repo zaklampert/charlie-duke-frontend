@@ -4,9 +4,11 @@ import AudioClip from './AudioClip';
 import Loading from './Loading';
 import Modal from './Modal';
 import VideoPlayer from './VideoPlayer'
+import Menu from './menu';
 
 export {
     Nav,
+    Menu,
     AudioClip,
     Loading,
     InteriorNav,

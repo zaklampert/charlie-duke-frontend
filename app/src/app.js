@@ -2,7 +2,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux'
 import { pages } from './data';
-import { Nav, InteriorNav, Modal } from './components';
+import { Nav, InteriorNav, Modal, Menu } from './components';
 import { About, Hero, Story, Shop } from './templates';
 import * as actions from './actions';
 import { mapDataToPage } from './data';
@@ -132,7 +132,7 @@ class App extends React.Component {
       {(!pages.ready) ?
         <Loading /> :
         <span>
-
+          <Menu />
           <Nav
             show={showNav}
             anchors={anchors}
