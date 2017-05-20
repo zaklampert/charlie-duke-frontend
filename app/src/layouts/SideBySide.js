@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
   },
   caption: {
     padding: '5px 0px',
+    textAlign: 'left',
   },
   audio: {
     textAlign: 'center',
@@ -39,9 +40,11 @@ const styles = StyleSheet.create({
     margin: '0 1%',
     display: 'inline-block',
     verticalAlign: 'top',
+    textAlign: 'center',
   },
   image: {
     maxWidth: '100%',
-    maxHeight: '70vh'
+    maxHeight: '70vh',
+    cursor: 'zoom-in',
   }
 })
