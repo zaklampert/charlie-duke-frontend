@@ -61,7 +61,17 @@ const Shop = ({page, products}) => (
           return (
             <div key={product.id} className={css(styles.thirds)}>
               <div className={css(styles.productInner)}>
-              <img src={product.image} style={{width: '90%', margin: '0 auto', display: 'block',}}/>
+              <div data-image={product.image}
+                   data-intense={true}
+                   style={{
+                     backgroundImage: `url(${product.image})`,
+                     backgroundRepeat: 'no-repeat',
+                     backgroundSize: 'cover',
+                     cursor: 'zoom-in',
+                     paddingBottom: '100%',
+                     width: '100%',
+                     margin: '0 auto',
+                     display: 'block',}}/>
               <Product product={product} />
               </div>
             </div>
@@ -121,7 +131,10 @@ class Product extends React.Component{
         <div className={css(styles.purchaseSuccess)}>
           Purchased! <br/>
           Check your email for confirmation.<br/>
-          <span onClick={()=>this.setState(initialProductState)} style={{cursor: 'pointer', textDecoration: 'underline'}}>Purchase another one.</span>
+          <span onClick={()=>this.setState(initialProductState)}
+                style={{cursor: 'pointer', textDecoration: 'underline'}}>
+               Purchase another one.
+          </span>
         </div>
       )
     }
@@ -140,6 +153,7 @@ class Product extends React.Component{
       return (
         <div className={css(styles.purchaseSuccess)}>
           Finishing your order... <br/>
+          <div style={{fontSize: '12px', cursor: 'pointer', color: '#adadad', padding: '8px'}} onClick={()=>this.setState(initialProductState)}>Cancel</div>
         </div>
       )
     }
@@ -241,7 +255,7 @@ const styles = StyleSheet.create({
   productDetails: {
     cursor: 'pointer',
     padding: '22px 5px',
-    maxWidth: '90%',
+    maxWidth: '100%',
 
     margin: '0 auto',
     ':hover':{
