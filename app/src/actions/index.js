@@ -10,7 +10,7 @@ export const SHOW_MODAL = 'SHOW_MODAL';
 export const HIDE_MODAL = 'HIDE_MODAL';
 export const UPDATE_LOCATION = 'UPDATE_LOCATION';
 
-const API_URL = 'https://charlieduke.com';
+const API_URL = 'https://charlieduke.wpengine.com';
 const apiOptions = {
   // headers:{
   // 'Access-Control-Allow-Origin':'*',
@@ -21,6 +21,47 @@ const apiOptions = {
   //   Accept: 'application/json',
   // },
   mode: 'cors',
+}
+
+export const onStripeToken = ({
+    amount,
+    success,
+    error,
+    inscription,
+    product_description
+  }, token, args ) => {
+
+  let myHeaders = new Headers();
+  myHeaders.append('Content-Type', 'application/json');
+  fetch(`${API_URL}/wp-json/duke/v1/stripe/charge`, {
+     method: 'POST',
+     headers: myHeaders,
+     mode: 'cors',
+     cache: 'default',
+     body: JSON.stringify({
+       token: token.id,
+       amount,
+       inscription,
+       product_description,
+       shipping: {
+         name: args.shipping_name,
+         address: {
+           line1: args.shipping_address_line1,
+           line2: args.shipping_address_line2,
+           postal_code: args.shipping_address_zip,
+           state: args.shipping_address_state,
+           city: args.shipping_address_country_code,
+         }
+       },
+       email: token.email,
+     }),
+   }).then(response => {
+     response.json().then(data => {
+       success(data);
+     });
+   }).catch(e=>{
+     error(e);
+   })
 }
 
 

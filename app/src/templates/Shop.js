@@ -1,13 +1,13 @@
 import React from 'react';
-import { FullPageSlide, FullPageSection } from '../layouts';
 import { StyleSheet, css } from 'aphrodite';
 import {connect} from 'react-redux';
 import StripeCheckout from 'react-stripe-checkout';
 import 'isomorphic-fetch';
+import { FullPageSlide, FullPageSection } from '../layouts';
+import { onStripeToken } from '../actions';
 
 import {buttons} from '../layouts/SectionIntro';
-const STRIPE_KEY = "pk_Z4nRov9Ge6n90mXq9v0VQeFmgIbsr";
-const STRIPE_CHARGE_ENDPOINT = "https://charlieduke.com/wp-json/duke/v1/stripe/charge"
+
 
 const currencyToNumber = (currency) => {
   return Number(currency.replace(/[^0-9\.]+/g,""));
@@ -17,29 +17,7 @@ const displayPrice = (currency) => {
   return currency.split('.')[0];
 }
 
-const onToken = (amount, success, error, token, args, ) => {
-  // TODO: Need to pass args (address, etc)
-  // console.log(token);
-  let myHeaders = new Headers();
-  myHeaders.append('Content-Type', 'application/json');
-  console.log(token, amount);
-  fetch(STRIPE_CHARGE_ENDPOINT, {
-     method: 'POST',
-     headers: myHeaders,
-     mode: 'cors',
-     cache: 'default',
-     body: JSON.stringify({
-       token: token.id,
-       amount,
-     }),
-   }).then(response => {
-     response.json().then(data => {
-       success(data);
-     });
-   }).catch(e=>{
-     error(e);
-   })
-}
+const STRIPE_KEY = "pk_Z4nRov9Ge6n90mXq9v0VQeFmgIbsr";
 
 const stripeProps = {
   stripeKey: STRIPE_KEY,
@@ -191,7 +169,13 @@ class Product extends React.Component{
           { (shippingRate ) && ( offerOnlySigned || (offerBoth && wantSigned) || (!offerOnlySigned && !offerBoth)) ?
             <StripeCheckout
               {...stripeProps}
-              token= {onToken.bind(this, (currencyToNumber(product.price) * 100) + (currencyToNumber(shippingRate) * 100), this._onSuccess, this._onError)}
+              token= {onStripeToken.bind(this, {
+                  amount: (currencyToNumber(product.price) * 100) + (currencyToNumber(shippingRate) * 100),
+                  inscription,
+                  product_description: product.title,
+                  success: this._onSuccess,
+                  error: this._onError,
+                })}
               description={`${product.title} ${(wantSigned && inscription) ? "Inscribed: " + inscription : ""}`}
               amount={(currencyToNumber(product.price) * 100) + (currencyToNumber(shippingRate) * 100)}
               currency="USD"
