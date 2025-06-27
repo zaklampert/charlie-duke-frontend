@@ -98,18 +98,17 @@ export const mapEvents = (dataFromWordpress) => {
   })
 };
 
-export const mapProducts = (dataFromWordpress) => {
-  return dataFromWordpress && dataFromWordpress.map(product => {
+export const mapShopifyProducts = (dataFromShopify) => {
+  const products = dataFromShopify && (dataFromShopify.products || dataFromShopify);
+  return products && products.map(product => {
     const mappedProduct = {
       id: product && product.id,
-      title: product && product.title && product.title.rendered,
-      description: product && product.content && product.content.rendered,
-      image: product && product._embedded && product._embedded["wp:featuredmedia"] &&
-      product._embedded["wp:featuredmedia"][0] && product._embedded["wp:featuredmedia"][0].source_url,
-      variants: product && product.meta_box && product.meta_box.variants,
-      price: product && product.meta_box && product.meta_box.price,
-      domesticShipping: product && product.meta_box && product.meta_box.dom_shipping,
-      internationalShipping: product && product.meta_box && product.meta_box.intnl_shipping,
+      variantId: product && product.variants && product.variants[0] && product.variants[0].id,
+      handle: product && product.handle,
+      title: product && product.title,
+      description: product && product.body_html,
+      image: product && product.images && product.images[0] && product.images[0].src,
+      price: product && product.variants && product.variants[0] && product.variants[0].price,
     };
     return mappedProduct;
   })
